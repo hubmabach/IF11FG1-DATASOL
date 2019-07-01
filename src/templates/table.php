@@ -38,7 +38,9 @@
             </tr>
         </thead>
         <tbody>
-        <?php //while ($row = mysqli_fetch_assoc($tableConfig['result'])):
+        <?php 
+            // TODO: Zur Datenbankabfrage wechseln
+            // while ($row = mysqli_fetch_assoc($tableConfig['result'])):
             foreach ($tableConfig['data'] as $row):
         ?>
             <tr>
