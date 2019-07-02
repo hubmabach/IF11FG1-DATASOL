@@ -6,6 +6,7 @@
      * @param tableConfig::columns Tabellenspalten die aus den Daten angezeigt werden sollen.
      * @param tableConfig::idColumn Name der Spalte die als Identifikator (kurz ID) dient.
      * @param tableConfig::result Das Ergebnis einer MySQL-Datenbankabfrage.
+     * @param tableConfig::pageName Der Name der für das PHP-File verwendet wird.
      */
 
     // $required_keys = array('columns', 'singularName', 'idColumn', 'data', 'result');
@@ -17,7 +18,7 @@
 ?>
 
 <div class="clearfix" style="margin-bottom: 20px;">
-    <a href="#" class="btn btn-primary float-right"><?php echo $tableConfig['singularName']; ?> erstellen</a>
+    <a href="index.php?page=<?php echo $tableConfig['pageName']; ?>&detail=new" class="btn btn-primary float-right"><?php echo $tableConfig['singularName']; ?> erstellen</a>
     <form class="form-inline">
         <div class="input-group">
             <input type="search" name="search" class="form-control" placeholder="Suche..." />
@@ -48,7 +49,7 @@
                 <td><?php echo $row[$columnName]; ?></td>
                 <?php endforeach; ?>
                 <td style="width: 1%">
-                    <a href="?page=komponentenart&id=<?php echo $row[$tableConfig['idColumn']]; ?>" class="btn btn-sm btn-light">Bearbeiten</a>
+                    <a href="?page=<?php echo $tableConfig['pageName']; ?>&detail=edit&id=<?php echo $row[$tableConfig['idColumn']]; ?>" class="btn btn-sm btn-light">Bearbeiten</a>
                 </td>
             </tr>
         <?php endforeach; ?>
