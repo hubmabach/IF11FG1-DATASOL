@@ -5,10 +5,16 @@
 
      $rooms = mysqli_query($dbLink, "SELECT RoomId, RoomNo FROM Rooms");
 
+     /**
+      * Gibt das Ergebnis der Datenbankabfrage - abhaengig von der RaumId - zurueck
+      * @param number $roomId - Id des ausgewaehlten Raumes
+      * @return mysqli_result $result - Ergebnis der Datenbankabfrage
+      */
      function getComponentsForRoom($roomId) {
-
+        // Datenbanklink
         global $dbLink;
 
+        // Datenbankabfrage mit variabler RaumId
         $sqlStatement =
         "SELECT 
         C.ComponentId AS ComponentId,
@@ -20,6 +26,8 @@
         INNER JOIN ComponentsInRoom AS CR ON C.ComponentId = CR.ComponentId
         INNER JOIN Rooms AS R ON R.RoomId = CR.RoomId
        WHERE R.RoomId = " .$roomId. ";";
+       
+       // Ergebnis der Datenbankabfrage
         $result = mysqli_query($dbLink, $sqlStatement);
         return $result;
      }
@@ -76,9 +84,7 @@
         </thead>
         <tbody>
         <?php
-        // TODO: Zur Datenbankabfrage wechseln
-        //while ($row = mysqli_fetch_assoc($tableConfig['result'])):
-            foreach ($tableConfig['result'] as $row):
+        while ($row = mysqli_fetch_assoc($tableConfig['result'])):
         ?>
             <tr>
                 <?php foreach ($tableConfig['columns'] as $columnName => $label): ?>
@@ -88,7 +94,7 @@
                     <a href="?page=komponentenart&id=<?php echo $row[$tableConfig['idColumn']]; ?>" class="btn btn-sm btn-light">Bearbeiten</a>
                 </td>
             </tr>
-        <?php endforeach; ?>
+        <?php endwhile; ?>
         </tbody>
     </table>
     </div>
