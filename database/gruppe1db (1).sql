@@ -289,7 +289,7 @@ CREATE TABLE `users` (
   `UserName` varchar(100) COLLATE latin1_german1_ci DEFAULT NULL,
   `UserFirstName` varchar(100) COLLATE latin1_german1_ci DEFAULT NULL,
   `UserLastName` varchar(100) COLLATE latin1_german1_ci DEFAULT NULL,
-  `UserPasswort` varchar(250) COLLATE latin1_german1_ci DEFAULT NULL,
+  `UserPassword` varchar(250) COLLATE latin1_german1_ci DEFAULT NULL,
   `IsAdmin` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci;
 
@@ -297,7 +297,7 @@ CREATE TABLE `users` (
 -- Daten für Tabelle `users`
 --
 
-INSERT INTO `users` (`UserId`, `UserEmail`, `UserName`, `UserFirstName`, `UserLastName`, `UserPasswort`, `IsAdmin`) VALUES
+INSERT INTO `users` (`UserId`, `UserEmail`, `UserName`, `UserFirstName`, `UserLastName`, `UserPassword`, `IsAdmin`) VALUES
 (1, 'Admin@b3-fuerth.de', 'Admin', 'Admin', 'Admin', 'Admin', 1),
 (3, 'benutzer@b3-fuerth.de', 'Benutzer', 'Ben', 'Utzer', 'Benutzer', 0);
 
