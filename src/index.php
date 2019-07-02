@@ -1,4 +1,6 @@
 <?php require_once('./includes/global.php');?>
+<?php include_once('./templates/html_start.php'); ?>
+<?php include_once('./templates/navigation.php'); ?>
 
 <div class="container" style="margin-top: 30px;">
     <?php include_once("./includes/router.php"); ?>
