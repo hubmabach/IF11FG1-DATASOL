@@ -31,4 +31,23 @@
     function hashString($string){
         return hash ( "md5", $string, FALSE); // md5 Hash (One-Direction)
     }
+
+
+    /**
+     * Verwandelt das Ergebnis einer MySQL-Datenbankabfrage in ein Ein-Dimensionales-Array anhand eines angegebenen Feldes.
+     * 
+     * @author Nikolas Bayerschmidt
+     * @param result Das Ergebnis einer MySQL-Datenbankabfrage (mysqli_query)
+     * @param columnName Der Name des Feldes aus dem der Wert gezogen wird.
+     * @return od_array Ein-Dimensionales-Array
+     */
+    function mysqli_od_array($result, $columnName) {
+        $od_array = array();
+
+        while ($row = mysqli_fetch_array($result)) {
+            if ($row[$columnName]) array_push($od_array, $row[$columnName]);
+        }
+
+        return $od_array;
+    }
 ?>
