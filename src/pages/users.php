@@ -7,7 +7,7 @@
     
     ?>    
 
-<h1>Accountverwaltung</h1>
+<h1>Stammdaten - Benutzerverwaltung</h1>
   
     <div class="card">
         <div class="card-body">
@@ -44,7 +44,7 @@
            ),
            
         ),
-        'singularName' => 'Anwender',
+        'singularName' => 'Benutzer',
 
     );
 
