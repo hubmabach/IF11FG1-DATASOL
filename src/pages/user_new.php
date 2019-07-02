@@ -1,6 +1,6 @@
 <?php
     /**
-     * 
+     * Formular zum Hinzufügen eines neuen Nutzers.
      */
 
     $userData = array(
@@ -20,6 +20,7 @@
             'IsAdmin' => isset($_POST['user_admin']) ? "1" : "0"
         );
         
+        // Hashe die Passwörter und vergleiche den Hashstring von beiden miteinander.
         $password = hashString($_POST['user_password']);
         $passwordRepeat = hashString($_POST['user_password_repeat']);
 

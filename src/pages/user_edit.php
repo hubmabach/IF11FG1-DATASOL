@@ -1,25 +1,32 @@
 <?php
     /**
+     * Bearbeiten eines bereits bestehenden Nutzers.
      * 
+     * Holt sich die Daten des Nutzers ausgehend von dem Paramter `id` in der URL.
      */
 
+
+    /**
+     * Funktion um ein assoziatives Array in eine MySQL-UPDATE-Wertefolge zu formatieren.
+     * 
+     * @param valueArray Assoziatives Array mit Werten
+     * @return updateStr Zeichenfolge die der Wertevergabe bei einer UPDATE-Datenbankabfrage gleicht. (`COLUMN = VALUE`)
+     */
     function sqlUpdateString($valueArray) {
-        $string = "";
+        $updateStr = "";
 
         foreach ($valueArray as $key => $value) {
 
-            if (is_string($value)) {
-                $value = "\"$value\"";
-            }
+            // Wenn der Wert ein String ist, müssen extra Anführungszeichen hinzugefügt werden.
+            if (is_string($value)) $value = "\"$value\"";
 
-            $string .= $key." = ".$value;
+            $updateStr .= $key." = ".$value;
 
-            if ($key !== array_key_last($valueArray)) {
-                $string .= ", ";
-            }
+            // Sollte der Iterator nicht bei dem letzten Wert sein, dann füge ein Komma zur Zeichenfolge hinzu.
+            if ($key !== array_key_last($valueArray)) $updateStr .= ", ";
         }
 
-        return $string;
+        return $updateStr;
     }
 
     $userId = (isset($_GET['id']) and !empty($_GET['id'])) ? intval($_GET['id']) : false;
@@ -37,6 +44,7 @@
             );
             
             if (!empty($_POST['user_password'])) {
+                // Hashe die Passwörter und vergleiche die Hashstrings miteinander. Sollten diese Übereinstimmen, dann füge den Wert zum $userData Array hinzu.
                 $password = hashString($_POST['user_password']);
                 $passwordRepeat = hashString($_POST['user_password_repeat']);
 
