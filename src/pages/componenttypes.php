@@ -5,7 +5,11 @@
      * @author Nikolas Bayerschmidt
      */
 
-    $query = "SELECT ComponentTypeID, ComponentTypeName, (SELECT COUNT(AttributeID) FROM componenttypehasattributes WHERE ComponentTypeID = ct.ComponentTypeID) AS ComponentTypeAttrCount FROM componenttypes ct;";
+    $query = "SELECT ComponentTypeID, ComponentTypeName, (SELECT COUNT(AttributeID) FROM componenttypehasattributes WHERE ComponentTypeID = ct.ComponentTypeID) AS ComponentTypeAttrCount FROM componenttypes ct";
+
+    if (isset($_GET['search']) and !empty($_GET['search'])) {
+        $query .= " WHERE ComponentTypeName LIKE '%".$_GET['search']."%'";
+    }
 
     $result = mysqli_query($dbLink, $query);
 
