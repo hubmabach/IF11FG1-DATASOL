@@ -4,11 +4,11 @@
      * Anzeige und Verwaltung der Account für die Software
      * Hinzufügen und Anpassen der Anwender-Daten
      */
+    
+    ?>    
 
-?>    
-    <h1>Accountverwaltung</h1>
-
-  <div  class="container" >
+<h1>Accountverwaltung</h1>
+  
     <div class="card">
         <div class="card-body">
             
@@ -22,6 +22,7 @@
             'UserEmail' => 'E-mail',
             'isAdmin' => 'Systembetreuer'
         ),
+        'pageName' => 'users',
         'idColumn' => 'UserId',
         'result' => array(
             array(
@@ -50,7 +51,7 @@
     include_once('./templates/table.php');
 ?> 
 
-        </div>
+
     </div>
 </div>
 
