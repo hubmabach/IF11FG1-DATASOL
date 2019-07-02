@@ -155,7 +155,7 @@ CREATE TABLE `users` (
   `UserName` varchar(100) COLLATE latin1_german1_ci DEFAULT NULL,
   `UserFirstName` varchar(100) COLLATE latin1_german1_ci DEFAULT NULL,
   `UserLastName` varchar(100) COLLATE latin1_german1_ci DEFAULT NULL,
-  `UserPasswort` varchar(250) COLLATE latin1_german1_ci DEFAULT NULL,
+  `UserPassword` varchar(250) COLLATE latin1_german1_ci DEFAULT NULL,
   `IsAdmin` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci;
 

@@ -12,7 +12,7 @@
 ?>
 
 
-
+<h1>Login</h1>
 <form method="POST" action="">
     <div class="form-group">
         <label for="input-username">Benutzername</label>
@@ -32,7 +32,7 @@ if(isset($_POST["submit-login"]))
   $username = $_POST["input-username"];
   $password = hashString($_POST["input-password"]); 
 
-  $query = "SELECT * FROM user WHERE Username = '$username';";  //Query zum Abfragen des Usernames
+  $query = "SELECT * FROM users WHERE UserName = '$username';";  //Query zum Abfragen des Usernames
   $result = mysqli_query($dbLink, $query); //Ist das Ergebnis der Suche aus der SQL - Query (filtert Usernames)
   $count = mysqli_num_rows($result); //Zählt die Anzahl der gefundenen Results
 
@@ -43,9 +43,9 @@ if(isset($_POST["submit-login"]))
  else {
   $userFromDb = mysqli_fetch_assoc($result); // Holt den aktuellen User aus dem Ergebnisdaten raus
 
-  if($userFromDb["Passwort"]==$password) // Prüft ob das eingegebene Passwort das gleiche ist, wie in der Datenbank gespeichert.
+  if($userFromDb["UserPasswort"]==$password) // Prüft ob das eingegebene Passwort das gleiche ist, wie in der Datenbank gespeichert.
   {
-    setIsAdmin($user["IsAdmin"]); // Setzt ob der aktuelle User ein Admin ist oder nicht
+    setIsAdmin($userFromDb["IsAdmin"]); // Setzt ob der aktuelle User ein Admin ist oder nicht
     setIsLoggedIn(true); // Setzt den Flag, dass der User eingeloggt ist
     setUser($userFromDb); // Setzt den aktuellen User um später auf z.B. den Namen zuzugreifen
     header("Location: index.php");
