@@ -25,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur fÃ¼r Tabelle `address`
+-- Tabellenstruktur für Tabelle `address`
 --
 
 CREATE TABLE `address` (
@@ -40,26 +40,10 @@ CREATE TABLE `address` (
   `MailAddress` varchar(45) COLLATE latin1_german1_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci;
 
---
--- Daten fÃ¼r Tabelle `address`
---
 
-INSERT INTO `address` (`AddressID`, `Street`, `PostalCode`, `City`, `Country`, `TelNo`, `MobilNo`, `FaxNo`, `MailAddress`) VALUES
-(1, '2077 Vel, Av.', '22151', 'Konstanz', 'Germany', '(08657) 1782939', '(449) 494-3243', '(804) 859-8978', 'Morbi@aliquetProin.net'),
-(2, '1752 Purus. Street', '78779', 'Zwickau', 'Germany', '(051) 35935584', '(787) 405-1583', '(984) 682-3280', 'viverra@dui.com'),
-(3, '213-4233 Diam. Avenue', '34046', 'Andernach', 'Germany', '(0982) 31693233', '(421) 234-6016', '(484) 624-3642', 'auctor.ullamcorper@eleifend.com'),
-(4, 'Ap #545-2788 Nullam Ave', '91881', 'Bad Neuenahr-Ahrweiler', 'Germany', '(01095) 6064220', '(238) 127-8714', '(801) 614-9089', 'orci@risusa.edu'),
-(5, '9882 Cursus Road', '27316', 'ZweibrÃ¼cken', 'Germany', '(0959) 24830831', '(678) 922-8155', '(666) 538-7841', 'pellentesque.massa@ornare.com'),
-(6, '304-208 Dictum Ave', '85277', 'Bielefeld', 'Germany', '(07793) 1360604', '(559) 707-8268', '(693) 117-9418', 'egestas.hendrerit@arcu.co.uk'),
-(7, 'P.O. Box 903, 2199 Sed St.', '63695', 'Wadgassen', 'Germany', '(077) 79692388', '(509) 940-2739', '(999) 694-6160', 'Cras.eu@porttitoreros.com'),
-(8, 'P.O. Box 119, 2852 Amet, Rd.', '41464', 'Dreieich', 'Germany', '(04953) 4558522', '(969) 811-1831', '(782) 184-6418', 'at.arcu.Vestibulum@enimgravIDa.net'),
-(9, 'P.O. Box 152, 5924 Nullam Road', '65607', 'TÃ¼bingen', 'Germany', '(037255) 333664', '(798) 743-2987', '(229) 915-0875', 'nulla.ante.iaculis@atiaculisquis.net'),
-(10, 'P.O. Box 207, 7610 Egestas. Road', '80957', 'Goslar', 'Germany', '(038599) 226477', '(181) 535-6080', '(152) 707-2735', 'Proin.vel.nisl@Inlorem.net');
-
--- --------------------------------------------------------
 
 --
--- Tabellenstruktur fÃ¼r Tabelle `componentattributes`
+-- Tabellenstruktur für Tabelle `componentattributes`
 --
 
 CREATE TABLE `componentattributes` (
@@ -67,22 +51,10 @@ CREATE TABLE `componentattributes` (
   `AttributeName` varchar(25) COLLATE latin1_german1_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci;
 
---
--- Daten fÃ¼r Tabelle `componentattributes`
---
 
-INSERT INTO `componentattributes` (`AttributeID`, `AttributeName`) VALUES
-(1, 'Festplatte '),
-(2, 'Grafikkarte'),
-(3, 'Arbeitsspeicher'),
-(4, 'Monitor'),
-(5, 'AnschlÃ¼sse'),
-(6, 'Kabel');
-
--- --------------------------------------------------------
 
 --
--- Tabellenstruktur fÃ¼r Tabelle `componenthasvalues`
+-- Tabellenstruktur für Tabelle `componenthasvalues`
 --
 
 CREATE TABLE `componenthasvalues` (
@@ -92,18 +64,10 @@ CREATE TABLE `componenthasvalues` (
   `AttributeValue` longtext COLLATE latin1_german1_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci;
 
---
--- Daten fÃ¼r Tabelle `componenthasvalues`
---
 
-INSERT INTO `componenthasvalues` (`ComponentValueID`, `ComponentID`, `AttributeID`, `AttributeValue`) VALUES
-(1, 1, 1, 'SSD 250 GB'),
-(2, 1, 5, '3 x PCI 16\r\n5 x USB 3.0\r\nAudioJack\r\n1 x HDMI \r\n2 x VGa');
-
--- --------------------------------------------------------
 
 --
--- Tabellenstruktur fÃ¼r Tabelle `components`
+-- Tabellenstruktur für Tabelle `components`
 --
 
 CREATE TABLE `components` (
@@ -118,17 +82,9 @@ CREATE TABLE `components` (
   `ComponentReceipt` varchar(150) COLLATE latin1_german1_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci;
 
---
--- Daten fÃ¼r Tabelle `components`
---
-
-INSERT INTO `components` (`ComponentID`, `ComponentName`, `SupplierID`, `ComponentPurchaseDate`, `ComponentWarranty`, `ComponentNotes`, `ComponentVendorID`, `ComponentTypeID`, `ComponentReceipt`) VALUES
-(1, 'Think Center 12020', 1, '0000-00-00', 2, '2 Jahre Garantie', 902, 1, NULL);
-
--- --------------------------------------------------------
 
 --
--- Tabellenstruktur fÃ¼r Tabelle `componentsinroom`
+-- Tabellenstruktur für Tabelle `componentsinroom`
 --
 
 CREATE TABLE `componentsinroom` (
@@ -137,17 +93,9 @@ CREATE TABLE `componentsinroom` (
   `RoomID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci;
 
---
--- Daten fÃ¼r Tabelle `componentsinroom`
---
-
-INSERT INTO `componentsinroom` (`ComponentRoomID`, `ComponentID`, `RoomID`) VALUES
-(1, 1, 100);
-
--- --------------------------------------------------------
 
 --
--- Tabellenstruktur fÃ¼r Tabelle `componenttypehasattributes`
+-- Tabellenstruktur für Tabelle `componenttypehasattributes`
 --
 
 CREATE TABLE `componenttypehasattributes` (
@@ -156,18 +104,10 @@ CREATE TABLE `componenttypehasattributes` (
   `AttributeID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci;
 
---
--- Daten fÃ¼r Tabelle `componenttypehasattributes`
---
 
-INSERT INTO `componenttypehasattributes` (`ComponentTypeAttributeID`, `ComponentTypeID`, `AttributeID`) VALUES
-(1, 1, 5),
-(2, 1, 1);
-
--- --------------------------------------------------------
 
 --
--- Tabellenstruktur fÃ¼r Tabelle `componenttypes`
+-- Tabellenstruktur für Tabelle `componenttypes`
 --
 
 CREATE TABLE `componenttypes` (
@@ -176,8 +116,278 @@ CREATE TABLE `componenttypes` (
   `IsSoftware` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci;
 
+
+
 --
--- Daten fÃ¼r Tabelle `componenttypes`
+-- Tabellenstruktur für Tabelle `rooms`
+--
+
+CREATE TABLE `rooms` (
+  `RoomID` int(11) NOT NULL,
+  `RoomNo` varchar(20) COLLATE latin1_german1_ci DEFAULT NULL,
+  `RoomName` varchar(45) COLLATE latin1_german1_ci DEFAULT NULL,
+  `RoomNodes` longtext COLLATE latin1_german1_ci
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci;
+
+
+
+--
+-- Tabellenstruktur für Tabelle `supplier`
+--
+
+CREATE TABLE `supplier` (
+  `SupplierID` int(11) NOT NULL,
+  `SupplierCompanyName` varchar(45) COLLATE latin1_german1_ci DEFAULT NULL,
+  `AddressID` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci;
+
+
+
+--
+-- Tabellenstruktur für Tabelle `users`
+--
+
+CREATE TABLE `users` (
+  `UserID` int(11) NOT NULL,
+  `UserEmail` varchar(100) COLLATE latin1_german1_ci DEFAULT NULL,
+  `UserName` varchar(100) COLLATE latin1_german1_ci DEFAULT NULL,
+  `UserFirstName` varchar(100) COLLATE latin1_german1_ci DEFAULT NULL,
+  `UserLastName` varchar(100) COLLATE latin1_german1_ci DEFAULT NULL,
+  `UserPassword` varchar(250) COLLATE latin1_german1_ci DEFAULT NULL,
+  `IsAdmin` tinyint(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci;
+
+
+
+--
+-- Tabellenstruktur für Tabelle `vendor`
+--
+
+CREATE TABLE `vendor` (
+  `VendorID` int(11) NOT NULL,
+  `VendorName` varchar(45) COLLATE latin1_german1_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci;
+
+
+-- Indizes der exportierten Tabellen
+--
+
+--
+-- Indizes für die Tabelle `address`
+--
+ALTER TABLE `address`
+  ADD PRIMARY KEY (`AddressID`);
+
+--
+-- Indizes für die Tabelle `componentattributes`
+--
+ALTER TABLE `componentattributes`
+  ADD PRIMARY KEY (`AttributeID`);
+
+--
+-- Indizes für die Tabelle `componenthasvalues`
+--
+ALTER TABLE `componenthasvalues`
+  ADD PRIMARY KEY (`ComponentValueID`),
+  ADD KEY `F_ComponentHasValues` (`ComponentID`),
+  ADD KEY `F_ComponentHasValues_2` (`AttributeID`);
+
+--
+-- Indizes für die Tabelle `components`
+--
+ALTER TABLE `components`
+  ADD PRIMARY KEY (`ComponentID`),
+  ADD KEY `F_Components` (`SupplierID`),
+  ADD KEY `F_ComponentVendorID` (`ComponentVendorID`),
+  ADD KEY `F_ComponentTypeID` (`ComponentTypeID`);
+
+--
+-- Indizes für die Tabelle `componentsinroom`
+--
+ALTER TABLE `componentsinroom`
+  ADD PRIMARY KEY (`ComponentRoomID`),
+  ADD KEY `ComponentID` (`ComponentID`,`RoomID`),
+  ADD KEY `RoomID` (`RoomID`);
+
+--
+-- Indizes für die Tabelle `componenttypehasattributes`
+--
+ALTER TABLE `componenttypehasattributes`
+  ADD PRIMARY KEY (`ComponentTypeAttributeID`),
+  ADD KEY `F_ComponentTypeHasAttributes` (`ComponentTypeID`),
+  ADD KEY `F_AttributeID` (`AttributeID`);
+
+--
+-- Indizes für die Tabelle `componenttypes`
+--
+ALTER TABLE `componenttypes`
+  ADD PRIMARY KEY (`ComponentTypeID`);
+
+--
+-- Indizes für die Tabelle `rooms`
+--
+ALTER TABLE `rooms`
+  ADD PRIMARY KEY (`RoomID`);
+
+--
+-- Indizes für die Tabelle `supplier`
+--
+ALTER TABLE `supplier`
+  ADD PRIMARY KEY (`SupplierID`),
+  ADD KEY `F_Supplier` (`AddressID`);
+
+--
+-- Indizes für die Tabelle `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`UserID`);
+
+--
+-- Indizes für die Tabelle `vendor`
+--
+ALTER TABLE `vendor`
+  ADD PRIMARY KEY (`VendorID`);
+
+--
+-- AUTO_INCREMENT für exportierte Tabellen
+--
+
+--
+-- AUTO_INCREMENT für Tabelle `address`
+--
+ALTER TABLE `address`
+  MODIFY `AddressID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+--
+-- AUTO_INCREMENT für Tabelle `componentattributes`
+--
+ALTER TABLE `componentattributes`
+  MODIFY `AttributeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+--
+-- AUTO_INCREMENT für Tabelle `componenthasvalues`
+--
+ALTER TABLE `componenthasvalues`
+  MODIFY `ComponentValueID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+--
+-- AUTO_INCREMENT für Tabelle `components`
+--
+ALTER TABLE `components`
+  MODIFY `ComponentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+--
+-- AUTO_INCREMENT für Tabelle `componentsinroom`
+--
+ALTER TABLE `componentsinroom`
+  MODIFY `ComponentRoomID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+--
+-- AUTO_INCREMENT für Tabelle `componenttypehasattributes`
+--
+ALTER TABLE `componenttypehasattributes`
+  MODIFY `ComponentTypeAttributeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+--
+-- AUTO_INCREMENT für Tabelle `componenttypes`
+--
+ALTER TABLE `componenttypes`
+  MODIFY `ComponentTypeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+--
+-- AUTO_INCREMENT für Tabelle `rooms`
+--
+ALTER TABLE `rooms`
+  MODIFY `RoomID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+--
+-- AUTO_INCREMENT für Tabelle `supplier`
+--
+ALTER TABLE `supplier`
+  MODIFY `SupplierID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+
+--INSERTS
+
+--
+-- Daten für Tabelle `address`
+--
+
+INSERT INTO `address` (`AddressID`, `Street`, `PostalCode`, `City`, `Country`, `TelNo`, `MobilNo`, `FaxNo`, `MailAddress`) VALUES
+(1, '2077 Vel, Av.', '22151', 'Konstanz', 'Germany', '(08657) 1782939', '(449) 494-3243', '(804) 859-8978', 'Morbi@aliquetProin.net'),
+(2, '1752 Purus. Street', '78779', 'Zwickau', 'Germany', '(051) 35935584', '(787) 405-1583', '(984) 682-3280', 'viverra@dui.com'),
+(3, '213-4233 Diam. Avenue', '34046', 'Andernach', 'Germany', '(0982) 31693233', '(421) 234-6016', '(484) 624-3642', 'auctor.ullamcorper@eleifend.com'),
+(4, 'Ap #545-2788 Nullam Ave', '91881', 'Bad Neuenahr-Ahrweiler', 'Germany', '(01095) 6064220', '(238) 127-8714', '(801) 614-9089', 'orci@risusa.edu'),
+(5, '9882 Cursus Road', '27316', 'Zweibrücken', 'Germany', '(0959) 24830831', '(678) 922-8155', '(666) 538-7841', 'pellentesque.massa@ornare.com'),
+(6, '304-208 Dictum Ave', '85277', 'Bielefeld', 'Germany', '(07793) 1360604', '(559) 707-8268', '(693) 117-9418', 'egestas.hendrerit@arcu.co.uk'),
+(7, 'P.O. Box 903, 2199 Sed St.', '63695', 'Wadgassen', 'Germany', '(077) 79692388', '(509) 940-2739', '(999) 694-6160', 'Cras.eu@porttitoreros.com'),
+(8, 'P.O. Box 119, 2852 Amet, Rd.', '41464', 'Dreieich', 'Germany', '(04953) 4558522', '(969) 811-1831', '(782) 184-6418', 'at.arcu.Vestibulum@enimgravIDa.net'),
+(9, 'P.O. Box 152, 5924 Nullam Road', '65607', 'Tübingen', 'Germany', '(037255) 333664', '(798) 743-2987', '(229) 915-0875', 'nulla.ante.iaculis@atiaculisquis.net'),
+(10, 'P.O. Box 207, 7610 Egestas. Road', '80957', 'Goslar', 'Germany', '(038599) 226477', '(181) 535-6080', '(152) 707-2735', 'Proin.vel.nisl@Inlorem.net');
+
+-- --------------------------------------------------------
+
+
+
+--
+-- Daten für Tabelle `componentattributes`
+--
+
+INSERT INTO `componentattributes` (`AttributeID`, `AttributeName`) VALUES
+(1, 'Festplatte '),
+(2, 'Grafikkarte'),
+(3, 'Arbeitsspeicher'),
+(4, 'Monitor'),
+(5, 'Anschlüsse'),
+(6, 'Kabel');
+
+-- --------------------------------------------------------
+
+
+
+--
+-- Daten für Tabelle `componenthasvalues`
+--
+
+INSERT INTO `componenthasvalues` (`ComponentValueID`, `ComponentID`, `AttributeID`, `AttributeValue`) VALUES
+(1, 1, 1, 'SSD 250 GB'),
+(2, 1, 5, '3 x PCI 16\r\n5 x USB 3.0\r\nAudioJack\r\n1 x HDMI \r\n2 x VGa');
+
+-- --------------------------------------------------------
+
+
+--
+-- Daten für Tabelle `components`
+--
+
+INSERT INTO `components` (`ComponentID`, `ComponentName`, `SupplierID`, `ComponentPurchaseDate`, `ComponentWarranty`, `ComponentNotes`, `ComponentVendorID`, `ComponentTypeID`, `ComponentReceipt`) VALUES
+(1, 'Think Center 12020', 1, '0000-00-00', 2, '2 Jahre Garantie', 902, 1, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Daten für Tabelle `componentsinroom`
+--
+
+INSERT INTO `componentsinroom` (`ComponentRoomID`, `ComponentID`, `RoomID`) VALUES
+(1, 1, 100);
+
+-- --------------------------------------------------------
+
+
+--
+-- Daten für Tabelle `componenttypehasattributes`
+--
+
+INSERT INTO `componenttypehasattributes` (`ComponentTypeAttributeID`, `ComponentTypeID`, `AttributeID`) VALUES
+(1, 1, 5),
+(2, 1, 1);
+
+-- --------------------------------------------------------
+
+
+--
+-- Daten für Tabelle `componenttypes`
 --
 
 INSERT INTO `componenttypes` (`ComponentTypeID`, `ComponentTypeName`, `IsSoftware`) VALUES
@@ -193,68 +403,34 @@ INSERT INTO `componenttypes` (`ComponentTypeID`, `ComponentTypeName`, `IsSoftwar
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur fÃ¼r Tabelle `rooms`
---
-
-CREATE TABLE `rooms` (
-  `RoomID` int(11) NOT NULL,
-  `RoomNo` varchar(20) COLLATE latin1_german1_ci DEFAULT NULL,
-  `RoomName` varchar(45) COLLATE latin1_german1_ci DEFAULT NULL,
-  `RoomNodes` longtext COLLATE latin1_german1_ci
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci;
-
---
--- Daten fÃ¼r Tabelle `rooms`
+-- Daten für Tabelle `rooms`
 --
 
 INSERT INTO `rooms` (`RoomID`, `RoomNo`, `RoomName`, `RoomNodes`) VALUES
-(100, '101', 'SekretÃ¤riat', NULL),
+(100, '101', 'Sekretäriat', NULL),
 (102, '102', 'Kopierer Raum', 'Raum zum kopieren'),
-(105, '103', 'Besenkammer', 'Raum fÃ¼r Besen und Heulsusen '),
+(105, '103', 'Besenkammer', 'Raum für Besen und Heulsusen '),
 (107, '104', 'Lehrer Zimmer', NULL),
 (111, '105', 'Lager', 'Lagerraum'),
 (113, '106', 'Besprechungzimmer', NULL),
-(115, '107', 'BÃ¼ro 001', NULL),
-(117, '108', 'BÃ¼ro  002', NULL);
+(115, '107', 'Büro 001', NULL),
+(117, '108', 'Büro  002', NULL);
 
 -- --------------------------------------------------------
 
---
--- Tabellenstruktur fÃ¼r Tabelle `supplier`
---
-
-CREATE TABLE `supplier` (
-  `SupplierID` int(11) NOT NULL,
-  `SupplierCompanyName` varchar(45) COLLATE latin1_german1_ci DEFAULT NULL,
-  `AddressID` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci;
 
 --
--- Daten fÃ¼r Tabelle `supplier`
+-- Daten für Tabelle `supplier`
 --
 
 INSERT INTO `supplier` (`SupplierID`, `SupplierCompanyName`, `AddressID`) VALUES
 (1, 'HardwareFix Gbr', 5),
-(2, 'SuperGÃ¼nstig', 8);
+(2, 'SuperGünstig', 8);
 
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur fÃ¼r Tabelle `users`
---
-
-CREATE TABLE `users` (
-  `UserID` int(11) NOT NULL,
-  `UserEmail` varchar(100) COLLATE latin1_german1_ci DEFAULT NULL,
-  `UserName` varchar(100) COLLATE latin1_german1_ci DEFAULT NULL,
-  `UserFirstName` varchar(100) COLLATE latin1_german1_ci DEFAULT NULL,
-  `UserLastName` varchar(100) COLLATE latin1_german1_ci DEFAULT NULL,
-  `UserPassword` varchar(250) COLLATE latin1_german1_ci DEFAULT NULL,
-  `IsAdmin` tinyint(1) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci;
-
---
--- Daten fÃ¼r Tabelle `users`
+-- Daten für Tabelle `users`
 --
 
 INSERT INTO `users` (`UserID`, `UserEmail`, `UserName`, `UserFirstName`, `UserLastName`, `UserPassword`, `IsAdmin`) VALUES
@@ -263,160 +439,26 @@ INSERT INTO `users` (`UserID`, `UserEmail`, `UserName`, `UserFirstName`, `UserLa
 
 -- --------------------------------------------------------
 
---
--- Tabellenstruktur fÃ¼r Tabelle `vendor`
---
-
-CREATE TABLE `vendor` (
-  `VendorID` int(11) NOT NULL,
-  `VendorName` varchar(45) COLLATE latin1_german1_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci;
 
 --
--- Daten fÃ¼r Tabelle `vendor`
+-- Daten für Tabelle `vendor`
 --
 
 INSERT INTO `vendor` (`VendorID`, `VendorName`) VALUES
 (901, 'Microsoft'),
 (902, 'Lenovo');
 
---
--- Indizes der exportierten Tabellen
---
+-- --------------------------------------------------------
 
---
--- Indizes fÃ¼r die Tabelle `address`
---
-ALTER TABLE `address`
-  ADD PRIMARY KEY (`AddressID`);
 
---
--- Indizes fÃ¼r die Tabelle `componentattributes`
---
-ALTER TABLE `componentattributes`
-  ADD PRIMARY KEY (`AttributeID`);
 
---
--- Indizes fÃ¼r die Tabelle `componenthasvalues`
---
-ALTER TABLE `componenthasvalues`
-  ADD PRIMARY KEY (`ComponentValueID`),
-  ADD KEY `F_ComponentHasValues` (`ComponentID`),
-  ADD KEY `F_ComponentHasValues_2` (`AttributeID`);
 
---
--- Indizes fÃ¼r die Tabelle `components`
---
-ALTER TABLE `components`
-  ADD PRIMARY KEY (`ComponentID`),
-  ADD KEY `F_Components` (`SupplierID`),
-  ADD KEY `F_ComponentVendorID` (`ComponentVendorID`),
-  ADD KEY `F_ComponentTypeID` (`ComponentTypeID`);
 
---
--- Indizes fÃ¼r die Tabelle `componentsinroom`
---
-ALTER TABLE `componentsinroom`
-  ADD PRIMARY KEY (`ComponentRoomID`),
-  ADD KEY `ComponentID` (`ComponentID`,`RoomID`),
-  ADD KEY `RoomID` (`RoomID`);
 
---
--- Indizes fÃ¼r die Tabelle `componenttypehasattributes`
---
-ALTER TABLE `componenttypehasattributes`
-  ADD PRIMARY KEY (`ComponentTypeAttributeID`),
-  ADD KEY `F_ComponentTypeHasAttributes` (`ComponentTypeID`),
-  ADD KEY `F_AttributeID` (`AttributeID`);
 
---
--- Indizes fÃ¼r die Tabelle `componenttypes`
---
-ALTER TABLE `componenttypes`
-  ADD PRIMARY KEY (`ComponentTypeID`);
 
---
--- Indizes fÃ¼r die Tabelle `rooms`
---
-ALTER TABLE `rooms`
-  ADD PRIMARY KEY (`RoomID`);
 
---
--- Indizes fÃ¼r die Tabelle `supplier`
---
-ALTER TABLE `supplier`
-  ADD PRIMARY KEY (`SupplierID`),
-  ADD KEY `F_Supplier` (`AddressID`);
 
---
--- Indizes fÃ¼r die Tabelle `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`UserID`);
-
---
--- Indizes fÃ¼r die Tabelle `vendor`
---
-ALTER TABLE `vendor`
-  ADD PRIMARY KEY (`VendorID`);
-
---
--- AUTO_INCREMENT fÃ¼r exportierte Tabellen
---
-
---
--- AUTO_INCREMENT fÃ¼r Tabelle `address`
---
-ALTER TABLE `address`
-  MODIFY `AddressID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
-
---
--- AUTO_INCREMENT fÃ¼r Tabelle `componentattributes`
---
-ALTER TABLE `componentattributes`
-  MODIFY `AttributeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
-
---
--- AUTO_INCREMENT fÃ¼r Tabelle `componenthasvalues`
---
-ALTER TABLE `componenthasvalues`
-  MODIFY `ComponentValueID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
-
---
--- AUTO_INCREMENT fÃ¼r Tabelle `components`
---
-ALTER TABLE `components`
-  MODIFY `ComponentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
-
---
--- AUTO_INCREMENT fÃ¼r Tabelle `componentsinroom`
---
-ALTER TABLE `componentsinroom`
-  MODIFY `ComponentRoomID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
-
---
--- AUTO_INCREMENT fÃ¼r Tabelle `componenttypehasattributes`
---
-ALTER TABLE `componenttypehasattributes`
-  MODIFY `ComponentTypeAttributeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
-
---
--- AUTO_INCREMENT fÃ¼r Tabelle `componenttypes`
---
-ALTER TABLE `componenttypes`
-  MODIFY `ComponentTypeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
-
---
--- AUTO_INCREMENT fÃ¼r Tabelle `rooms`
---
-ALTER TABLE `rooms`
-  MODIFY `RoomID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
-
---
--- AUTO_INCREMENT fÃ¼r Tabelle `supplier`
---
-ALTER TABLE `supplier`
-  MODIFY `SupplierID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
