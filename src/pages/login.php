@@ -43,7 +43,7 @@ if(isset($_POST["submit-login"]))
  else {
   $userFromDb = mysqli_fetch_assoc($result); // Holt den aktuellen User aus dem Ergebnisdaten raus
 
-  if($userFromDb["UserPasswort"]==$password) // Prüft ob das eingegebene Passwort das gleiche ist, wie in der Datenbank gespeichert.
+  if($userFromDb["UserPassword"]==$password) // Prüft ob das eingegebene Passwort das gleiche ist, wie in der Datenbank gespeichert.
   {
     setIsAdmin($userFromDb["IsAdmin"]); // Setzt ob der aktuelle User ein Admin ist oder nicht
     setIsLoggedIn(true); // Setzt den Flag, dass der User eingeloggt ist
