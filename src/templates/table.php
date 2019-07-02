@@ -2,11 +2,11 @@
     /**
      * Diese Datei dient zur Anzeige von Daten in einem Tabellen-Layout.
      * 
-     * @param tableConfig Konfiguration der Tabelle. Diese Variable sollte vor der Einbindung dieser Datei definiert worden sein.
-     * @param tableConfig::columns Tabellenspalten die aus den Daten angezeigt werden sollen.
-     * @param tableConfig::idColumn Name der Spalte die als Identifikator (kurz ID) dient.
-     * @param tableConfig::result Das Ergebnis einer MySQL-Datenbankabfrage.
-     * @param tableConfig::pageName Der Name der für das PHP-File verwendet wird.
+     * @param array $tableConfig Konfiguration der Tabelle. Diese Variable sollte vor der Einbindung dieser Datei definiert worden sein.
+     * @param array $tableConfig::columns Tabellenspalten die aus den Daten angezeigt werden sollen.
+     * @param string $tableConfig::idColumn Name der Spalte die als Identifikator (kurz ID) dient.
+     * @param mysqli_result $tableConfig::result Das Ergebnis einer MySQL-Datenbankabfrage.
+     * @param string $tableConfig::pageName Der Name der für das PHP-File verwendet wird.
      */
 
     // $required_keys = array('columns', 'singularName', 'idColumn', 'data', 'result');

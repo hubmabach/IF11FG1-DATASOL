@@ -9,8 +9,8 @@
     /**
      * Funktion um ein assoziatives Array in eine MySQL-UPDATE-Wertefolge zu formatieren.
      * 
-     * @param valueArray Assoziatives Array mit Werten
-     * @return updateStr Zeichenfolge die der Wertevergabe bei einer UPDATE-Datenbankabfrage gleicht. (`COLUMN = VALUE`)
+     * @param array $valueArray Assoziatives Array mit Werten
+     * @return string $updateStr Zeichenfolge die der Wertevergabe bei einer UPDATE-Datenbankabfrage gleicht. (`COLUMN = VALUE`)
      */
     function sqlUpdateString($valueArray) {
         $updateStr = "";

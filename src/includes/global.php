@@ -37,9 +37,9 @@
      * Verwandelt das Ergebnis einer MySQL-Datenbankabfrage in ein Ein-Dimensionales-Array anhand eines angegebenen Feldes.
      * 
      * @author Nikolas Bayerschmidt
-     * @param result Das Ergebnis einer MySQL-Datenbankabfrage (mysqli_query)
-     * @param columnName Der Name des Feldes aus dem der Wert gezogen wird.
-     * @return od_array Ein-Dimensionales-Array
+     * @param mysqli_result $result Das Ergebnis einer MySQL-Datenbankabfrage (mysqli_query)
+     * @param string $columnName Der Name des Feldes aus dem der Wert gezogen wird.
+     * @return array $od_array Ein-Dimensionales-Array
      */
     function mysqli_od_array($result, $columnName) {
         $od_array = array();
