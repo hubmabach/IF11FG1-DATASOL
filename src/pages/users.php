@@ -1,20 +1,18 @@
     
 <?php 
     /**
-     * Anzeige und Verwaltung der Account für die Software
-     * Hinzufügen und Anpassen der Anwender-Daten
+     * Anzeige der Benutzer
      */
     
-
-     $result = mysqli_query($dbLink, "SELECT * FROM Users");
-
+     $result = mysqli_query($dbLink,
+     "SELECT UserId, UserName, UserFirstName, UserLastName, IF(IsAdmin, 'Ja', 'Nein') AS IsAdmin FROM Users");
      $tableConfig = array(
         'columns' => array(
             'UserId' => '#',
             'UserName' => 'Benutzername',
             'UserFirstName' => 'Vorname',
             'UserLastName' => 'Nachname',
-            'UserEmail' => 'E-mail',
+            // 'UserEmail' => 'E-mail',
             'IsAdmin' => 'Systembetreuer'
         ),
         'pageName' => 'users',
