@@ -22,6 +22,7 @@
                 <a class="dropdown-item" href="index.php?page=room">Räume</a>
                 <a class="dropdown-item" href="index.php?page=users">Benutzer</a>
                 <a class="dropdown-item" href="index.php?page=component">Komponenten</a>
+                <a class="dropdown-item" href="index.php?page=componenttypes">Komponentenarten</a>
             </div>
             </li>
             <li class="nav-item">
