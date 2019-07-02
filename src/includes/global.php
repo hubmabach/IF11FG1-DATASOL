@@ -5,7 +5,7 @@
 
     session_start(); 
 
-    $dbLink = @mysqli_connect("localhost", "root", "", "projekt");
+    $dbLink = @mysqli_connect("localhost", "root", "", "gruppe1db");
 
     if($dbLink === false)
     {
