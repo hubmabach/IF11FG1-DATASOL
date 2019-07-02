@@ -38,10 +38,10 @@
             </tr>
         </thead>
         <tbody>
-        <?php 
-            // TODO: Zur Datenbankabfrage wechseln
-            // while ($row = mysqli_fetch_assoc($tableConfig['result'])):
-            foreach ($tableConfig['data'] as $row):
+        <?php
+        // TODO: Zur Datenbankabfrage wechseln
+        //while ($row = mysqli_fetch_assoc($tableConfig['result'])):
+            foreach ($tableConfig['result'] as $row):
         ?>
             <tr>
                 <?php foreach ($tableConfig['columns'] as $columnName => $label): ?>
