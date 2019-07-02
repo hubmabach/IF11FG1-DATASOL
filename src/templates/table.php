@@ -19,16 +19,18 @@
 
 <div class="clearfix" style="margin-bottom: 20px;">
     <a href="index.php?page=<?php echo $tableConfig['pageName']; ?>&detail=new" class="btn btn-primary float-right"><?php echo $tableConfig['singularName']; ?> erstellen</a>
-    <form class="form-inline">
+    <form class="form-inline" method="GET">
+        <input type="hidden" name="page" value="<?php echo $_GET['page']; ?>" />
         <div class="input-group">
-            <input type="search" name="search" class="form-control" placeholder="Suche..." />
+            <input type="search" name="search" class="form-control" placeholder="Suche..." value="<?php echo @$_GET['search']; ?>" />
             <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button" id="button-addon2">Suchen</button>
+                <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Suchen</button>
             </div>
         </div>
     </form>
 </div>
 <div class="clearfix">
+    <?php if ($tableConfig['result'] and mysqli_num_rows($tableConfig['result']) > 0): ?>
     <table class="table">
         <thead>
             <tr>
@@ -62,5 +64,8 @@
         <a class="btn btn-default btn-outline-light">3</a>
         <a class="btn btn-default btn-outline-light">Nächste Seite</a>
     </div> -->
+    <?php else: ?>
+    <div class="alert alert-light">Keine Daten vorhanden.</div>
+    <?php endif; ?>
 </div>
 <?php endif; ?>
