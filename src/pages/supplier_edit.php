@@ -1,4 +1,13 @@
 <?php
+/**
+ * Auf dieser Seite hat der Nutzer die Möglichkeit, ein Lieferanten zu bearbeiten. Dieser wird über die
+ * ID in der URL herausgesucht. Sollte keine ID gesetzt sein, wird er auf die Übersichtsseite zurück verwiesen. 
+ * Ansonsten werden die Felder mit den in der Datenbank gespeicherten Werten vorbefüllt. Der Nutzer kann diese anschließend
+ * nach belieben bearbeiten und Speichern.
+ * @author Benedikt/Matthais
+ * Benedikt 13:00-15:00
+ * Matthias 13:00-15:00
+ */
 $currentPage = $_GET["page"];
 if (!isset($_GET["id"])) {
     header("Location: index.php?page=$currentPage");

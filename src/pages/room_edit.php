@@ -1,4 +1,11 @@
 <?php
+
+/**
+ * Auf dieser Seite wird ein bestehender Raum anhander der ID in der URL angezeigt. Sollte keine ID gesetzt sein, 
+ * wird der Nutzer zurück auf die Raumübersichtsseite verwiesen. Ansonsten hat er auf der Seite die Möglichkeit, 
+ * alle erfassten Daten für diesen Raum abzuändern und dann anschließend zu speichern.
+ */
+
 $currentPage = $_GET["page"];
 if (!isset($_GET["id"])) {
     header("Location: index.php?page=$currentPage");

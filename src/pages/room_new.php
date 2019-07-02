@@ -32,6 +32,10 @@
 </div>
 
 <?php
+/**
+ * Auf dieser Seite hat der Nutzer die Möglichkeit, einen neuen Raum anzulegen. Es wird geprüft ob alle 
+ * Pflichtfelder gesetzt sind oder nicht. 
+ */
 if (isset($_POST["submit-new-room"])) {
     $roomnumber = $_POST["input-room-number"];
     $roomname = $_POST["input-room-name"];

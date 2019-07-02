@@ -1,6 +1,6 @@
 <?php 
     /**
-     * TODO: Dokumentation
+     * Auf dieser Seite werden alle Räume angzeigt, die in der Datenbank gespeichert sind.
      */
     
     $query = "SELECT * FROM rooms";

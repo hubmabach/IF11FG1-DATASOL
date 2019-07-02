@@ -3,6 +3,11 @@
     <div class="card-body">
         <?php 
 
+            /**
+             * Stellt alle Lieferanten in der Datenbank dar und biettet die Möglichkeit, diese zu bearbeiten,
+             * bzw. neue Lieferanten anzulegen.
+             */
+
             $query = "SELECT * FROM supplier INNER JOIN address on supplier.AddressId = address.AddressId";
             $result = mysqli_query($dbLink, $query);
 

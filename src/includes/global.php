@@ -1,6 +1,14 @@
 <?php 
     /**
-     * TODO: Dokumentation
+     * Dient dazu bei jedem Request festzustellen ob der Nutzer eingeloggt ist oder nicht. Des Weiteren
+     * wird geprüft welche Rechte der Nutzer hat um entsprechend die Navigationsleiste zu erstellen.
+     * Ist der Nutzer eingeloggt wird auch gleich der Nutzer in einer Variable abgespeichert, damit jeder
+     * auf die Daten des Nutzes zugreifen kann. Ebenso wird auch gleich eine Verbindung mit der Datenbank hergestellt.
+     * 
+     * @author Benedikt/Matthias
+     * 
+     * Benedikt: 11:00 - 12:00
+     * Matthias: 11:00 - 12:00
      */
 
     session_start(); 
@@ -16,18 +24,38 @@
     $isAdmin = isset($_SESSION["Admin"]) && ($_SESSION["Admin"]);
     $user = isset($_SESSION["User"]) ? $_SESSION["User"] : null;
 
+    /**
+     * Setzt den Wert ob ein Nutzer Admin ist oder nicht.
+     * @param value ist ein booolscher Wert.
+     * @author Benedikt/Matthias
+     */
     function setIsAdmin($value){
         $_SESSION["Admin"] = $value; // Setzt ob der Nutzer Admin ist oder nicht in die Session
     }
 
+    /**
+     * Setzt ob ein Nutzer aktuell eingeloggt ist oder nicht
+     * @param value ist ein boolscher Wert.
+     * @author Benedikt/Matthias
+     */
     function setIsLoggedIn($value){
         $_SESSION["Loggedin"] = $value; // Setzt ob der Nutzer eingeloggt ist oder nicht in die Session
     }
 
+    /**
+     * Setzt den aktuellen User
+     * @param value assoziatives Array mit den Userdaten.
+     * @author Benedikt/Matthias
+     */
     function setUser($value){
         $_SESSION["User"] = $value; // Setzt den aktuell eingeloggten User
     }
 
+    /**
+     * Hasht einen String mit unseren Hash-Algorithmus.
+     * @param string der String der gehasht werden soll.
+     * @author Benedikt/Matthias
+     */
     function hashString($string){
         return hash ( "md5", $string, FALSE); // md5 Hash (One-Direction)
     }
