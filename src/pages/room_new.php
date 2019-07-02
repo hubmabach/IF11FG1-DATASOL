@@ -46,13 +46,9 @@ if (isset($_POST["submit-new-room"])) {
         echo "<p>Bitte geben Sie einen Raumnamen ein!</p>";
         $valid = false;
     }
-    if (ctype_space($roomdescription)) {
-        echo "<p>Bitte geben Sie eine Raumbeschreibung ein! </p>";
-        $valid = false;
-    }
 
     if ($valid) { 
-        $query = "INSERT INTO Rooms (RoomNo, RoomName, RoomNotes) VALUES ('$roomnumber', '$roomname', '$roomdescription');";
+        $query = "INSERT INTO rooms (RoomNo, RoomName, RoomNotes) VALUES ('$roomnumber', '$roomname', '$roomdescription');";
         $result = mysqli_query($dbLink, $query);
 
         if(!$result) {
