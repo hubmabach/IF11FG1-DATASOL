@@ -5,53 +5,32 @@
      * Hinzufügen und Anpassen der Anwender-Daten
      */
     
+
+     $result = mysqli_query($dbLink, "SELECT * FROM Users");
+
+     $tableConfig = array(
+        'columns' => array(
+            'UserId' => '#',
+            'UserName' => 'Benutzername',
+            'UserFirstName' => 'Vorname',
+            'UserLastName' => 'Nachname',
+            'UserEmail' => 'E-mail',
+            'IsAdmin' => 'Systembetreuer'
+        ),
+        'pageName' => 'users',
+        'idColumn' => 'UserId',
+        'result' => $result,
+        'singularName' => 'Benutzer'
+    );
     ?>    
 
 <h1>Stammdaten - Benutzerverwaltung</h1>
   
-    <div class="card">
-        <div class="card-body">
-            
+<div class="card">
+    <div class="card-body">            
         <?php
-    $tableConfig = array(
-        'columns' => array(
-            'UserId' => '#',
-            'UserName' => 'Benutzername',
-            'UserFirstname' => 'Vorname',
-            'UserLastname' => 'Nachname',
-            'UserEmail' => 'E-mail',
-            'isAdmin' => 'Systembetreuer'
-        ),
-        'pageName' => 'users',
-        'idColumn' => 'UserId',
-        'result' => array(
-            array(
-            'UserId' => '1',
-            'UserName' => 'Hänno',
-            'UserFirstname' => 'Max',
-            'UserLastname' => 'Whoknows',
-            'UserEmail' => 'test@mail.de',
-            // todo: need checkbox to display true false value
-            'isAdmin' => 'true',
-            ),
-            array(
-            'UserId' => '2',
-           'UserName' => 'Zimbel',
-           'UserFirstname' => 'Zedrik',
-           'UserLastname' => 'Ombey',
-           'UserEmail' => '',
-           'isAdmin' => 'false',
-           ),
-           
-        ),
-        'singularName' => 'Benutzer',
-
-    );
-
-    include_once('./templates/table.php');
-?> 
-
-
+            include_once('./templates/table.php');
+        ?> 
     </div>
 </div>
 
