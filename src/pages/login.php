@@ -52,7 +52,7 @@ if(isset($_POST["submit-login"]))
     exit;
   } else // Das eingegebene Passwort ist falsch.
   {
-    echo "<p>>Der Nutzername und/oder Passwort ist nicht korrekt </p>";
+    echo "<p>Der Nutzername und/oder Passwort ist nicht korrekt </p>";
   }
     
 }

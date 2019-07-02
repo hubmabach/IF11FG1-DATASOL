@@ -6,13 +6,13 @@ if (!isset($_GET["id"])) {
 }
 
 $id = $_GET["id"];
-$query = "SELECT * FROM rooms WHERE RoomId = $id;";
+$query = "SELECT * FROM rooms WHERE RoomID = $id;";
 $result = mysqli_query($dbLink, $query);
-$room = mysqli_fetch_assoc($result);
 
 if (mysqli_num_rows($result) !== 0) {
     if (isset($_POST["submit-edit-room"])) {
 
+        $room = mysqli_fetch_assoc($result);
         $roomName = $_POST["input-room-name"];
         $roomNumber = $_POST["input-room-number"];
         $roomNodes = $_POST["input-room-description"];
@@ -28,8 +28,8 @@ if (mysqli_num_rows($result) !== 0) {
         }
 
         if ($valid) {
-            $roomId = $room['RoomId'];
-            $query = "UPDATE rooms SET RoomNo = '$roomNumber', RoomName = '$roomName', RoomNodes='$roomNodes' WHERE RoomId = $roomId";
+            $roomId = $room['RoomID'];
+            $query = "UPDATE rooms SET RoomNo = '$roomNumber', RoomName = '$roomName', RoomNodes='$roomNodes' WHERE RoomID = $roomId";
             $result = mysqli_query($dbLink, $query);
 
             if ($result === false) {
@@ -51,6 +51,8 @@ if (mysqli_num_rows($result) === 0) : ?>
 endif;
 
 if (mysqli_num_rows($result) !== 0) :
+
+    $room = mysqli_fetch_assoc($result);
     ?>
 
     <h1>Stammdaten - Räume - Raum bearbeiten</h1>
@@ -60,7 +62,7 @@ if (mysqli_num_rows($result) !== 0) :
             <div class="form-group row">
                 <label for="input-room-id" class="col-sm-2 col-form-label">Raum-Id</label>
                 <div class="col-sm-7">
-                    <input type="text" class="form-control" id="input-room-id" name="input-room-id" disabled value="<?php echo $room['RoomId']; ?>" />
+                    <input type="text" class="form-control" id="input-room-id" name="input-room-id" disabled value="<?php echo $room['RoomID']; ?>" />
                 </div>
             </div>
             <div class="form-group row">

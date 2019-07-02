@@ -13,7 +13,7 @@ if (mysqli_num_rows($result) !== 0) {
 
     if (isset($_POST["submit-edit-supplier"])) {
         
-        $supplierId = $_POST["input-supplier-id"];
+        $supplierId = $id;
         $supplierCompanyName = $_POST["input-supplier-name"];
         $street = $_POST["input-street"];
         $postcode = $_POST["input-postcode"];
@@ -52,15 +52,15 @@ if (mysqli_num_rows($result) !== 0) {
     
     
         if ($valid) {
-            $queryAddress = "SELECT * FROM address WHERE Street LIKE $street AND PostalCode LIKE $postcode AND City LIKE $city AND MailAddress LIKE $email";
-            $result = mysqli_query($dbLink, $queryCheckAddress);
-            $addressId = mysqli_fetch_assoc($result)["AddressID"];
+            $queryAddress = "SELECT * FROM address WHERE Street LIKE '$street' AND PostalCode LIKE '$postcode' AND City LIKE '$city' AND MailAddress LIKE '$email'";
+            $resultAddress = mysqli_query($dbLink, $queryAddress);
+            $addressId = mysqli_fetch_assoc($resultAddress)["AddressID"];
 
             $queryUpdateAddress = "UPDATE address SET Street = '$street', PostalCode = '$postcode', City = '$city', " .
                                     "Country = '$country', TelNo = '$telephone', MobilNo = '$mobile', FaxNo = '$fax', " . 
                                     " MailAddress = '$email' WHERE AddressID = $addressId;";
             $queryUpdateCompany = "UPDATE supplier SET SupplierCompanyName = '$supplierCompanyName' WHERE SupplierID = $supplierId";
-            
+
             mysqli_query($dbLink, "BEGIN");
             $resultAddress = mysqli_query($dbLink, $queryUpdateAddress);
             $resultCompany = mysqli_query($dbLink, $queryUpdateCompany);
@@ -73,6 +73,7 @@ if (mysqli_num_rows($result) !== 0) {
             else 
             {
                 mysqli_query($dbLink, "COMMIT");
+                header("Location: index.php?page=$currentPage");
             }
         }
     }
