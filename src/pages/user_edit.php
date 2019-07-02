@@ -129,7 +129,7 @@
                 <div class="form-group row">
                     <div class="col-sm-8 offset-sm-2">
                         <div class="form-check">
-                            <input class="form-check-input" <?php if (boolval($userData['IsAdmin'])): ?>checked<?php endif; ?> type="checkbox" value="1" id="user_admin">
+                            <input class="form-check-input" <?php if (boolval($userData['IsAdmin'])): ?>checked<?php endif; ?> type="checkbox" value="1" id="user_admin" name="user_admin">
                             <label class="form-check-label" for="user_admin">
                                 Benutzer ist Systembetreuer
                             </label>
