@@ -43,7 +43,7 @@
         <tbody>
         <?php
         // TODO: Zur Datenbankabfrage wechseln
-        //while ($row = mysqli_fetch_assoc($tableConfig['result'])):
+        while ($row = mysqli_fetch_assoc($tableConfig['result']))
             foreach ($tableConfig['result'] as $row):
         ?>
             <tr>
