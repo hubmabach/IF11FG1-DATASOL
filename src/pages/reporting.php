@@ -47,15 +47,10 @@
         <?php
 
             if(isset($_POST["search"])) {
-                if(!isset($_POST['selection'])) {
-                    die();
+                if(!isset($_POST['selection'])) {                    
                     return;
                 }
             $result = getComponentsForRoom($_POST["selection"]);
-            if(mysqli_num_rows($result) == 0) {
-                echo "<p style='margin-top:20px'>In diesem Raum sind keine Komponenten</p>";
-                die();
-            }
             $tableConfig = array(
                 'columns' => array(
                     'Raum' => 'Raum',
@@ -68,6 +63,7 @@
             );     
         }        
     ?>
+    <?php if(isset($tableConfig) && mysqli_num_rows($result) > 0): ?>
     <div class="clearfix">
     <table class="table">
         <thead>
@@ -95,7 +91,9 @@
         <?php endforeach; ?>
         </tbody>
     </table>
-</div>
-            
+    </div>
+            <?php else: ?>  
+                <p style='margin-top:20px'>In diesem Raum sind keine Komponenten</p>
+            <?php endif; ?>
     </div>
 </div>
