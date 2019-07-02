@@ -298,8 +298,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`UserId`, `UserEmail`, `UserName`, `UserFirstName`, `UserLastName`, `UserPassword`, `IsAdmin`) VALUES
-(1, 'Admin@b3-fuerth.de', 'Admin', 'Admin', 'Admin', 'Admin', 1),
-(3, 'benutzer@b3-fuerth.de', 'Benutzer', 'Ben', 'Utzer', 'Benutzer', 0);
+(1, 'Admin@b3-fuerth.de', 'Admin', 'Admin', 'Admin', 'e3afed0047b08059d0fada10f400c1e5', 1),
+(3, 'benutzer@b3-fuerth.de', 'Benutzer', 'Ben', 'Utzer', 'b15b7b0340f52d448dc6191fc9317f3a', 0);
 
 -- --------------------------------------------------------
 
