@@ -1,11 +1,15 @@
 <?php
     /**
-     * Anzeige der verschiedenen Komponenten, abhängig vom ausgewähltem Raum
+     * Anzeige der verschiedenen Komponenten, abhängig von der Filterauswahl
      */
 
-    function getComponentByTypeId($typeId) {
-        global $dbLink;
 
+    /**
+     * Gibt alle Komponenten mit dieser TypeId zurueck
+     * @param int $typeId Id des gesuchten Komponententyps
+     */
+    
+    function getComponentsByTypeId($typeId) {
         $sqlStatement = 
         "SELECT 
         C.ComponentId AS ComponentId,
@@ -16,25 +20,39 @@
         INNER JOIN ComponentTypes AS CT ON C.ComponentTypeId = CT.ComponentTypeId
         INNER JOIN ComponentsInRoom AS CR ON C.ComponentId = CR.ComponentId
         INNER JOIN Rooms AS R ON R.RoomId = CR.RoomId        
-        WHERE CT.ComponentTypeId =" .$typeId. ";";
+        WHERE CT.ComponentTypeId =" .$typeId. "
+        ORDER BY R.RoomNo ASC;";
 
-        $result = mysqli_query($dbLink, $sqlStatement);
-        return $result;
+        return getResult($sqlStatement);
     }
 
+    /**
+     * Gibt alle Kompoenten zurueck, die die gesuchten Zeichen im Namen haben
+     * @param string $searchTerm ganzer oder nur zum Teil Name eines Geraetes
+     */
+    function getComponentsByName($searchTerm) {
+        $sqlStatement = 
+        "SELECT 
+        C.ComponentId AS ComponentId,
+        C.ComponentName,
+        CT.ComponentTypeName AS Kategorie,
+        R.RoomNo AS Raum
+        FROM Components AS C
+        INNER JOIN ComponentTypes AS CT ON C.ComponentTypeId = CT.ComponentTypeId
+        INNER JOIN ComponentsInRoom AS CR ON C.ComponentId = CR.ComponentId
+        INNER JOIN Rooms AS R ON R.RoomId = CR.RoomId
+        WHERE C.ComponentName LIKE '%" .$searchTerm. "%'
+        ORDER BY R.RoomNo ASC;";
 
+        return getResult($sqlStatement);
+    }
    
 
      /**
-      * Gibt das Ergebnis der Datenbankabfrage - abhaengig von der RaumId - zurueck
-      * @param number $roomId - Id des ausgewaehlten Raumes
-      * @return mysqli_result $result - Ergebnis der Datenbankabfrage
+      * Gibt alle Komponenten, die sich im ausgewaehltem Raum befinden, zurueck
+      * @param int $roomId - Id des ausgewaehlten Raumes
       */
      function getComponentsForRoom($roomId) {
-        // Datenbanklink
-        global $dbLink;
-
-        // Datenbankabfrage mit variabler RaumId
         $sqlStatement =
         "SELECT 
         C.ComponentId AS ComponentId,
@@ -47,38 +65,43 @@
         INNER JOIN Rooms AS R ON R.RoomId = CR.RoomId
        WHERE R.RoomId = " .$roomId. ";";
        
-       // Ergebnis der Datenbankabfrage
-        $result = mysqli_query($dbLink, $sqlStatement);
-        return $result;
+       return getResult($sqlStatement);
+
      }
     /**
     * Gibt alle Arten von Softwares zurueck
     */
     function getSoftwareTypes() {
-        global $dbLink;
         $sqlStatement =
         "SELECT ComponentTypeID, ComponentTypeName
         FROM ComponentTypes
-        WHERE IsSoftware = 1";
+        WHERE IsSoftware = 1;";
 
-        $result = mysqli_query($dbLink, $sqlStatement);
-        return $result;
+        return getResult($sqlStatement);
     }
 
     /**
      * Gibt alle Arten von Hardwares zurueck
     */
     function getHardwareTypes() {
-        global $dbLink;
         $sqlStatement =
         "SELECT ComponentTypeID, ComponentTypeName
         FROM ComponentTypes
-        WHERE IsSoftware = 0";
+        WHERE IsSoftware = 0;";
 
+        return getResult($sqlStatement);
+    }
+
+    /**
+     * Gibt das Ergebnis der SQL-Abfrage zurueck
+     * @param string $sqlStatement Beinhaltet die Datenbankabfrage
+     * @return mysqli_result Ergebnis der Datenbankabfrage
+     */
+    function getResult($sqlStatement) {
+        global $dbLink;
         $result = mysqli_query($dbLink, $sqlStatement);
         return $result;
     }
-
 
     $rooms = mysqli_query($dbLink, "SELECT RoomId, RoomNo FROM Rooms");
     $hardware = getHardwareTypes();
@@ -91,49 +114,56 @@
 <h1>Reporting</h1>
 <div class="card">
     <div class="card-body">
-        <form method="POST">
+        <form method="POST" style="margin-top:20px; margin-bottom:20px;">
         <select name="room" placeholder="Raum" class="custom-select custom-select-lg" style="width: 10%" >
-            <option selected disabled>------</option>
+            <option selected disabled>Raum</option>
             <?php 
                 foreach($rooms as $option) {
                     echo "<option value='", $option["RoomId"],"' > ", $option["RoomNo"], " </option>";
                 }        
             ?>
         </select>
-        <select name="hardware" placeholer="Hardware" class="custom-select custom-select-lg" style="width: 10%" >
-            <option selected disabled>------</option>
+        <select name="hardware" placeholer="Hardware" class="custom-select custom-select-lg" style="width: 13%" >
+            <option selected disabled>Hardware</option>
             <?php 
                 foreach($hardware as $option) {
                     echo "<option value='", $option["ComponentTypeID"],"' > ", $option["ComponentTypeName"], " </option>";
                 }        
             ?>
         </select>
-        <select name="software" placeholder="Software" class="custom-select custom-select-lg" style="width: 10%" >
-            <option selected disabled>------</option>
+        <select name="software" placeholder="Software" class="custom-select custom-select-lg" style="width: 12%" >
+            <option selected disabled>Software</option>
             <?php 
                 foreach($software as $option) {
                     echo "<option value='", $option["ComponentTypeID"],"' > ", $option["ComponentTypeName"], " </option>";
                 }        
             ?>
         </select>
-        <button name="search" type="submit" class="btn btn-primary"> Suchen </button>
+        <input type="text" name="searchfilter" class="form-control" style="width:20% !important; display:inline;" placeholder="Gerätename"/>
+        <button name="searchbtn" type="submit" class="btn btn-primary"> Suchen </button>
         </form>
         
         <?php
 
-            if(isset($_POST["search"])) {
+            if(isset($_POST["searchbtn"])) {
             if(isset($_POST["room"])) {
                 $result = getComponentsForRoom($_POST["room"]);
             }
             if(isset($_POST["hardware"])) {
-                $result = getComponentByTypeId($_POST["hardware"]);
+                $result = getComponentsByTypeId($_POST["hardware"]);
             } 
             if(isset($_POST["software"])) {
-                $result = getComponentByTypeId($_POST["software"]);
+                $result = getComponentsByTypeId($_POST["software"]);
             }
-            if(isset($_POST["room"]) || isset($_POST["hardware"]) || isset($_POST["software"])) {
-
-                
+            if(isset($_POST["searchfilter"]) && !empty($_POST["searchfilter"])) {
+                $result = getComponentsByName($_POST["searchfilter"]);
+            }
+            if(isset($_POST["room"]) 
+            || isset($_POST["hardware"]) 
+            || isset($_POST["software"]) 
+            || (isset($_POST["searchfilter"]) && !empty($_POST["searchfilter"]))
+            ) {
+            
                 $tableConfig = array(
                     'columns' => array(
                         'Raum' => 'Raum',
