@@ -8,7 +8,7 @@
     $query = "SELECT * FROM components";
 
     if (isset($_GET['search']) and !empty($_GET['search'])) {
-        $query = " WHERE ComponentName LIKE '%".$_GET['search']."%'";
+        $query .= " WHERE ComponentName LIKE '%".$_GET['search']."%'";
     }
 
     $result = mysqli_query($dbLink,$query);
