@@ -196,9 +196,11 @@
                 <?php foreach ($tableConfig['columns'] as $columnName => $label): ?>
                 <td><?php echo $row[$columnName]; ?></td>
                 <?php endforeach; ?>
+                <?php if($isAdmin):?>
                 <td style="width: 1%">
-                    <a href="?page=komponentenart&id=<?php echo $row[$tableConfig['idColumn']]; ?>" class="btn btn-sm btn-light">Bearbeiten</a>
+                    <a href="?page=component&id=<?php echo $row[$tableConfig['idColumn']]; ?>" class="btn btn-sm btn-light">Bearbeiten</a>
                 </td>
+                <?php endif; ?>
             </tr>
         <?php endwhile; ?>
         </tbody>
