@@ -9,7 +9,7 @@
      * @param string $tableConfig::pageName Der Name der für das PHP-File verwendet wird.
      */
 
-    // $required_keys = array('columns', 'singularName', 'idColumn', 'data', 'result');
+    // $required_keys = array('columns', 'singularName', 'idColumn', 'result');
 
     // Sollte die Variable $tableConfig nicht existieren, dann gib eine Warnung aus.
     if (!isset($tableConfig)):
@@ -42,7 +42,6 @@
         </thead>
         <tbody>
         <?php
-        // TODO: Zur Datenbankabfrage wechseln
         while ($row = mysqli_fetch_assoc($tableConfig['result']))
             foreach ($tableConfig['result'] as $row):
         ?>
@@ -50,20 +49,13 @@
                 <?php foreach ($tableConfig['columns'] as $columnName => $label): ?>
                 <td><?php echo $row[$columnName]; ?></td>
                 <?php endforeach; ?>
-                <td style="width: 1%">
+                <td style="width: 1%">                
                     <a href="?page=<?php echo $tableConfig['pageName']; ?>&detail=edit&id=<?php echo $row[$tableConfig['idColumn']]; ?>" class="btn btn-sm btn-light">Bearbeiten</a>
                 </td>
             </tr>
         <?php endforeach; ?>
         </tbody>
     </table>
-    <!-- <div class="btn-group">
-        <a class="btn btn-default btn-outline-light">Vorherige Seite</a>
-        <a class="btn btn-default btn-outline-light">1</a>
-        <a class="btn btn-default btn-outline-light">2</a>
-        <a class="btn btn-default btn-outline-light">3</a>
-        <a class="btn btn-default btn-outline-light">Nächste Seite</a>
-    </div> -->
     <?php else: ?>
     <div class="alert alert-light">Keine Daten vorhanden.</div>
     <?php endif; ?>
