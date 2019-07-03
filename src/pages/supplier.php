@@ -9,6 +9,12 @@
              */
 
             $query = "SELECT * FROM supplier INNER JOIN address on supplier.AddressId = address.AddressId";
+
+            if (isset($_GET['search']) and !empty($_GET['search'])) {
+                $query .= " WHERE SupplierCompanyName LIKE '%".$_GET['search']."%' OR TelNo LIKE '%".$_GET['search']."%'".
+                            " OR MailAddress LIKE '%".$_GET['search']."%'";
+            }
+
             $result = mysqli_query($dbLink, $query);
 
             $tableConfig = array(
