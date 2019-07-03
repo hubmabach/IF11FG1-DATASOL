@@ -26,7 +26,6 @@ if (isset($_POST["submit-login"])) {
     echo "<p>Der Nutzername und/oder Passwort ist nicht korrekt </p>";
   } else {
     $userFromDb = mysqli_fetch_assoc($result); // Holt den aktuellen User aus dem Ergebnisdaten raus
-
     if ($userFromDb["UserPassword"] == $password) // Prüft ob das eingegebene Passwort das gleiche ist, wie in der Datenbank gespeichert.
     {
       setIsAdmin($userFromDb["IsAdmin"]); // Setzt ob der aktuelle User ein Admin ist oder nicht

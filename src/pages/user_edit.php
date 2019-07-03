@@ -14,7 +14,8 @@
      */
     function sqlUpdateString($valueArray) {
         $updateStr = "";
-
+        $arrayKeys = array_keys($valueArray);
+        $lastArrayKey = array_pop($arrayKeys);
         foreach ($valueArray as $key => $value) {
 
             // Wenn der Wert ein String ist, müssen extra Anführungszeichen hinzugefügt werden.
@@ -23,7 +24,7 @@
             $updateStr .= $key." = ".$value;
 
             // Sollte der Iterator nicht bei dem letzten Wert sein, dann füge ein Komma zur Zeichenfolge hinzu.
-            if ($key !== array_key_last($valueArray)) $updateStr .= ", ";
+            if ($key !== $lastArrayKey) $updateStr .= ", ";
         }
 
         return $updateStr;
@@ -47,7 +48,6 @@
                 // Hashe die Passwörter und vergleiche die Hashstrings miteinander. Sollten diese Übereinstimmen, dann füge den Wert zum $userData Array hinzu.
                 $password = hashString($_POST['user_password']);
                 $passwordRepeat = hashString($_POST['user_password_repeat']);
-
                 if ($password === $passwordRepeat) {
                     $userData['UserPassword'] = $password;
                 } else {
@@ -57,10 +57,13 @@
 
             if (empty($error)) {
                 $query = "UPDATE users SET ".sqlUpdateString($userData)." WHERE UserID = $userId";
-
                 $result = mysqli_query($dbLink, $query);
 
-                echo "<div class='alert alert-success'>Änderungen erfolgreich gespeichert.</div>";
+                if($result){
+                    echo "<div class='alert alert-success'>Änderungen erfolgreich gespeichert.</div>";
+                } else {
+                    echo "<div class='alert alert-danger'>Bei der Bearbeitung Ihrer Anfrage tat ein Fehler auf.</div>";
+                }
             } else {
                 ?><div class="alert alert-danger"><?php echo $error; ?></div><?php
             }
