@@ -31,9 +31,7 @@
   
 <div class="card">
     <div class="card-body">            
-        <?php
-            include_once('./templates/table.php');
-        ?> 
+        <?php include_once('./templates/table.php'); ?> 
     </div>
 </div>
 
