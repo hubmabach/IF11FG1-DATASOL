@@ -2,7 +2,7 @@
 
 /**
  * Setzt alle nötigen Werten um ein Nutzer als ausgeloggt zu markieren.
- * @author Benedikt
+ * @author Reindl/Schmiedkunz
  * Benedikt 15:45 - 15:50
  */
 

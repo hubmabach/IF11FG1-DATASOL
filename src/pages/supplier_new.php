@@ -4,7 +4,7 @@
  * Auf dieser Seite kann der Nutzer ein neuen Lieferanten anlegen. Bei der Eingabe der Adresse wird geprüft, 
  * ob die Addresse bereits vorhanden ist und falls ja wird keine neue Adresse angelegt, sondern die bereits vorhandene
  * Addresse verwendet. Falls keine Adresse vorhanden ist, wird eine angelegt und im Lieferanten gespeichert.
- * @author Benedikt/Matthias
+ * @author Reindl/Schmiedkunz
  * 
  * Benedikt 13:00-15:00
  * Matthias 13:00-15:00

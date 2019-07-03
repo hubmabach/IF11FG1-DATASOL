@@ -7,6 +7,8 @@
  * - Über "input-username" und "input-password" werden die Daten beim Drücken des "Anmelden"-Buttons mit den Einträgen in der Datenbank verglichen 
  * - Das Passwort wird über einen One-Direction-Hash ("md5") gesichert, hier wird das Passwort im Plain Text eingegeben, gehasht und mit dem gehashten Passwort auf der Datenbank verglichen
  * 
+ * @author Reindl/Schmiedkunz
+ * 
  * - Zeit: Beni: 09:00 - 13:27
  * - Zeit: Matze S: 09:00 - 12:45
  */

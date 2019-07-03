@@ -1,6 +1,8 @@
 <?php 
     /**
      * Auf dieser Seite werden alle Räume angzeigt, die in der Datenbank gespeichert sind.
+     * 
+     * @author Reindl/Schmiedkunz
      */
     
     $query = "SELECT * FROM rooms";

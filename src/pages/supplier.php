@@ -3,7 +3,7 @@
      * Stellt alle Lieferanten in der Datenbank dar und biettet die Möglichkeit, diese zu bearbeiten,
      * bzw. neue Lieferanten anzulegen.
      * 
-     * @author Benedikt/Matthias
+     * @author Reindl/Schmiedkunz
      */
 
     $query = "SELECT * FROM supplier INNER JOIN address on supplier.AddressId = address.AddressId";

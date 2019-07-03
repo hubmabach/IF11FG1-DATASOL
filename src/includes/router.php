@@ -10,6 +10,8 @@
  * Ist der Nutzer eingeloggt und ruft eine spezielle Seite auf, wird die Listenansicht zurück gegeben.
  * Ansonsten wird ein zusätzlicher Paramter übergeben, der auf eine Unterseite verweißt.
  * 
+ * @author Reindl/Schmiedkunz
+ * 
  * Benedikt 15:00 -16:30
  */
 

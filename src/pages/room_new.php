@@ -3,6 +3,8 @@
 /**
  * Auf dieser Seite hat der Nutzer die Möglichkeit, einen neuen Raum anzulegen. Es wird geprüft ob alle 
  * Pflichtfelder gesetzt sind oder nicht. 
+ * 
+ * @author Reindl/Schmiedkunz
  */
 
 $roomnumber = "";

@@ -4,6 +4,8 @@
  * Auf dieser Seite wird ein bestehender Raum anhander der ID in der URL angezeigt. Sollte keine ID gesetzt sein, 
  * wird der Nutzer zurück auf die Raumübersichtsseite verwiesen. Ansonsten hat er auf der Seite die Möglichkeit, 
  * alle erfassten Daten für diesen Raum abzuändern und dann anschließend zu speichern.
+ * 
+ * @author Reindl/Schmiedkunz
  */
 
 $currentPage = $_GET["page"];

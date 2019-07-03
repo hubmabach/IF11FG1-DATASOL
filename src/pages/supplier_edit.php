@@ -5,7 +5,7 @@
  * ID in der URL herausgesucht. Sollte keine ID gesetzt sein, wird er auf die Übersichtsseite zurück verwiesen. 
  * Ansonsten werden die Felder mit den in der Datenbank gespeicherten Werten vorbefüllt. Der Nutzer kann diese anschließend
  * nach belieben bearbeiten und Speichern.
- * @author Benedikt/Matthais
+ * @author Reindl/Schmiedkunz
  * Benedikt 13:00-15:00
  * Matthias 13:00-15:00
  */
