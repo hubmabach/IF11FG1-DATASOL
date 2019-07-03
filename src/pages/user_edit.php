@@ -80,14 +80,21 @@
 
     $result = mysqli_query($dbLink, $query);
 
-    if (mysqli_num_rows($result) > 0) {
+    if (mysqli_num_rows($result) === 0) : ?>
+
+    <h3 class="text-danger">Der angeforderte Benutzer wurde leider nicht gefunden.</h3>
+    <p>Vielleicht wurde er durch einen anderen Nutzer gelöscht.</p>
+    <a class="btn btn-secondary" href="index.php?page=users">Zur Übersicht</a>
+<?php
+endif;
+
+    if (mysqli_num_rows($result) > 0):
         $userData = mysqli_fetch_assoc($result);
-    }
 ?>
-<div class="container" style="margin-top: 30px;">
-    <h1>Stammdaten - Benutzer - <?php echo "Max Mustermann"; ?></h1>
+
+    <h1>Stammdaten - Benutzer - <?php echo $userData["UserName"]; ?></h1>
     <div class="card">
-        <div class="card-body">
+        <div class="card-body" style="background-color:#f8f9fa;">   
             <form method="post">
                 <div class="form-group row">
                     <label class="control-label col-sm-2 text-sm-right">Benutzername</label>
@@ -144,3 +151,4 @@
         </div>
     </div>
 </div>
+<?php endif; ?>

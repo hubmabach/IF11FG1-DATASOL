@@ -47,9 +47,9 @@
         }
     }
 ?>
-<h1>Stammdaten - Benutzer - <?php echo "Max Mustermann"; ?></h1>
+<h1>Stammdaten - Benutzer - Neuen Benutzer anlegen</h1>
 <div class="card">
-    <div class="card-body">
+    <div class="card-body" style="background-color:#f8f9fa;">
         <form method="post">
             <div class="form-group row">
                 <label class="control-label col-sm-2 text-sm-right">Benutzername</label>

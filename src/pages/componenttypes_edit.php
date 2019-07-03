@@ -44,6 +44,8 @@
                 foreach ($attributes_to_add as $attributeId) {
                     mysqli_query($dbLink, "INSERT INTO componenttypehasattributes (ComponentTypeID, AttributeID) VALUES ($id, $attributeId);");
                 }
+
+                echo "<div class='alert alert-success'>Änderungen erfolgreich gespeichert.</div>";
             }
         } else if (isset($_POST['componenttype_delete'])) {
             $delete_attributes_query = "DELETE FROM componenttypehasattributes WHERE ComponentTypeID = $id;";
@@ -73,7 +75,7 @@
 <h1>Stammdaten - Komponentenart - <?php echo $data['ComponentTypeName']; ?></h1>
 
 <div class="card">
-    <div class="card-body">
+    <div class="card-body" style="background-color:#f8f9fa;">
         <form method="post">
             <div class="form-group row">
                 <label class="control-label col-sm-2 text-sm-right">Bezeichnung</label>
