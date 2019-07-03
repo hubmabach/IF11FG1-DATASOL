@@ -17,7 +17,7 @@
     else:
 ?>
 
-<div class="clearfix" style="margin-bottom: 20px;">
+<div class="clearfix">
     <a href="index.php?page=<?php echo $tableConfig['pageName']; ?>&detail=new" class="btn btn-primary float-right"><?php echo $tableConfig['singularName']; ?> erstellen</a>
     <form class="form-inline" method="GET">
         <input type="hidden" name="page" value="<?php echo $_GET['page']; ?>" />
