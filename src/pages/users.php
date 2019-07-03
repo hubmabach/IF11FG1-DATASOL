@@ -34,6 +34,3 @@
         <?php include_once('./templates/table.php'); ?> 
     </div>
 </div>
-
-
-
