@@ -47,7 +47,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         }
     }
     else if(isset($_POST["submit-delete-room"])) {
+        $queryDelete = "DELETE FROM users WHERE UserID = $id";
 
+        $resultDelete = mysqli_query($dbLink, $queryDelete);
+
+        if ($resultDelete) {
+            header("Location: ./index.php?page=room");
+        }
     }
 }
 
