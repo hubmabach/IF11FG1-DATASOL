@@ -25,7 +25,7 @@
             'ComponentTypeID' => 'KomponentenartID'
         ),
         'singularName' => 'Komponenten',
-        'IDColumn' => 'ComonentID',
+        'idColumn' => 'ComponentID',
         'pageName' => 'component',
         'result' => $result
     );
