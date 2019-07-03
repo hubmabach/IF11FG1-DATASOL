@@ -1,6 +1,7 @@
 <?php
     /**
      * Anzeige der verschiedenen Komponenten, abhängig von der Filterauswahl
+     * @author Rubein
      */
 
 
@@ -115,8 +116,9 @@
 <div class="card">
     <div class="card-body">
         <form method="POST" style="margin-top:20px; margin-bottom:20px;">
+        <div class="form-group">
         <select id="room" name="room" placeholder="Raum" class="custom-select custom-select-lg" style="width: 10%" >
-            <option value="" selected disabled>-----</option>
+            <option value="" selected>-----</option>
             <?php 
                 foreach($rooms as $option) {
                     echo "<option value='", $option["RoomId"],"' > ", $option["RoomNo"], " </option>";
@@ -127,7 +129,7 @@
             document.getElementById('room').value = "<?php echo $_POST['room'];?>";
         </script>
         <select id="hardware" name="hardware" placeholer="Hardware" class="custom-select custom-select-lg" style="width: 13%" >
-            <option value="" selected disabled>-----</option>
+            <option value="" selected>-----</option>
             <?php 
                 foreach($hardware as $option) {
                     echo "<option value='", $option["ComponentTypeID"],"' > ", $option["ComponentTypeName"], " </option>";
@@ -138,7 +140,7 @@
             document.getElementById('hardware').value = "<?php echo $_POST['hardware'];?>";
         </script>
         <select id="software" name="software" placeholder="Software" class="custom-select custom-select-lg" style="width: 12%" >
-            <option value="" selected disabled>-----</option>
+            <option value="" selected>-----</option>
             <?php 
                 foreach($software as $option) {
                     echo "<option value='", $option["ComponentTypeID"],"' > ", $option["ComponentTypeName"], " </option>";
@@ -162,25 +164,26 @@
                 document.getElementById('searchfilter').value = "";
         </script>
         <?php endif; ?>
+        </div>
         </form>
         
         <?php
             if(isset($_POST["searchbtn"])) {
-            if(isset($_POST["room"])) {
+            if(isset($_POST["room"]) && !empty($_POST["room"])) {
                 $result = getComponentsForRoom($_POST["room"]);
             }
-            if(isset($_POST["hardware"])) {
+            if(isset($_POST["hardware"]) && !empty($_POST["hardware"])) {
                 $result = getComponentsByTypeId($_POST["hardware"]);
             } 
-            if(isset($_POST["software"])) {
+            if(isset($_POST["software"]) && !empty($_POST["software"])) {
                 $result = getComponentsByTypeId($_POST["software"]);
             }
             if(isset($_POST["searchfilter"]) && !empty($_POST["searchfilter"])) {
                 $result = getComponentsByName($_POST["searchfilter"]);
             }
-            if(isset($_POST["room"]) 
-            || isset($_POST["hardware"]) 
-            || isset($_POST["software"]) 
+            if((isset($_POST["room"]) && !empty($_POST["room"])) 
+            || (isset($_POST["hardware"]) && !empty($_POST["hardware"])) 
+            || (isset($_POST["software"]) && !empty($_POST["software"])) 
             || (isset($_POST["searchfilter"]) && !empty($_POST["searchfilter"]))
             ) {
             
