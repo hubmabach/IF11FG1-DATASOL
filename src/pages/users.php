@@ -2,6 +2,7 @@
 <?php 
     /**
      * Anzeige der Benutzer
+     * @author Rubeins
      */
     
     $query = "SELECT UserId, UserName, UserFirstName, UserLastName, IF(IsAdmin, 'Ja', 'Nein') AS IsAdmin FROM Users";
