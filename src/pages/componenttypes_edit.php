@@ -70,6 +70,16 @@
     $result = mysqli_query($dbLink, $query);
 
     $data = mysqli_fetch_assoc($result);
+
+    if (mysqli_num_rows($result) === 0) : ?>
+
+    <h3 class="text-danger">Die angeforderte Komponentenart wurde leider nicht gefunden.</h3>
+    <p>Vielleicht wurde sie durch einen anderen Nutzer gelöscht.</p>
+    <a class="btn btn-secondary" href="index.php?page=componenttypes">Zur Übersicht</a>
+
+<?php
+endif;
+if (mysqli_num_rows($result) !== 0) :
 ?>
 
 <h1>Stammdaten - Komponentenart - <?php echo $data['ComponentTypeName']; ?></h1>
@@ -139,3 +149,4 @@
         </form>
     </div>
 </div>
+<?php endif; ?>
