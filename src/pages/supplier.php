@@ -2,32 +2,26 @@
 <div class="card">
     <div class="card-body">
         <?php 
+
+            /**
+             * Stellt alle Lieferanten in der Datenbank dar und biettet die Möglichkeit, diese zu bearbeiten,
+             * bzw. neue Lieferanten anzulegen.
+             */
+
+            $query = "SELECT * FROM supplier INNER JOIN address on supplier.AddressId = address.AddressId";
+            $result = mysqli_query($dbLink, $query);
+
             $tableConfig = array(
                 'columns' => array(
-                    'SupplierId' => '#',
-                    'SupplierName' => 'Lieferantenname',
-                    'SupplierContactInformation' => 'Kontaktinformationen'
+                    'SupplierID' => '#',
+                    'SupplierCompanyName' => 'Lieferantenname',
+                    'TelNo' => 'Telefonnummber',
+                    'MailAddress' => 'E-mailadresse'
                 ),
                 'singularName' => 'Lieferant',
-                'idColumn' => 'SupplierId',
+                'idColumn' => 'SupplierID',
                 'pageName' => 'supplier',
-                'data' => array(
-                    array(
-                        'SupplierId' => 1,
-                        'SupplierName' => 'R001',
-                        'SupplierContactInformation' => 'Tel: 01234/56789 E-Mail: test@test.de'
-                    ),
-                    array(
-                        'SupplierId' => 2,
-                        'SupplierName' => 'R002',
-                        'SupplierContactInformation' => 'Tel: 01234/56789 E-Mail: test@test.de'
-                    ),
-                    array(
-                        'SupplierId' => 3,
-                        'SupplierName' => 'R003',
-                        'SupplierContactInformation' => 'Tel: 01234/56789 E-Mail: test@test.de'
-                    )
-                )
+                'result' => $result
             );
 
             include_once('./templates/table.php');

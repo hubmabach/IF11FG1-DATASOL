@@ -9,9 +9,9 @@
  * 
  * Ist der Nutzer eingeloggt und ruft eine spezielle Seite auf, wird die Listenansicht zurück gegeben.
  * Ansonsten wird ein zusätzlicher Paramter übergeben, der auf eine Unterseite verweißt.
+ * 
+ * Benedikt 15:00 -16:30
  */
-
-$errorPage = realpath( __DIR__ . "/../pages/errorpage.php");
 
 if($isLoggedIn)
 {
@@ -31,7 +31,7 @@ if($isLoggedIn)
             if(file_exists($filePath))
                 include_once($filePath);
             else
-                include_once($errorPage);
+                header("Location: index.php?page=errorpage");
         }
         else
         {
@@ -40,7 +40,7 @@ if($isLoggedIn)
             if(file_exists($filePath))
                 include_once($filePath);
             else
-                include_once($errorPage);
+                header("Location: index.php?page=errorpage");
         }
     }
 }

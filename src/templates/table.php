@@ -2,10 +2,11 @@
     /**
      * Diese Datei dient zur Anzeige von Daten in einem Tabellen-Layout.
      * 
-     * @param tableConfig Konfiguration der Tabelle. Diese Variable sollte vor der Einbindung dieser Datei definiert worden sein.
-     * @param tableConfig::columns Tabellenspalten die aus den Daten angezeigt werden sollen.
-     * @param tableConfig::idColumn Name der Spalte die als Identifikator (kurz ID) dient.
-     * @param tableConfig::result Das Ergebnis einer MySQL-Datenbankabfrage.
+     * @param array $tableConfig Konfiguration der Tabelle. Diese Variable sollte vor der Einbindung dieser Datei definiert worden sein.
+     * @param array $tableConfig::columns Tabellenspalten die aus den Daten angezeigt werden sollen.
+     * @param string $tableConfig::idColumn Name der Spalte die als Identifikator (kurz ID) dient.
+     * @param mysqli_result $tableConfig::result Das Ergebnis einer MySQL-Datenbankabfrage.
+     * @param string $tableConfig::pageName Der Name der für das PHP-File verwendet wird.
      */
 
     // $required_keys = array('columns', 'singularName', 'idColumn', 'data', 'result');
@@ -17,17 +18,19 @@
 ?>
 
 <div class="clearfix" style="margin-bottom: 20px;">
-    <a href="#" class="btn btn-primary float-right"><?php echo $tableConfig['singularName']; ?> erstellen</a>
-    <form class="form-inline">
+    <a href="index.php?page=<?php echo $tableConfig['pageName']; ?>&detail=new" class="btn btn-primary float-right"><?php echo $tableConfig['singularName']; ?> erstellen</a>
+    <form class="form-inline" method="GET">
+        <input type="hidden" name="page" value="<?php echo $_GET['page']; ?>" />
         <div class="input-group">
-            <input type="search" name="search" class="form-control" placeholder="Suche..." />
+            <input type="search" name="search" class="form-control" placeholder="Suche..." value="<?php echo @$_GET['search']; ?>" />
             <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button" id="button-addon2">Suchen</button>
+                <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Suchen</button>
             </div>
         </div>
     </form>
 </div>
 <div class="clearfix">
+    <?php if ($tableConfig['result'] and mysqli_num_rows($tableConfig['result']) > 0): ?>
     <table class="table">
         <thead>
             <tr>
@@ -38,17 +41,17 @@
             </tr>
         </thead>
         <tbody>
-        <?php 
-            // TODO: Zur Datenbankabfrage wechseln
-            // while ($row = mysqli_fetch_assoc($tableConfig['result'])):
-            foreach ($tableConfig['data'] as $row):
+        <?php
+        // TODO: Zur Datenbankabfrage wechseln
+        while ($row = mysqli_fetch_assoc($tableConfig['result']))
+            foreach ($tableConfig['result'] as $row):
         ?>
             <tr>
                 <?php foreach ($tableConfig['columns'] as $columnName => $label): ?>
                 <td><?php echo $row[$columnName]; ?></td>
                 <?php endforeach; ?>
                 <td style="width: 1%">
-                    <a href="?page=komponentenart&id=<?php echo $row[$tableConfig['idColumn']]; ?>" class="btn btn-sm btn-light">Bearbeiten</a>
+                    <a href="?page=<?php echo $tableConfig['pageName']; ?>&detail=edit&id=<?php echo $row[$tableConfig['idColumn']]; ?>" class="btn btn-sm btn-light">Bearbeiten</a>
                 </td>
             </tr>
         <?php endforeach; ?>
@@ -61,5 +64,8 @@
         <a class="btn btn-default btn-outline-light">3</a>
         <a class="btn btn-default btn-outline-light">Nächste Seite</a>
     </div> -->
+    <?php else: ?>
+    <div class="alert alert-light">Keine Daten vorhanden.</div>
+    <?php endif; ?>
 </div>
 <?php endif; ?>

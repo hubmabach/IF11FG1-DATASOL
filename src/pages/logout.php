@@ -1,9 +1,15 @@
-<?php 
+<?php
 
-setIsAdmin(false); // Setzt ob der aktuelle User ein Admin ist oder nicht
-setIsLoggedIn(false); // Setzt den Flag, dass der User eingeloggt ist
-setUser(null); // Setzt den aktuellen User um später auf z.B. den Namen zuzugreifen
-header("Location: index.php");
-exit;
+/**
+ * Setzt alle nötigen Werten um ein Nutzer als ausgeloggt zu markieren.
+ * @author Benedikt
+ * Benedikt 15:45 - 15:50
+ */
+
+    setIsAdmin(false); 
+    setIsLoggedIn(false); 
+    setUser(null);
+    header("Location: index.php");
+    exit;
 
 ?>

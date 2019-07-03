@@ -1,10 +1,4 @@
-<?php
-    require_once('./includes/global.php');
-    
-    include_once('./templates/html_start.php');
-    include_once('./templates/navigation.php');
-?>
-
+<?php require_once('./includes/global.php');?>
 <?php include_once('./templates/html_start.php'); ?>
 <?php include_once('./templates/navigation.php'); ?>
 
