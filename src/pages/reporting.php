@@ -22,13 +22,12 @@
         INNER JOIN Rooms AS R ON R.RoomId = CR.RoomId        
         WHERE CT.ComponentTypeId =" .$typeId. "
         ORDER BY R.RoomNo ASC;";
-
         return getResult($sqlStatement);
     }
 
     /**
-     * Gibt alle Kompoenten zurueck, die die gesuchten Zeichen im Namen haben
-     * @param string $searchTerm ganzer oder nur zum Teil Name eines Geraetes
+     * Gibt alle Komponenten zurueck, die die gesuchten Zeichen im Namen haben
+     * @param string $searchTerm ganzer Name oder nur Teil des Namens eines Geraetes
      */
     function getComponentsByName($searchTerm) {
         $sqlStatement = 
@@ -43,13 +42,12 @@
         INNER JOIN Rooms AS R ON R.RoomId = CR.RoomId
         WHERE C.ComponentName LIKE '%" .$searchTerm. "%'
         ORDER BY R.RoomNo ASC;";
-
         return getResult($sqlStatement);
     }
    
 
      /**
-      * Gibt alle Komponenten, die sich im ausgewaehltem Raum befinden, zurueck
+      * Gibt alle Komponenten zurueck, die sich im ausgewaehltem Raum befinden
       * @param int $roomId - Id des ausgewaehlten Raumes
       */
      function getComponentsForRoom($roomId) {
@@ -63,15 +61,14 @@
         INNER JOIN ComponentTypes AS CT ON C.ComponentTypeId = CT.ComponentTypeId
         INNER JOIN ComponentsInRoom AS CR ON C.ComponentId = CR.ComponentId
         INNER JOIN Rooms AS R ON R.RoomId = CR.RoomId
-       WHERE R.RoomId = " .$roomId. ";";
-       
+       WHERE R.RoomId = " .$roomId. ";";       
        return getResult($sqlStatement);
 
      }
     /**
-    * Gibt alle Arten von Softwares zurueck
+    * Gibt alle Komponenten vom Typ Software zurueck
     */
-    function getSoftwareTypes() {
+    function getAllSoftwareTypes() {
         $sqlStatement =
         "SELECT ComponentTypeID, ComponentTypeName
         FROM ComponentTypes
@@ -81,14 +78,24 @@
     }
 
     /**
-     * Gibt alle Arten von Hardwares zurueck
+     * Gibt alle Komponenten vom Typ Hardwares zurueck
     */
-    function getHardwareTypes() {
+    function getAllHardwareTypes() {
         $sqlStatement =
         "SELECT ComponentTypeID, ComponentTypeName
         FROM ComponentTypes
         WHERE IsSoftware = 0;";
 
+        return getResult($sqlStatement);
+    }
+
+    /**
+     * Gibt alle Raeume zurueck
+     */
+    function getAllRooms() {
+        $sqlStatement = 
+        "SELECT RoomId, RoomNo 
+        FROM Rooms;";
         return getResult($sqlStatement);
     }
 
@@ -99,13 +106,12 @@
      */
     function getResult($sqlStatement) {
         global $dbLink;
-        $result = mysqli_query($dbLink, $sqlStatement);
-        return $result;
+        return mysqli_query($dbLink, $sqlStatement);
     }
 
-    $rooms = mysqli_query($dbLink, "SELECT RoomId, RoomNo FROM Rooms");
-    $hardware = getHardwareTypes();
-    $software = getSoftwareTypes();
+    $rooms = getAllRooms();
+    $hardware = getAllHardwareTypes();
+    $software = getAllSoftwareTypes();
      
 ?>
 
