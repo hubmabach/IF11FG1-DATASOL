@@ -9,11 +9,11 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <?php if ($isLoggedIn): ?>
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
+            <li class="nav-item" id="navbar-reporting">
                 <a class="nav-link" href="index.php?page=reporting">Reporting</a>
             </li>
             <?php if ($isAdmin): ?>
-            <li class="nav-item active dropdown">
+            <li class="nav-item dropdown" id="navbar-stammdaten">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Stammdaten
             </a>
@@ -25,7 +25,7 @@
                 <a class="dropdown-item" href="index.php?page=componenttypes">Komponentenarten</a>
             </div>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" id="navbar-new-component">
                 <a class="nav-link" href="index.php?page=component&detail=new">Neubeschaffung</a>
             </li>
             <?php endif; ?>

@@ -13,8 +13,6 @@
  * Benedikt 15:00 -16:30
  */
 
-$errorPage = realpath( __DIR__ . "/../pages/errorpage.php");
-
 if($isLoggedIn)
 {
     if(!isset($_GET["page"]))
@@ -33,7 +31,7 @@ if($isLoggedIn)
             if(file_exists($filePath))
                 include_once($filePath);
             else
-                include_once($errorPage);
+                header("Location: index.php?page=errorpage");
         }
         else
         {
@@ -42,7 +40,7 @@ if($isLoggedIn)
             if(file_exists($filePath))
                 include_once($filePath);
             else
-                include_once($errorPage);
+                header("Location: index.php?page=errorpage");
         }
     }
 }
