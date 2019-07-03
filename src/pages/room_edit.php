@@ -17,29 +17,39 @@ $query = "SELECT * FROM rooms WHERE RoomID = $id;";
 $result = mysqli_query($dbLink, $query);
 
 if (mysqli_num_rows($result) !== 0) {
+    $room = mysqli_fetch_assoc($result);
     if (isset($_POST["submit-edit-room"])) {
 
-        $room = mysqli_fetch_assoc($result);
         $roomName = $_POST["input-room-name"];
         $roomNumber = $_POST["input-room-number"];
         $roomNodes = $_POST["input-room-description"];
         $valid = true;
 
         if (ctype_space($roomNumber)) {
-            echo "<p>Bitte geben Sie eine Raumnummer ein!</p>";
+            echo "<div class='alert alert-danger' role='alert'> " .
+            "Bitte geben Sie eine Raumnummer ein! " . 
+          "</div>";
             $valid = false;
         }
         if (ctype_space($roomName)) {
-            echo "<p>Bitte geben Sie einen Raumnamen ein!</p>";
+            echo "<div class='alert alert-danger' role='alert'> " .
+            "Bitte geben Sie einen Raumnamen ein! " . 
+            "</div>";
+            $valid = false;
+        }
+        if (strlen($roomNumber) !== 4) {
+            echo "<div class='alert alert-danger' role='alert'> " .
+            "Bitte geben Sie beim der Raumnummer genau 4 Zeichen an. " . 
+            "</div>";
             $valid = false;
         }
 
         if ($valid) {
             $roomId = $room['RoomID'];
             $query = "UPDATE rooms SET RoomNo = '$roomNumber', RoomName = '$roomName', RoomNodes='$roomNodes' WHERE RoomID = $roomId";
-            $result = mysqli_query($dbLink, $query);
+            $resultUpdate = mysqli_query($dbLink, $query);
 
-            if ($result === false) {
+            if ($resultUpdate === false) {
                 echo "<p>Upps da tratt ein Fehler auf. Versuchen Sie es bitte erneut.</p>";
             } else {
                 header("Location: index.php?page=$currentPage");
@@ -58,8 +68,6 @@ if (mysqli_num_rows($result) === 0) : ?>
 endif;
 
 if (mysqli_num_rows($result) !== 0) :
-
-    $room = mysqli_fetch_assoc($result);
     ?>
 
     <h1>Stammdaten - Räume - Raum bearbeiten</h1>
@@ -75,13 +83,13 @@ if (mysqli_num_rows($result) !== 0) :
             <div class="form-group row">
                 <label for="input-room-number" class="col-sm-2 col-form-label">Raumnummer</label>
                 <div class="col-sm-7">
-                    <input type="text" class="form-control" id="input-room-number" value="<?php echo $room['RoomNo']; ?>" name="input-room-number" maxlength="20">
+                    <input type="text" class="form-control" id="input-room-number" value="<?php echo $room['RoomNo']; ?>" name="input-room-number" maxlength="4" required>
                 </div>
             </div>
             <div class="form-group row">
                 <label for="input-room-name" class="col-sm-2 col-form-label">Raumname</label>
                 <div class="col-sm-7">
-                    <input type="text" class="form-control" id="input-room-name" value="<?php echo $room['RoomName']; ?>" name="input-room-name" maxlength="45">
+                    <input type="text" class="form-control" id="input-room-name" value="<?php echo $room['RoomName']; ?>" name="input-room-name" maxlength="45" required>
                 </div>
             </div>
             <div class="form-group row">

@@ -87,37 +87,37 @@ if (isset($_POST["submit-new-supplier"])) {
         <div class="form-group row">
             <label for="input-supplier-name" class="col-sm-2 col-form-label">Lieferantennamen</label>
             <div class="col-sm-7">
-                <input type="text" class="form-control" id="input-supplier-name" placeholder="Datasol GmbH" name="input-supplier-name" maxlength="45">
+                <input type="text" class="form-control" id="input-supplier-name" placeholder="Datasol GmbH" name="input-supplier-name" maxlength="45" required>
             </div>
         </div>
         <div class="form-group row">
             <label for="input-street" class="col-sm-2 col-form-label">Straße</label>
             <div class="col-sm-7">
-                <input type="text" class="form-control" id="input-street" placeholder="Häußsterweg 4" name="input-street" maxlength="255">
+                <input type="text" class="form-control" id="input-street" placeholder="Häußsterweg 4" name="input-street" maxlength="255" required>
             </div>
         </div>
         <div class="form-group row">
             <label for="input-postcode" class="col-sm-2 col-form-label">Postleitzahl</label>
             <div class="col-sm-7">
-                <input type="text" class="form-control" id="input-postcode" rows="3" placeholder="12345" name="input-postcode" maxlength="10" />
+                <input type="text" class="form-control" id="input-postcode" rows="3" placeholder="12345" name="input-postcode" maxlength="5" required/>
             </div>
         </div>
         <div class="form-group row">
             <label for="input-city" class="col-sm-2 col-form-label">Stadt</label>
             <div class="col-sm-7">
-                <input type="text" class="form-control" id="input-city" rows="3" placeholder="Berlin" name="input-city" maxlength="45" />
+                <input type="text" class="form-control" id="input-city" rows="3" placeholder="Berlin" name="input-city" maxlength="45" required/>
             </div>
         </div>
         <div class="form-group row">
             <label for="input-country" class="col-sm-2 col-form-label">Land</label>
             <div class="col-sm-7">
-                <input type="text" class="form-control" id="input-country" rows="3" placeholder="Deutschland" name="input-country" maxlength="45" />
+                <input type="text" class="form-control" id="input-country" rows="3" placeholder="Deutschland" name="input-country" maxlength="45" required/>
             </div>
         </div>
         <div class="form-group row">
             <label for="input-email" class="col-sm-2 col-form-label">E-Mail</label>
             <div class="col-sm-7">
-                <input type="email" class="form-control" id="input-email" rows="3" placeholder="test@lieferant.de" name="input-email" maxlength="45" />
+                <input type="email" class="form-control" id="input-email" rows="3" placeholder="test@lieferant.de" name="input-email" maxlength="45" required/>
             </div>
         </div>
         <div class="form-group row">

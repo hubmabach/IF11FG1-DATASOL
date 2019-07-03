@@ -115,35 +115,35 @@ if (mysqli_num_rows($result) !== 0) :
         <div class="form-group row">
             <label for="input-supplier-name" class="col-sm-2 col-form-label">Lieferantennamen</label>
             <div class="col-sm-7">
-                <input type="text" class="form-control" id="input-supplier-name" name="input-supplier-name" maxlength="45" value="<?php echo $supplier["SupplierCompanyName"] ?>">
+                <input type="text" class="form-control" id="input-supplier-name" name="input-supplier-name" maxlength="45" value="<?php echo $supplier["SupplierCompanyName"] ?>" required>
             </div>
         </div>
         <div class="form-group row">
             <label for="input-street" class="col-sm-2 col-form-label">Straße</label>
             <div class="col-sm-7">
-                <input type="text" class="form-control" id="input-street" name="input-street" maxlength="255" value="<?php echo $supplier["Street"] ?>">
+                <input type="text" class="form-control" id="input-street" name="input-street" maxlength="255" value="<?php echo $supplier["Street"] ?>" required>
             </div>
         </div>
         <div class="form-group row">
             <label for="input-postcode" class="col-sm-2 col-form-label">Postleitzahl</label>
             <div class="col-sm-2">
-                <input type="text" class="form-control" id="input-postcode" rows="3" name="input-postcode" maxlength="10" value="<?php echo $supplier["PostalCode"] ?>"/>
+                <input type="text" class="form-control" id="input-postcode" rows="3" name="input-postcode" maxlength="5" value="<?php echo $supplier["PostalCode"] ?>" required/>
             </div>
             <label for="input-city" class="col-sm-1 col-form-label">Stadt</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="input-city" rows="3" name="input-city" maxlength="45" value="<?php echo $supplier["City"] ?>"/>
+                <input type="text" class="form-control" id="input-city" rows="3" name="input-city" maxlength="45" value="<?php echo $supplier["City"] ?>" required/>
             </div>
         </div>
         <div class="form-group row">
             <label for="input-country" class="col-sm-2 col-form-label">Land</label>
             <div class="col-sm-7">
-                <input type="text" class="form-control" id="input-country" rows="3" name="input-country" maxlength="45" value="<?php echo $supplier["Country"] ?>"/>
+                <input type="text" class="form-control" id="input-country" rows="3" name="input-country" maxlength="45" value="<?php echo $supplier["Country"] ?>" required/>
             </div>
         </div>
         <div class="form-group row">
             <label for="input-email" class="col-sm-2 col-form-label">E-Mail</label>
             <div class="col-sm-7">
-                <input type="email" class="form-control" id="input-email" rows="3" name="input-email" maxlength="45" value="<?php echo $supplier["MailAddress"] ?>"/>
+                <input type="email" class="form-control" id="input-email" rows="3" name="input-email" maxlength="45" value="<?php echo $supplier["MailAddress"] ?>" required/>
             </div>
         </div>
         <div class="form-group row">
