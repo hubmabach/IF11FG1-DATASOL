@@ -15,7 +15,7 @@
             // 'UserEmail' => 'E-mail',
             'IsAdmin' => 'Systembetreuer'
         ),
-        'pageName' => 'users',
+        'pageName' => 'user',
         'idColumn' => 'UserId',
         'result' => $result,
         'singularName' => 'Benutzer'
