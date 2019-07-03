@@ -5,7 +5,7 @@
  */
 
 (function() {
-    $('[name="c_attributes[]"]').on('change', function(e) {
+    $('.container form').on('change', "input[name='c_attributes[]']", function(e) {
         $(e.target).parents('label').toggleClass('card-selected', e.target.checked);
     });
 
@@ -32,10 +32,12 @@
                 processData: false,
                 success: function(data) {
                     var item = $('label.card').last().parent().clone();
+                    item.find('label').removeClass('card-selected');
                     item.find('input').val(data.id);
                     item.find('span').text(data.name);
 
                     $('label.card').parents('.row').append(item);
+                    item.find('input').prop('checked', false);
                     inputElem.val("");
                 },
                 error: function(jqXHR) {
