@@ -6,7 +6,7 @@
     $query = "SELECT * FROM rooms";
 
     if (isset($_GET['search']) and !empty($_GET['search'])) {
-        $query = " WHERE RoomName LIKE '%".$_GET['search']."%' OR RoomNo LIKE '%".$_GET['search']."%'";
+        $query .= " WHERE RoomName LIKE '%".$_GET['search']."%' OR RoomNo LIKE '%".$_GET['search']."%'";
     }
 
     $result = mysqli_query($dbLink, $query);
