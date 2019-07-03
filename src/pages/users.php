@@ -4,9 +4,14 @@
      * Anzeige der Benutzer
      */
     
-     $result = mysqli_query($dbLink,
-     "SELECT UserId, UserName, UserFirstName, UserLastName, IF(IsAdmin, 'Ja', 'Nein') AS IsAdmin FROM Users");
-     $tableConfig = array(
+    $query = "SELECT UserId, UserName, UserFirstName, UserLastName, IF(IsAdmin, 'Ja', 'Nein') AS IsAdmin FROM Users";
+
+    if (isset($_GET['search']) and !empty($_GET['search'])) {
+        $query .= " WHERE UserName LIKE '%".$_GET['search']."%' OR UserFirstName LIKE '%".$_GET['search']."%' OR UserLastName LIKE '%".$_GET['search']."%'";
+    }
+
+    $result = mysqli_query($dbLink, $query);
+    $tableConfig = array(
         'columns' => array(
             'UserId' => '#',
             'UserName' => 'Benutzername',
