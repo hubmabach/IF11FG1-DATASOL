@@ -3,6 +3,8 @@
      * Diese Datei bildet das Ende unserer HTML-Struktur.
      * 
      * Hier werden benötigte JavaScript-Dateien eingebunden.
+     * 
+     * @author Nikolas Bayerschmidt
      */
 ?>
 

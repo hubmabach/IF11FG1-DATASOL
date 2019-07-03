@@ -3,6 +3,8 @@
      * Diese Datei bildet den Start unserer HTML-Struktur bis zum öffnenden <body>-Tag.
      * 
      * Hier werden sowohl Metainformationen aufgelistet als auch CSS-Stylesheets eingebunden.
+     * 
+     * @author Nikolas Bayerschmidt
      */
 ?>
 <!DOCTYPE html>

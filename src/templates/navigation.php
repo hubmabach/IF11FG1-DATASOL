@@ -1,3 +1,13 @@
+<?php
+    /**
+     * Template für die Hauptnavigation des Weboberfläche.
+     * 
+     * Die Navigationspunkte werden erst angezeigt, sobald der Benutzer angemeldet ist.
+     * Solange der Benutzer kein Systembetreuer/Admin ist, wird diesem in der Navigation nur der Punkt "Reporting" angezeigt.
+     * 
+     * @author Nikolas Bayerschmidt
+     */
+?>
 <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
     <a class="navbar-brand" href="index.php">
         <img src="<?php echo abs_url("/assets/logo.png"); ?>" height="30" alt="">
