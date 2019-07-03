@@ -78,19 +78,4 @@
 
         return $od_array;
     }
-
-    /**
-     * Erstellt eine absolute URL zum angegebenen Pfad.
-     * 
-     * @author Nikolas Bayerschmidt
-     * @param string $urlPart Pfad der an die Domain angehängt werden sollen.
-     * @return string $absUrl Die absolute URL.
-     */
-    function abs_url($urlPart) {
-        // Überprüfe, ob der Pfad mit einem Strich ("/") anfängt. Wenn nicht, dann füge einen hinzu.
-        if (substr( $urlPart, 0, 1 ) !== "/") $urlPart = "/" . $urlPart;
-
-        // Browser erkennen die Nutzung von "//" und benutzen automatisch "http"/"https" je nachdem womit die Seite aufgerufen wurde.
-        return "//" . $_SERVER['SERVER_NAME'] . $urlPart;
-    }
 ?>

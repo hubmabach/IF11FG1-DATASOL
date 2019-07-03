@@ -10,7 +10,7 @@
 ?>
 <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
     <a class="navbar-brand" href="index.php">
-        <img src="<?php echo abs_url("/assets/logo.png"); ?>" height="30" alt="">
+        <img src="./assets/logo.png" height="30" alt="">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
