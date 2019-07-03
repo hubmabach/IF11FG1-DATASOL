@@ -63,7 +63,7 @@
                 <div class="col-sm-4">
                     <label class="card">
                         <div class="card-body">
-                            <input type="checkbox" name="c_attributes[]" id="c_attributes_<?php echo $attr['AttributeId']; ?>" value="<?php echo $attr['AttributeId']; ?>" />
+                            <input type="checkbox" name="c_attributes[]" id="c_attributes_<?php echo $attr['AttributeID']; ?>" value="<?php echo $attr['AttributeID']; ?>" />
                             <span><?php echo $attr['AttributeName']; ?></span>
                         </div>
                     </label>
@@ -77,6 +77,7 @@
                         <div class="input-group-append">
                             <button class="btn btn-outline-secondary" type="button" id="add_attribute_btn">Attribut hinzufügen</button>
                         </div>
+                        <small id="add_attribute_err" class="form-text text-danger" style="display: none;"></small>
                     </div>
                 </div>
             </div>
@@ -84,41 +85,3 @@
         </form>
     </div>
 </div>
-<script>
-    window.addEventListener('jQueryLoaded', function(){
-        // TODO: Auslagerung in eigene JavaScript Datei
-        $('[name="c_attributes[]"]').on('change', function(e) {
-            $(e.target).parents('label').toggleClass('card-selected', e.target.checked);
-        });
-
-        $('#add_attribute_btn').on('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            $value = $('#add_attribute_inpt').val();
-
-            if ($value) {
-                var fd = new FormData();
-
-                fd.append('attribute_name', $value);
-
-                $.ajax({
-                    url: "./ajax_component_attributes.php",
-                    data: fd,
-                    method: "POST",
-                    contentType: false,
-                    processData: false,
-                    success: function(data) {
-                        var item = $('label.card').last().parent().clone();
-                        item.find('input').val(data.id);
-                        item.find('span').text(data.name);
-
-                        $('label.card').parents('.row').append(item);
-                        $('#add_attribute_inpt').val("");
-                    },
-                    dataType: "json"
-                });
-            }
-        });
-    });
-</script>
