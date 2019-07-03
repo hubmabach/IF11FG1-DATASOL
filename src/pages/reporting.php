@@ -205,7 +205,7 @@
     </table>
     </div>
             <?php else: ?>  
-                <p style='margin-top:20px'>In diesem Raum sind keine Komponenten</p>
+                <p style='margin-top:20px'>Keine Komponenten vorhanden</p>
             <?php endif; ?>
     </div>
 </div>
