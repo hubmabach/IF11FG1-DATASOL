@@ -1,6 +1,8 @@
 <?php
     /**
      * Formular zum Hinzufügen eines neuen Nutzers.
+     * 
+     * @author Nikolas Bayerschmidt
      */
 
     $userData = array(
