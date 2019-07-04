@@ -127,7 +127,7 @@ endif;
                 <?php if (isset($_GET['id'])): ?>
                 <input type="submit" name="user_delete" value="Löschen" class="btn btn-danger" />
                 <?php endif; ?>
-                <a class="btn btn-secondary" href="index.php?page=user">Abbrechen</a>
+                <a class="btn btn-secondary" href="index.php?page=users">Abbrechen</a>
             </form>
         </div>
     </div>
