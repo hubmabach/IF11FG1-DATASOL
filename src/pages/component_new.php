@@ -124,6 +124,7 @@
         <div class="col-sm-8">
          <select class="form-control" required id="component_supplier" name="component_supplier">
                 <option value="" disabled="" selected="">Auswahl</option>
+<!-- Optionen für den Lieferanten aus Datenbank holen und ausgeben -->
                 <?php
                 $query = "SELECT SupplierID, SupplierCompanyName FROM supplier";
                 $result = mysqli_query($dbLink,$query);
@@ -134,12 +135,14 @@
             </select>
         </div>
       </div>
+<!-- Kaufdatum einstellen -->
       <div class="form-group row">
         <label class="control-label col-sm-2 text-sm-right">Kaufdatum</label>
         <div class="col-sm-8">
         <input type="date" id="component_purchase" name="component_purchase" required class="form-control " placeholder="">
         </div>
       </div>
+<!-- Gewährleistung einstellen -->
       <div class="form-group row">
         <label class="control-label col-sm-2 text-sm-right">Gewährleistung bis</label>
         <div class="col-sm-8">
@@ -147,6 +150,7 @@
         </div>
       </div>
       <div class="form-group row">
+<!-- Hersteller wählen -->
         <label class="control-label col-sm-2 text-sm-right">Hersteller</label>
         <div class="col-sm-8">
           <select class="form-control" required id="component_vendor" name="component_vendor">
@@ -161,12 +165,14 @@
           </select>
         </div>
       </div>
+<!-- Raum wählen -->
       <div class="form-group row">
         <label class="control-label col-sm-2 text-sm-right">Raum</label>
         <div class="col-sm-8">
           <select class="form-control" id="component_room" name="component_room">
               <option value="" disabled="" selected="">Auswahl</option>
-              <?php
+              <?
+// Suche alle verfügbaren Räume und gebe sie in einem Optionsfeld aus
               $query = "SELECT RoomID, RoomName FROM rooms";
               $result = mysqli_query($dbLink,$query);
               while ($row = mysqli_fetch_assoc($result)): ?>
@@ -176,6 +182,7 @@
           </select>
         </div>
       </div>
+<!-- Uploadfunktion mit Layout und Labelvergabe  -->
       <style>.custom-file-label:after { content: "Durchsuchen"; }</style>
       <div class="form-group row">
         <label class="control-label col-sm-2 text-sm-right">Kaufbeleg</label>
