@@ -25,7 +25,7 @@
       // Hole alle Werte die aus dem Formular gesendet wurden.
       $component_type_id = $_POST['component_type'];
       $component_room_id = $_POST['component_room'];
-      $component_attributes = $_POST['component_attributes'];
+      $component_attributes = isset($_POST['component_attributes']) ? $_POST['component_attributes'] : array();
 
       $saveData = array(
         'ComponentName' => $_POST['component_name'],

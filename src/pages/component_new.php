@@ -22,18 +22,18 @@
      $component_warranty = $_POST['component_warranty'];
      $component_vendor_id = $_POST['component_vendor'];
      $component_room_id = $_POST['component_room'];
-     $component_receipt = (empty($_FILES) or !isset($_FILES['component_receipt'])) ? "" : $_FILES['component_receipt'];
+     $component_receipt = "";
      $component_notes = $_POST['component_notes'];
-     $component_attributes = $_POST['component_attributes'];
+     $component_attributes = isset($_POST['component_attributes']) ? $_POST['component_attributes'] : array();
 
 # Überprüfungob eine Datei hochgeladen
-     if ($component_receipt !== "" && file_exists($component_receipt['tmp_name']) && is_uploaded_file($component_receipt['tmp_name'])) {
+     if (!empty($_FILES) && isset($_FILES['component_receipt']) && file_exists($_FILES['component_receipt']['tmp_name']) && is_uploaded_file($_FILES['component_receipt']['tmp_name'])) {
 # Uploaddiractory
        $upload_dir = __dir__ . "/../uploads/";
 # Upload mit eindeutigem Filename versehen
-       $filename = basename( substr(hash("md5", time(), FALSE), 0, 5) ."_". $component_receipt['name']);
+       $filename = basename( substr(hash("md5", time(), FALSE), 0, 5) ."_". $_FILES['component_receipt']['name']);
 # Upload in Temporäres Dateiverzeichnis aufnehmen
-       if (move_uploaded_file($component_receipt['tmp_name'], $upload_dir . $filename)) {
+       if (move_uploaded_file($_FILES['component_receipt']['tmp_name'], $upload_dir . $filename)) {
         $component_receipt = $filename;
        } else {
         echo '<div class="alert alert-danger">Leider tratt bei der Verarbeitung ein Fehler auf, bitte versuchen Sie es später erneut.</div>';
