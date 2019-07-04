@@ -20,15 +20,6 @@ $id = intval($_GET['id']);
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     if (isset($_POST['componenttype_save'])) {
 
-        $queryCheck = "SELECT * FROM componenttypes WHERE ComponentTypeName = '" . $_POST['componenttype_name'] . "';";
-        $resultCheck = mysqli_query($dbLink, $queryCheck);
-
-        if (mysqli_num_rows($resultCheck) !== 0) {
-            $id = mysqli_fetch_assoc($resultCheck)["ComponentTypeID"];
-            echo "<div class='alert alert-danger'>Komponentenattart existiert bereits. <a href='index.php?page=componenttypes&detail=edit&id=$id'>Zur Detailansicht</a></div>";
-            $valid = false;
-        }
-
         if ($valid) {
             $query = "UPDATE componenttypes SET ComponentTypeName = '" . $_POST['componenttype_name'] . "', IsSoftware = " . intval(isset($_POST['componenttype_software'])) . " WHERE ComponentTypeID = $id";
             $result = mysqli_query($dbLink, $query);

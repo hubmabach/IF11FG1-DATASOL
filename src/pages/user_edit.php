@@ -32,15 +32,6 @@
                 }
             }
 
-            $queryCheck = "SELECT * FROM users WHERE UserName = '".$userData["UserName"]."';";
-            $resultCheck = mysqli_query($dbLink, $queryCheck);
-    
-            if(mysqli_num_rows($resultCheck) !== 0) {
-                $id = mysqli_fetch_assoc($resultCheck)["UserID"];
-                $error = "Benutzer bereits angelegt. <a href='index.php?page=user&detail=edit&id=$id'>Zur Detailansicht</a>";
-                $valid = false;
-            }
-
             if (empty($error)) {
                 $query = "UPDATE users SET ".sqlUpdateString($userData)." WHERE UserID = $userId";
                 $result = mysqli_query($dbLink, $query);
