@@ -42,22 +42,24 @@
      }
 # Wenn alles geklappt hat -> Kaufbeleg an Datenbank senden
      if ($valid) {
+# Datenbankinsert für die Komponenten
        $query = "INSERT INTO components (ComponentTypeID, ComponentName, SupplierID, ComponentPurchaseDate, ComponentWarranty, ComponentNotes, ComponentVendorID, ComponentReceipt)
         VALUES ($component_type_id, '$component_name', $component_supplier_id, '$component_purchase', '$component_warranty', '$component_notes', $component_vendor_id, '$component_receipt')";
         $result = mysqli_query($dbLink, $query);
 
         if ($result) {
           $component_id = mysqli_insert_id($dbLink);
-
+# Datenbank insert query für die Räume
           $room_query = "INSERT INTO componentsinroom (ComponentID, RoomID) VALUES ($component_id, $component_room_id);";
           mysqli_query($dbLink, $room_query);
-
+# Erstellen einer Speicher-variable die an die Datenbank via Insert übergeben wird
           foreach($component_attributes as $attribute) {
               if (empty($attribute['value'])) continue;
               $save_query = "INSERT INTO componenthasvalues (ComponentID, AttributeID, AttributeValue) VALUES ($component_id, ".$attribute['id'].", '".$attribute['value']."');";
               mysqli_query($dbLink, $save_query);
           }
 
+# Gebe einen Link für den neu erstellten Komponenten aus via HTML / Komponenten-Detailansicht
           echo "<div class='alert alert-success'>Komponente erfolgreich angelegt. <a href='index.php?page=component&detail=edit&id=$component_id'>Zur Detailansicht</a></div>";
 
           unset($_POST['component_type']);
@@ -68,11 +70,14 @@
    }
 ?>
 
-
+<!-- Gebe Überschrift in HTML aus  -->
 <h1>Stammdaten - Komponent neu anlegen</h1>
+<!-- Gebe Layout aus -->
 <div class="card">
   <div class="card-body">
+<!-- Setze Formular -->
     <form method="post" enctype="multipart/form-data">
+<!-- Falls der Komponententyp nicht gesetzt wird -->
       <?php if (!isset($_POST["component_type"])): ?>
       <div class="form-group row">
         <label class="control-label col-sm-2 text-sm-right" for="component_type">Komponentenart</label>
@@ -80,12 +85,13 @@
           <select class="browser-default form-control"  id="component_type" name="component_type">
               <option value="" disabled="" selected="" style="display: none;">Wähle die Komponentenart</option>
               <?php
-                // Hole alle Einträge aus der Tabelle Componenttypes
+// Hole alle Einträge aus der Tabelle Componenttypes
                 $query = "SELECT ComponentTypeName, ComponentTypeID FROM componenttypes";
                 $result = mysqli_query($dbLink, $query);
 
                 while ($row = mysqli_fetch_assoc($result)):
               ?>
+<!-- Gebe das Ergebnis in einem DropDown-Options-Menü aus -->
               <option value="<?php echo $row['ComponentTypeID'] ?>"><?php echo $row['ComponentTypeName']; ?></option>
               <?php endwhile; ?>
           </select>
@@ -93,6 +99,8 @@
       </div>
       <input type="submit" class="btn btn-success" name="component_type_choose" value="Auswählen" />
       <?php else: ?>
+
+<!-- Sollte der Komponententyp jedoch feststehen gebe alle Inputfelder aus -->
       <div class="form-group row">
         <label class="control-label col-sm-2 text-sm-right">Komponentenart</label>
         <div class="col-sm-8">
