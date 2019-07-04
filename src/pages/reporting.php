@@ -163,7 +163,11 @@
                 </select>
             </div>
             <script type="text/javascript">
-                document.getElementById('room').value = "<?php echo $_POST['room'];?>";
+                document.getElementById('room').value = "
+                <?php if(isset($_POST['room'])) {
+                    echo $_POST['room'];
+                } 
+                ?>";
             </script>
         
         <div class="d-flex flex-column ">
@@ -177,7 +181,11 @@
                 ?>
             </select>
             <script type="text/javascript">
-                document.getElementById('hardware').value = "<?php echo $_POST['hardware'];?>";
+                document.getElementById('hardware').value = "
+                <?php if(isset($_POST['hardware'])) {
+                    echo $_POST['hardware'];
+                }                
+                ?>";
             </script>
         </div>
 
@@ -192,12 +200,20 @@
                 ?>
             </select>
             <script type="text/javascript">
-                document.getElementById('software').value = "<?php echo $_POST['software'];?>";
+                document.getElementById('software').value = "
+                <?php if(isset($_POST['software'])) {
+                    echo $_POST['software'];
+                }
+                ?>";
             </script>
         </div>
         <input id="searchfilter" type="text" name="searchfilter" class="form-control" style="width:20% !important; display:inline; margin-top:25px" placeholder="Gerätename"/>
         <script type="text/javascript">
-            document.getElementById('searchfilter').value = "<?php echo $_POST['searchfilter'];?>";
+            document.getElementById('searchfilter').value = "
+            <?php if(isset($_POST['searchfilter'])) {
+                echo $_POST['searchfilter'];
+            }
+            ?>";
         </script>
         <button name="searchbtn" type="submit" class="btn btn-primary" style="margin-top:25px">Suchen</button>
         <button name="reset" type="submit" class="btn btn-secondary" style="margin-top:25px"> Zurücksetzen </button>
