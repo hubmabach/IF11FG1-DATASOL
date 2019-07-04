@@ -168,47 +168,58 @@
 <div class="card">
     <div class="card-body">
         <form method="POST" style="margin-top:20px; margin-bottom:20px;">
-        <div class="form-group">
-        <select id="room" name="room" placeholder="Raum" class="custom-select custom-select-lg" style="width: 10%" >
-            <option value="" selected>-----</option>
-            <?php 
-                foreach($rooms as $option) {
-                    echo "<option value='", $option["RoomId"],"' > ", $option["RoomNo"], " </option>";
-                }        
-            ?>
-            <option value="IsInMaintenance">Ausgemustert</option>
-        </select>
-        <script type="text/javascript">
-            document.getElementById('room').value = "<?php echo $_POST['room'];?>";
-        </script>
-        <select id="hardware" name="hardware" placeholer="Hardware" class="custom-select custom-select-lg" style="width: 13%" >
-            <option value="" selected>-----</option>
-            <?php 
-                foreach($hardware as $option) {
-                    echo "<option value='", $option["ComponentTypeID"],"' > ", $option["ComponentTypeName"], " </option>";
-                }      
-            ?>
-        </select>
-        <script type="text/javascript">
-            document.getElementById('hardware').value = "<?php echo $_POST['hardware'];?>";
-        </script>
-        <select id="software" name="software" placeholder="Software" class="custom-select custom-select-lg" style="width: 12%" >
-            <option value="" selected>-----</option>
-            <?php 
-                foreach($software as $option) {
-                    echo "<option value='", $option["ComponentTypeID"],"' > ", $option["ComponentTypeName"], " </option>";
-                }        
-            ?>
-        </select>
-        <script type="text/javascript">
-            document.getElementById('software').value = "<?php echo $_POST['software'];?>";
-        </script>
-        <input id="searchfilter" type="text" name="searchfilter" class="form-control" style="width:20% !important; display:inline;" placeholder="Gerätename"/>
+        <div class="form-group d-flex flex-row justify-content-around align-items-center">
+            <div class="d-flex flex-column ">
+                <label>Raum</label>
+                <select id="room" name="room" placeholder="Raum" class="custom-select custom-select-lg" >
+                    <option value="" selected>-----</option>
+                    <?php 
+                        foreach($rooms as $option) {
+                            echo "<option value='", $option["RoomId"],"' > ", $option["RoomNo"], " </option>";
+                        }        
+                    ?>
+                    <option value="IsInMaintenance">Ausgemustert</option>
+                </select>
+            </div>
+            <script type="text/javascript">
+                document.getElementById('room').value = "<?php echo $_POST['room'];?>";
+            </script>
+        
+        <div class="d-flex flex-column ">
+        <label>Hardware</label>
+            <select id="hardware" name="hardware" placeholer="Hardware" class="custom-select custom-select-lg" >
+                <option value="" selected>-----</option>
+                <?php 
+                    foreach($hardware as $option) {
+                        echo "<option value='", $option["ComponentTypeID"],"' > ", $option["ComponentTypeName"], " </option>";
+                    }      
+                ?>
+            </select>
+            <script type="text/javascript">
+                document.getElementById('hardware').value = "<?php echo $_POST['hardware'];?>";
+            </script>
+        </div>
+
+        <div class="d-flex flex-column ">
+            <label>Software</label>
+            <select id="software" name="software" placeholder="Software" class="custom-select custom-select-lg" >
+                <option value="" selected>-----</option>
+                <?php 
+                    foreach($software as $option) {
+                        echo "<option value='", $option["ComponentTypeID"],"' > ", $option["ComponentTypeName"], " </option>";
+                    }        
+                ?>
+            </select>
+            <script type="text/javascript">
+                document.getElementById('software').value = "<?php echo $_POST['software'];?>";
+            </script>
+        </div>
+        <input id="searchfilter" type="text" name="searchfilter" class="form-control" style="width:20% !important; display:inline; margin-top:25px" placeholder="Gerätename"/>
         <script type="text/javascript">
             document.getElementById('searchfilter').value = "<?php echo $_POST['searchfilter'];?>";
         </script>
-        <button name="searchbtn" type="submit" class="btn btn-primary">Suchen</button>
-        <button name="reset" type="submit" class="btn btn-secondary"> Zurücksetzen </button>
+        <button name="searchbtn" type="submit" class="btn btn-primary" style="margin-top:25px">Suchen</button>
+        <button name="reset" type="submit" class="btn btn-secondary" style="margin-top:25px"> Zurücksetzen </button>
         <?php if(isset($_POST["reset"])): ?>
         <script type="text/javascript">
                 document.getElementById('room').value = "";
@@ -265,7 +276,7 @@
                 <?php endforeach; ?>
                 <?php if($isAdmin):?>
                 <td style="width: 1%">
-                    <a href="?page=component&id=<?php echo $row[$tableConfig['idColumn']]; ?>" class="btn btn-sm btn-light">Bearbeiten</a>
+                    <a href="?page=component&detail=edit&id=<?php echo $row[$tableConfig['idColumn']]; ?>" class="btn btn-sm btn-light">Bearbeiten</a>
                 </td>
                 <?php endif; ?>
             </tr>
