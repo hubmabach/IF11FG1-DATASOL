@@ -8,7 +8,7 @@
    *
    * @author Maximilian Bachhuber, Jonas Becker
    * Beginn : 03.07.2019 09.00 : 15:00
-   *
+   * Ende : 04.07.2019 9.30 : 12.15 
    */
 # ErrorHandling
    $valid = true;
