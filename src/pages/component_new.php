@@ -24,7 +24,7 @@
      $component_attributes = $_POST['component_attributes'];
 
      if ($component_receipt !== "" && file_exists($component_receipt['tmp_name']) && is_uploaded_file($component_receipt['tmp_name'])) {
-       $upload_dir = __dir__ . "/../../uploads/";
+       $upload_dir = __dir__ . "/../uploads/";
        $filename = basename( substr(hash("md5", time(), FALSE), 0, 5) ."_". $component_receipt['name']);
 
        if (move_uploaded_file($component_receipt['tmp_name'], $upload_dir . $filename)) {
