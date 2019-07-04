@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['submit-new-room'])) {
 
     if (strlen($roomnumber) !== 3) {
         echo "<div class='alert alert-danger' role='alert'> " .
-            "Bitte geben Sie beim der Raumnummer genau 3 Zahlen an. " .
+            "Bitte geben Sie bei der Raumnummer genau 3 Zahlen an. " .
             "</div>";
         $valid = false;
     }

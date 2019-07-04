@@ -117,7 +117,7 @@ CREATE TABLE IF NOT EXISTS `supplier` (
 -- Daten Export vom Benutzer nicht ausgewählt
 -- Exportiere Struktur von Tabelle gruppe1db.users
 CREATE TABLE IF NOT EXISTS `users` (
-  `UserID` int(11) NOT NULL,
+  `UserID` int(11) NOT NULL AUTO_INCREMENT,
   `UserEmail` varchar(100) COLLATE utf8_general_ci DEFAULT NULL,
   `UserName` varchar(100) COLLATE utf8_general_ci DEFAULT NULL,
   `UserFirstName` varchar(100) COLLATE utf8_general_ci DEFAULT NULL,

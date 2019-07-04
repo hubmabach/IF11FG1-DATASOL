@@ -33,17 +33,16 @@
                 ".$userData['IsAdmin'].", 
                 '".$password."'
             )";
-
             $result = mysqli_query($dbLink, $query);
 
             if ($result === false) {
-
+                echo '<div class="alert alert-danger">Leider tratt bei der Verarbeitung ein Fehler auf, bitte versuchen Sie es später erneut.</div>';
             } else {
                 $id = mysqli_insert_id($dbLink);
-                echo "<div class='alert alert-success'>Benutzer erfolgreich angelegt. <a href='index.php?page=user&detail=edit&id=$id'></a></div>";
+                echo "<div class='alert alert-success'>Benutzer erfolgreich angelegt. <a href='index.php?page=user&detail=edit&id=$id'>Zur Detailansicht</a></div>";
             }
         } else {
-            echo '<div class="alert alert-danger">Passwörter stimmen nicht überein.</div><';
+            echo '<div class="alert alert-danger">Passwörter stimmen nicht überein.</div>';
         }
     }
 ?>

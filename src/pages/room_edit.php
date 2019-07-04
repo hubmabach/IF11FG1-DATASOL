@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
         if (strlen($roomNumber) !== 4) {
             echo "<div class='alert alert-danger' role='alert'> " .
-                "Bitte geben Sie beim der Raumnummer genau 4 Zeichen an. " .
+                "Bitte geben Sie bei der Raumnummer genau 4 Zeichen an. " .
                 "</div>";
             $valid = false;
         }
@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         }
     }
     else if(isset($_POST["submit-delete-room"])) {
-        $queryDelete = "DELETE FROM users WHERE UserID = $id";
+        $queryDelete = "DELETE FROM rooms WHERE RoomID = $id";
 
         $resultDelete = mysqli_query($dbLink, $queryDelete);
 
