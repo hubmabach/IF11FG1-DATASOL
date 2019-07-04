@@ -219,6 +219,7 @@
       <?php endwhile; ?>
 <!-- Daten speichern und per Post an den Server übergeben -->
       <input type="submit" class="btn btn-success" name="component_save" value="Speichern" />
+      <a class="btn btn-secondary" href="index.php?page=component">Abbrechen</a>
       <?php endif; ?>
     </form>
   </div>

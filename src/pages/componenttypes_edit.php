@@ -148,6 +148,7 @@ if (mysqli_num_rows($result) !== 0) :
                 <?php if (isset($_GET['id'])) : ?>
                     <input type="submit" name="componenttype_delete" value="Löschen" class="btn btn-danger" />
                 <?php endif; ?>
+                <a class="btn btn-secondary" href="index.php?page=componenttypes">Abbrechen</a>
             </form>
         </div>
     </div>

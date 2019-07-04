@@ -173,6 +173,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit-new-supplier']
             <div class="form-group row">
                 <div class="col-sm-1">
                     <button type="submit" class="btn btn-success" name="submit-new-supplier">Speichern</button>
+                    <a class="btn btn-secondary" href="index.php?page=supplier">Abbrechen</a>
                 </div>
             </div>
         </form>

@@ -100,6 +100,7 @@ if (mysqli_num_rows($result) !== 0) :
                 </div>
                 <button type="submit" class="btn btn-success" name="submit-edit-room">Speichern</button>
                 <button type="submit" class="btn btn-danger" name="submit-delete-room">Löschen</button>
+                <a class="btn btn-secondary" href="index.php?page=room">Abbrechen</a>
             </form>
         </div>
     </div>

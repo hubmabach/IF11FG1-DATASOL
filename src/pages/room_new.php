@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['submit-new-room'])) {
         $id = mysqli_fetch_assoc($resultCheck)["RoomID"];
         echo "<div class='alert alert-danger'>Raumnummer existiert bereits. <a href='index.php?page=room&detail=edit&id=$id'>Zur Detailansicht</a></div>";
         $valid = false;
-     }
+    }
 
     if ($valid) {
         $query = "INSERT INTO rooms (RoomNo, RoomName, RoomNodes) VALUES ('R$roomnumber', '$roomname', '$roomdescription');";
@@ -70,11 +70,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['submit-new-room'])) {
                     <textarea class="form-control" id="input-room-description" rows="3" placeholder="Fügen Sie hier die Beschreibung für den Raum ein..." name="input-room-description" maxlength="500"><?php echo $roomdescription ?></textarea>
                 </div>
             </div>
-            <div class="form-group row">
-                <div class="col-sm-1">
-                    <button type="submit" class="btn btn-success" name="submit-new-room">Speichern</button>
-                </div>
-            </div>
+            <button type="submit" class="btn btn-success" name="submit-new-room">Speichern</button>
+            <a class="btn btn-secondary" href="index.php?page=room">Abbrechen</a>
         </form>
     </div>
 </div>

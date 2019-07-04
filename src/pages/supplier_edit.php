@@ -138,7 +138,7 @@ if (mysqli_num_rows($result) !== 0) :
                 </div>
                 <button type="submit" class="btn btn-success" name="submit-edit-supplier">Speichern</button>
                 <button type="submit" class="btn btn-danger" name="submit-delete-supplier">Löschen</button>
-
+                <a class="btn btn-secondary" href="index.php?page=supplier">Abbrechen</a>
             </form>
         </div>
     </div>

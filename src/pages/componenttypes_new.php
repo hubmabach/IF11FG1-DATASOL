@@ -91,6 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['componenttype_save'])
                 </div>
             </div>
             <input type="submit" name="componenttype_save" value="Speichern" class="btn btn-success" />
+            <a class="btn btn-secondary" href="index.php?page=componenttypes">Abbrechen</a>
         </form>
     </div>
 </div>

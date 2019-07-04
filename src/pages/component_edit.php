@@ -261,6 +261,7 @@
       <?php if (!boolval($data['IsInMaintenance'])): ?><input type="submit" class="btn btn-warning" name="component_store" value="Ausmustern" /><?php endif; ?>
       <?php if (boolval($data['IsInMaintenance'])): ?><input type="submit" class="btn btn-warning" name="component_de_store" value="Wieder Einführen" /><?php endif; ?>
       <?php if (boolval($data['IsInMaintenance'])): ?><input type="submit" class="btn btn-danger" name="component_delete" value="Löschen" /><?php endif; ?>
+      <a class="btn btn-secondary" href="index.php?page=component">Abbrechen</a>
     </form>
   </div>
 </div>
