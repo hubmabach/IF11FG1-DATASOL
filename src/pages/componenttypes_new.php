@@ -1,14 +1,23 @@
 <?php
-    /**
-     * Formular zum Erstellen einer neuen Komponentenart.
-     * 
-     * Das Besondere an diesem Formular ist die Zuweisung von Komponentenattributen.
-     * 
-     * @author Nikolas Bayerschmidt
-     */
 
-    if ($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['componenttype_save'])) {
-        $query = "INSERT INTO componenttypes (ComponentTypeName, IsSoftware) VALUES ('".$_POST['componenttype_name']."', ".intval(isset($_POST['componenttype_software'])).");";
+/**
+ * Formular zum Erstellen einer neuen Komponentenart.
+ * 
+ * Das Besondere an diesem Formular ist die Zuweisung von Komponentenattributen.
+ * 
+ * @author Nikolas Bayerschmidt
+ */
+
+if ($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['componenttype_save'])) {
+
+    $queryCheck = "SELECT * FROM componenttypes WHERE ComponentTypeName = '" . $_POST['componenttype_name'] . "';";
+    $resultCheck = mysqli_query($dbLink, $queryCheck);
+
+    if (mysqli_num_rows($resultCheck) !== 0) {
+        $id = mysqli_fetch_assoc($resultCheck)["ComponentTypeID"];
+        echo "<div class='alert alert-danger'>Komponentenattart existiert bereits. <a href='index.php?page=componenttypes&detail=edit&id=$id'>Zur Detailansicht</a></div>";
+    } else {
+        $query = "INSERT INTO componenttypes (ComponentTypeName, IsSoftware) VALUES ('" . $_POST['componenttype_name'] . "', " . intval(isset($_POST['componenttype_software'])) . ");";
         $result = mysqli_query($dbLink, $query);
 
         if ($result) {
@@ -22,6 +31,7 @@
             echo "<div class='alert alert-success'>Komponentenattart erfolgreich angelegt. <a href='index.php?page=componenttypes&detail=edit&id=$id'>Zur Detailansicht</a></div>";
         }
     }
+}
 ?>
 
 <h1>Stammdaten - Komponentenart - Neuanlage</h1>
@@ -48,8 +58,8 @@
             <hr />
             <h4>Komponentenattribute</h4>
             <?php
-                $query = "SELECT * FROM componentattributes;";
-                $attr_result = mysqli_query($dbLink, $query);
+            $query = "SELECT * FROM componentattributes;";
+            $attr_result = mysqli_query($dbLink, $query);
             ?>
             <style>
                 label.card.card-selected {
@@ -58,15 +68,15 @@
                 }
             </style>
             <div class="row">
-                <?php while ($attr = mysqli_fetch_assoc($attr_result)): ?>
-                <div class="col-sm-4">
-                    <label class="card">
-                        <div class="card-body">
-                            <input type="checkbox" name="c_attributes[]" id="c_attributes_<?php echo $attr['AttributeID']; ?>" value="<?php echo $attr['AttributeID']; ?>" />
-                            <span><?php echo $attr['AttributeName']; ?></span>
-                        </div>
-                    </label>
-                </div>
+                <?php while ($attr = mysqli_fetch_assoc($attr_result)) : ?>
+                    <div class="col-sm-4">
+                        <label class="card">
+                            <div class="card-body">
+                                <input type="checkbox" name="c_attributes[]" id="c_attributes_<?php echo $attr['AttributeID']; ?>" value="<?php echo $attr['AttributeID']; ?>" />
+                                <span><?php echo $attr['AttributeName']; ?></span>
+                            </div>
+                        </label>
+                    </div>
                 <?php endwhile; ?>
             </div>
             <div class="row">

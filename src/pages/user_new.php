@@ -12,6 +12,7 @@
         'UserLastname' => "",
         'IsAdmin' => "0"
     );
+    $valid = true;
     
     if ($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['user_save'])) {
         $userData = array(
@@ -26,7 +27,21 @@
         $password = hashString($_POST['user_password']);
         $passwordRepeat = hashString($_POST['user_password_repeat']);
 
-        if ($password === $passwordRepeat) {
+        $queryCheck = "SELECT * FROM users WHERE UserName = '".$userData["UserName"]."';";
+        $resultCheck = mysqli_query($dbLink, $queryCheck);
+
+        if(mysqli_num_rows($resultCheck) !== 0) {
+            $id = mysqli_fetch_assoc($resultCheck)["UserID"];
+            echo "<div class='alert alert-danger'>Benutzer bereits angelegt. <a href='index.php?page=user&detail=edit&id=$id'>Zur Detailansicht</a></div>";
+            $valid = false;
+        }
+
+        if ($password !== $passwordRepeat) {
+            echo '<div class="alert alert-danger">Passwörter stimmen nicht überein.</div>';
+            $valid = false;
+        }
+
+        if($valid) {
             $query = "INSERT INTO users (UserEmail, UserName, UserFirstname, UserLastname, IsAdmin, UserPassword) VALUES (
                 '".$userData['UserEmail']."', 
                 '".$userData['UserName']."', 
@@ -43,8 +58,6 @@
                 $id = mysqli_insert_id($dbLink);
                 echo "<div class='alert alert-success'>Benutzer erfolgreich angelegt. <a href='index.php?page=user&detail=edit&id=$id'>Zur Detailansicht</a></div>";
             }
-        } else {
-            echo '<div class="alert alert-danger">Passwörter stimmen nicht überein.</div>';
         }
     }
 ?>

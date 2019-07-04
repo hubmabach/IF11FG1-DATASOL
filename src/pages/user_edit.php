@@ -49,7 +49,7 @@
 
             $result = mysqli_query($dbLink, $query);
 
-            if ($result && mysqli_num_rows($result) > 0) {
+            if ($result) {
                 header("Location: ./index.php?page=users");
                 die();
             }
