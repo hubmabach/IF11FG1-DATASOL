@@ -149,7 +149,7 @@
      */
     function getAllRooms() {
         $sqlStatement = 
-        "SELECT RoomId, RoomNo 
+        "SELECT RoomId, RoomNo, RoomName
         FROM Rooms;";
         return getResult($sqlStatement);
     }
@@ -175,7 +175,7 @@
                     <option value="" selected>-----</option>
                     <?php 
                         foreach($rooms as $option) {
-                            echo "<option value='", $option["RoomId"],"' > ", $option["RoomNo"], " </option>";
+                            echo "<option value='", $option["RoomId"],"' > ", $option["RoomNo"], " (", $option["RoomName"], ") </option>";
                         }        
                     ?>
                     <option value="IsInMaintenance">Ausgemustert</option>
