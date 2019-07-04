@@ -15,25 +15,6 @@
         return mysqli_query($dbLink, $sqlStatement);
     }
 
-    
-    function getComponentsByAllFilterValues($roomId, $hardwareId, $softwareId, $searchTerm) {
-        $sqlStatement = 
-        "SELECT C.ComponentId AS ComponentId,
-        C.ComponentName,
-        CT.ComponentTypeName AS Kategorie,
-        R.RoomNo AS Raum
-        FROM Components AS C
-        INNER JOIN ComponentTypes AS CT ON C.ComponentTypeId = CT.ComponentTypeId
-        INNER JOIN ComponentsInRoom AS CR ON C.ComponentId = CR.ComponentId
-        INNER JOIN Rooms AS R ON R.RoomId = CR.RoomId 
-        WHERE R.RoomId = " .$roomId. " AND  
-        (CT.ComponentTypeId =" .$hardwareId. " OR 
-        CT.ComponentTypeId =" .$softwareId. ") AND 
-        C.ComponentName LIKE '%" .$searchTerm. "%'
-        ORDER BY R.RoomNo ASC;";
-        return getResult($sqlStatement);
-    }
-
     /**
      * ueberprueft ob das asoziative globale $_POST Array an der Stelle $arrPos valide ist
      * @param string $arrPos Wert der zu ueberpruefenden Stelle
