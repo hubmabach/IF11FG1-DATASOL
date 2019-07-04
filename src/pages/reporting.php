@@ -5,6 +5,35 @@
      */
 
 
+     /**
+     * Gibt das Ergebnis der SQL-Abfrage zurueck
+     * @param string $sqlStatement Beinhaltet die Datenbankabfrage
+     * @return mysqli_result Ergebnis der Datenbankabfrage
+     */
+    function getResult($sqlStatement) {
+        global $dbLink;
+        return mysqli_query($dbLink, $sqlStatement);
+    }
+
+    
+    function getComponentsByAllFilterValues($roomId, $hardwareId, $softwareId, $searchTerm) {
+        $sqlStatement = 
+        "SELECT C.ComponentId AS ComponentId,
+        C.ComponentName,
+        CT.ComponentTypeName AS Kategorie,
+        R.RoomNo AS Raum
+        FROM Components AS C
+        INNER JOIN ComponentTypes AS CT ON C.ComponentTypeId = CT.ComponentTypeId
+        INNER JOIN ComponentsInRoom AS CR ON C.ComponentId = CR.ComponentId
+        INNER JOIN Rooms AS R ON R.RoomId = CR.RoomId 
+        WHERE R.RoomId = " .$roomId. " AND  
+        (CT.ComponentTypeId =" .$hardwareId. " OR 
+        CT.ComponentTypeId =" .$softwareId. ") AND 
+        C.ComponentName LIKE '%" .$searchTerm. "%'
+        ORDER BY R.RoomNo ASC;";
+        return getResult($sqlStatement);
+    }
+
     /**
      * Gibt alle Komponenten mit dieser TypeId zurueck
      * @param int $typeId Id des gesuchten Komponententyps
@@ -47,11 +76,11 @@
     }
    
 
-     /**
-      * Gibt alle Komponenten zurueck, die sich im ausgewaehltem Raum befinden
-      * @param int $roomId - Id des ausgewaehlten Raumes
-      */
-     function getComponentsForRoom($roomId) {
+    /**
+    * Gibt alle Komponenten zurueck, die sich im ausgewaehltem Raum befinden
+    * @param int $roomId - Id des ausgewaehlten Raumes
+    */
+    function getComponentsForRoom($roomId) {
         $sqlStatement =
         "SELECT 
         C.ComponentId AS ComponentId,
@@ -62,10 +91,21 @@
         INNER JOIN ComponentTypes AS CT ON C.ComponentTypeId = CT.ComponentTypeId
         INNER JOIN ComponentsInRoom AS CR ON C.ComponentId = CR.ComponentId
         INNER JOIN Rooms AS R ON R.RoomId = CR.RoomId
-       WHERE R.RoomId = " .$roomId. ";";       
-       return getResult($sqlStatement);
+        WHERE R.RoomId = " .$roomId. ";";
+        $result = getResult($sqlStatement);
+        return getResult($sqlStatement);
+    }
 
-     }
+    /**
+     * ueberprueft ob das asoziative globale $_POST Array an der Stelle $arrPos valide ist
+     * @param string $arrPos Wert der zu ueberpruefenden Stelle
+     * @return boolean gibt true bei einem gesetztem und nicht leeren Wert zurueck
+     */
+    function isValidInput($arrPos) {
+        if(isset($_POST[$arrPos]) && !empty($_POST[$arrPos])) return true;
+        else return false;
+    }
+
     /**
     * Gibt alle Komponenten vom Typ Software zurueck
     */
@@ -90,25 +130,6 @@
         return getResult($sqlStatement);
     }
 
-    function getComponentsByAllFilterValues($roomId, $hardwareId, $softwareId, $searchTerm) {
-        printf("here");
-        $sqlStatement = 
-        "SELECT C.ComponentId AS ComponentId,
-        C.ComponentName,
-        CT.ComponentTypeName AS Kategorie,
-        R.RoomNo AS Raum
-        FROM Components AS C
-        INNER JOIN ComponentTypes AS CT ON C.ComponentTypeId = CT.ComponentTypeId
-        INNER JOIN ComponentsInRoom AS CR ON C.ComponentId = CR.ComponentId
-        INNER JOIN Rooms AS R ON R.RoomId = CR.RoomId 
-        WHERE R.RoomId = " .$roomId. " AND  
-        (CT.ComponentTypeId =" .$hardwareId. " OR 
-        CT.ComponentTypeId =" .$softwareId. ") AND 
-        C.ComponentName LIKE '%" .$searchTerm. "%'
-        ORDER BY R.RoomNo ASC;";
-        return getResult($sqlStatement);
-    }
-
     /**
      * Gibt alle Raeume zurueck
      */
@@ -119,15 +140,7 @@
         return getResult($sqlStatement);
     }
 
-    /**
-     * Gibt das Ergebnis der SQL-Abfrage zurueck
-     * @param string $sqlStatement Beinhaltet die Datenbankabfrage
-     * @return mysqli_result Ergebnis der Datenbankabfrage
-     */
-    function getResult($sqlStatement) {
-        global $dbLink;
-        return mysqli_query($dbLink, $sqlStatement);
-    }
+
 
     $rooms = getAllRooms();
     $hardware = getAllHardwareTypes();
@@ -194,28 +207,25 @@
         
         <?php
             if(isset($_POST["searchbtn"])) {
-                if(isset($_POST["room"]) && !empty($_POST["room"])
-                && isset($_POST["hardware"]) && !empty($_POST["hardware"])
-                && isset($_POST["software"]) && !empty($_POST["software"])
-                && isset($_POST["searchfilter"]) && !empty($_POST["searchfilter"])) {
-                } else {
-                    if(isset($_POST["room"]) && !empty($_POST["room"])) {
+                // if(isValidInput("room") && isValidInput("hardware")
+                // && isValidInput("software") && isValidInput("searchfilter")) {
+                // } else {
+                    if(isValidInput("room")) {
                         $result = getComponentsForRoom($_POST["room"]);
                     }
-                    if(isset($_POST["hardware"]) && !empty($_POST["hardware"])) {
+                    if(isValidInput("hardware")) {
                         $result = getComponentsByTypeId($_POST["hardware"]);
                     } 
-                    if(isset($_POST["software"]) && !empty($_POST["software"])) {
+                    if(isValidInput("software")) {
                         $result = getComponentsByTypeId($_POST["software"]);
                     }
-                    if(isset($_POST["searchfilter"]) && !empty($_POST["searchfilter"])) {
+                    if(isValidInput("searchfilter")) {
                         $result = getComponentsByName($_POST["searchfilter"]);
                     }
-                }
-                if((isset($_POST["room"]) && !empty($_POST["room"])) 
-                || (isset($_POST["hardware"]) && !empty($_POST["hardware"])) 
-                || (isset($_POST["software"]) && !empty($_POST["software"])) 
-                || (isset($_POST["searchfilter"]) && !empty($_POST["searchfilter"]))
+                // }
+                if(
+                    isValidInput("room") || isValidInput("hardware")
+                    || isValidInput("software") || isValidInput("searchfilter")
                 ) {
                         
                 $tableConfig = array(
