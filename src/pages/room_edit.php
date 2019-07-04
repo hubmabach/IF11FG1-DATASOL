@@ -34,6 +34,15 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $valid = false;
         }
 
+        $queryCheck = "SELECT * FROM rooms WHERE RoomNo = 'R$roomnumber'";
+        $resultCheck = mysqli_query($dbLink, $queryCheck);
+
+        if (mysqli_num_rows($resultCheck) !== 0) {
+            $id = mysqli_fetch_assoc($resultCheck)["RoomID"];
+            echo "<div class='alert alert-danger'>Raumnummer existiert bereits. <a href='index.php?page=room&detail=edit&id=$id'>Zur Detailansicht</a></div>";
+            $valid = false;
+        }
+
         if ($valid) {
             $roomId = $room['RoomID'];
             $queryUpdate = "UPDATE rooms SET RoomNo = '$roomNumber', RoomName = '$roomName', RoomNodes='$roomNodes' WHERE RoomID = $roomId";
@@ -47,8 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 echo '<div class="alert alert-danger">Leider tratt bei der Verarbeitung ein Fehler auf, bitte versuchen Sie es später erneut.</div>';
             }
         }
-    }
-    else if(isset($_POST["submit-delete-room"])) {
+    } else if (isset($_POST["submit-delete-room"])) {
         $queryDelete = "DELETE FROM rooms WHERE RoomID = $id";
 
         $resultDelete = mysqli_query($dbLink, $queryDelete);

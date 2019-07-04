@@ -37,7 +37,7 @@
                 // Status-Code 400 `BAD REQUEST`
                 http_response_code(400);
                 // Rückgabe einer lesbaren Fehlernachricht
-                echo json_encode(array( 'error' => "Attribut mit dieser Bezeichnung existiert bereits." ));
+                echo json_encode(array( 'error' => "Attribut mit dieser Bezeichnung existiert bereits. Laden Sie die Seite neu sollte dieses nicht vorhanden sein." ));
             }
         } else {
             // Status-Code 400 `BAD REQUEST`
