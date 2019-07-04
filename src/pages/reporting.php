@@ -44,13 +44,19 @@
         else return false;
     }
 
+
+    /**
+     * Suchefunktion, die alle moeglichen Filtereinstellungen beruecksichtigt 
+     * und demensprechend die Datenbankabfrage generiert und das Ergebnis zurueck gibt
+     */
     function getComponentsByFilterValues() {
         // Grundabfrage - beinhaltet alle Tabellen-JOINS
         $sqlStatement = 
         "SELECT C.ComponentId AS ComponentId,
         C.ComponentName,
         CT.ComponentTypeName AS Kategorie,
-        R.RoomNo AS Raum
+        R.RoomNo AS Raum,
+        C.IsInMaintenance AS Ausgemustert
         FROM Components AS C
         INNER JOIN ComponentTypes AS CT ON C.ComponentTypeId = CT.ComponentTypeId
         INNER JOIN ComponentsInRoom AS CR ON C.ComponentId = CR.ComponentId
@@ -58,9 +64,13 @@
 
         // Sofern nach einem Raum gefiltert wird, wird dieser der DB-Abfrage hinzugefuegt
         if(isValidInput("room")) {
-
-            // Filterkriterium der gesuchten RaumId zur DB-Abfrage hinzufuegen
-            $sqlStatement .= "R.RoomId = " .$_POST["room"]. " ";
+            if ($_POST["room"] == "IsInMaintenance") {
+                // Wenn nach den Ausgemusterten Komponenten gesucht wird, landet man hier
+                $sqlStatement .= " C.IsInMaintenance = 1 ";
+            } else {
+                // Filterkriterium der gesuchten RaumId zur DB-Abfrage hinzufuegen
+                $sqlStatement .= "R.RoomId = " .$_POST["room"]. " AND C.IsInMaintenance = 0 ";                
+            }          
         }
         // Sofern nach einer bestimmten Hardware gesucht wird, wird diese der DB-Abfrage hinzugefuegt
         if (isValidInput("hardware")) {
@@ -166,6 +176,7 @@
                     echo "<option value='", $option["RoomId"],"' > ", $option["RoomNo"], " </option>";
                 }        
             ?>
+            <option value="IsInMaintenance">Ausgemustert</option>
         </select>
         <script type="text/javascript">
             document.getElementById('room').value = "<?php echo $_POST['room'];?>";
