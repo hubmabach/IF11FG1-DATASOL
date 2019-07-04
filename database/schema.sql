@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS `address` (
   `FaxNo` varchar(20) COLLATE utf8_general_ci DEFAULT NULL,
   `MailAddress` varchar(45) COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`AddressID`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- Daten Export vom Benutzer nicht ausgewählt
 -- Exportiere Struktur von Tabelle gruppe1db.componentattributes
@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `componentattributes` (
   `AttributeID` int(11) NOT NULL AUTO_INCREMENT,
   `AttributeName` varchar(25) COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`AttributeID`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- Daten Export vom Benutzer nicht ausgewählt
 -- Exportiere Struktur von Tabelle gruppe1db.componenthasvalues
@@ -41,9 +41,10 @@ CREATE TABLE IF NOT EXISTS `componenthasvalues` (
   `AttributeID` int(11) DEFAULT NULL,
   `AttributeValue` longtext COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`ComponentValueID`),
+  UNIQUE KEY `U_ComponentID_AttributeID` (`ComponentID`,`AttributeID`),
   KEY `F_ComponentId` (`ComponentID`),
   KEY `F_AttributeID` (`AttributeID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- Daten Export vom Benutzer nicht ausgewählt
 -- Exportiere Struktur von Tabelle gruppe1db.components
@@ -52,16 +53,17 @@ CREATE TABLE IF NOT EXISTS `components` (
   `ComponentName` varchar(100) COLLATE utf8_general_ci DEFAULT NULL,
   `SupplierID` int(11) DEFAULT NULL,
   `ComponentPurchaseDate` date DEFAULT NULL,
-  `ComponentWarranty` int(11) DEFAULT NULL,
+  `ComponentWarranty` date DEFAULT NULL,
   `ComponentNotes` longtext COLLATE utf8_general_ci DEFAULT NULL,
   `ComponentVendorID` int(11) DEFAULT NULL,
   `ComponentTypeID` int(11) DEFAULT NULL,
   `ComponentReceipt` varchar(150) COLLATE utf8_general_ci DEFAULT NULL,
+  `IsInMaintenance` tinyint(1) DEFAULT 0,
   PRIMARY KEY (`ComponentID`),
   KEY `F_SupplierID` (`SupplierID`),
   KEY `F_ComponentVendorID` (`ComponentVendorID`),
   KEY `F_ComponentTypeID` (`ComponentTypeID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- Daten Export vom Benutzer nicht ausgewählt
 -- Exportiere Struktur von Tabelle gruppe1db.componentsinroom
@@ -70,9 +72,10 @@ CREATE TABLE IF NOT EXISTS `componentsinroom` (
   `ComponentID` int(11) DEFAULT NULL,
   `RoomID` int(11) DEFAULT NULL,
   PRIMARY KEY (`ComponentRoomID`),
-  KEY `F_ComponentID` (`ComponentID`,`RoomID`),
-  KEY `F_RoomID` (`RoomID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  UNIQUE KEY `unique_ComponentID` (`ComponentID`),
+  KEY `F_RoomID` (`RoomID`),
+  KEY `F_ComponentID` (`ComponentID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- Daten Export vom Benutzer nicht ausgewählt
 -- Exportiere Struktur von Tabelle gruppe1db.componenttypehasattributes
@@ -83,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `componenttypehasattributes` (
   PRIMARY KEY (`ComponentTypeAttributeID`),
   KEY `F_ComponentTypeID` (`ComponentTypeID`),
   KEY `F_AttributeID` (`AttributeID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- Daten Export vom Benutzer nicht ausgewählt
 -- Exportiere Struktur von Tabelle gruppe1db.componenttypes
@@ -92,7 +95,7 @@ CREATE TABLE IF NOT EXISTS `componenttypes` (
   `ComponentTypeName` varchar(45) COLLATE utf8_general_ci DEFAULT NULL,
   `IsSoftware` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`ComponentTypeID`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- Daten Export vom Benutzer nicht ausgewählt
 -- Exportiere Struktur von Tabelle gruppe1db.rooms
@@ -102,7 +105,7 @@ CREATE TABLE IF NOT EXISTS `rooms` (
   `RoomName` varchar(45) COLLATE utf8_general_ci DEFAULT NULL,
   `RoomNodes` longtext COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`RoomID`)
-) ENGINE=InnoDB AUTO_INCREMENT=118 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- Daten Export vom Benutzer nicht ausgewählt
 -- Exportiere Struktur von Tabelle gruppe1db.supplier
@@ -112,7 +115,7 @@ CREATE TABLE IF NOT EXISTS `supplier` (
   `AddressID` int(11) DEFAULT NULL,
   PRIMARY KEY (`SupplierID`),
   KEY `F_AddressID` (`AddressID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- Daten Export vom Benutzer nicht ausgewählt
 -- Exportiere Struktur von Tabelle gruppe1db.users
@@ -130,7 +133,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Daten Export vom Benutzer nicht ausgewählt
 -- Exportiere Struktur von Tabelle gruppe1db.vendor
 CREATE TABLE IF NOT EXISTS `vendor` (
-  `VendorID` int(11) NOT NULL,
+  `VendorID` int(11) NOT NULL AUTO_INCREMENT,
   `VendorName` varchar(45) COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`VendorID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;

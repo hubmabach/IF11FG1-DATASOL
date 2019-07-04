@@ -78,4 +78,29 @@
 
         return $od_array;
     }
+
+    /**
+     * Funktion um ein assoziatives Array in eine MySQL-UPDATE-Wertefolge zu formatieren.
+     * 
+     * @author Nikolas Bayerschmidt
+     * @param array $valueArray Assoziatives Array mit Werten
+     * @return string $updateStr Zeichenfolge die der Wertevergabe bei einer UPDATE-Datenbankabfrage gleicht. (`COLUMN = VALUE`)
+     */
+    function sqlUpdateString($valueArray) {
+        $updateStr = "";
+        $arrayKeys = array_keys($valueArray);
+        $lastArrayKey = array_pop($arrayKeys);
+        foreach ($valueArray as $key => $value) {
+
+            // Wenn der Wert ein String ist, müssen extra Anführungszeichen hinzugefügt werden.
+            if (is_string($value)) $value = "\"$value\"";
+
+            $updateStr .= $key." = ".$value;
+
+            // Sollte der Iterator nicht bei dem letzten Wert sein, dann füge ein Komma zur Zeichenfolge hinzu.
+            if ($key !== $lastArrayKey) $updateStr .= ", ";
+        }
+
+        return $updateStr;
+    }
 ?>

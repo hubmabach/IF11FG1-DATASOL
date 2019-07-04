@@ -5,7 +5,7 @@
      * @author Maximilan Bachhuber, Jonas Becker
      */
 
-    $query = "SELECT * FROM components";
+    $query = "SELECT c.ComponentID, c.ComponentName, s.SupplierCompanyName, c.ComponentPurchaseDate, ct.ComponentTypeName, r.RoomName, IF(c.IsInMaintenance, 'Ja', 'Nein') AS IsInMaintenance FROM components c LEFT JOIN supplier s ON c.SupplierID = s.SupplierID LEFT JOIN componenttypes ct ON c.ComponentTypeID = ct.ComponentTypeID LEFT JOIN componentsinroom cir ON c.ComponentID = cir.ComponentID LEFT JOIN rooms r ON cir.RoomID = r.RoomID";
 
     if (isset($_GET['search']) and !empty($_GET['search'])) {
         $query .= " WHERE ComponentName LIKE '%".$_GET['search']."%'";
@@ -16,13 +16,12 @@
     $tableConfig = array(
         'columns' => array(
             'ComponentID' => '#',
-            'ComponentName' => 'Komponentenname',
-            'SupplierID' => 'LieferantenID',
+            'ComponentName' => 'Bezeichnung',
+            'SupplierCompanyName' => 'Lieferant',
             'ComponentPurchaseDate' => 'Kaufdatum',
-            'ComponentWarranty' => 'Garantie',
-            'ComponentNotes' => 'Bemerkung',
-            'ComponentVendorID' => 'VerkäuferID',
-            'ComponentTypeID' => 'KomponentenartID'
+            'ComponentTypeName' => 'Art',
+            'RoomName' => 'Raum',
+            'IsInMaintenance' => "Ausgemustert"
         ),
         'singularName' => 'Komponenten',
         'idColumn' => 'ComponentID',

@@ -7,10 +7,13 @@
    * Lädt eine Datei bei Vorhandensein in den Ordner `uploads` hoch.
    *
    * @author Maximilian Bachhuber, Jonas Becker
+   * Beginn : 03.07.2019 09.00 : 15:00
+   *
    */
-
+# ErrorHandling
    $valid = true;
 
+# Überprüfung ob die Eingabemethode Post und die Komponentenart gesetzt wurde
    if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['component_save'])) {
      $component_type_id = $_POST['component_type'];
      $component_name = $_POST['component_name'];
@@ -23,17 +26,21 @@
      $component_notes = $_POST['component_notes'];
      $component_attributes = $_POST['component_attributes'];
 
+# Überprüfungob eine Datei hochgeladen
      if ($component_receipt !== "" && file_exists($component_receipt['tmp_name']) && is_uploaded_file($component_receipt['tmp_name'])) {
+# Uploaddiractory
        $upload_dir = __dir__ . "/../uploads/";
+# Upload mit eindeutigem Filename versehen
        $filename = basename( substr(hash("md5", time(), FALSE), 0, 5) ."_". $component_receipt['name']);
-
+# Upload in Temporäres Dateiverzeichnis aufnehmen
        if (move_uploaded_file($component_receipt['tmp_name'], $upload_dir . $filename)) {
-         $component_receipt = $filename;
+        $component_receipt = $filename;
        } else {
-         // FIXME: Fehler
-         $valid = false;
+        echo '<div class="alert alert-danger">Leider tratt bei der Verarbeitung ein Fehler auf, bitte versuchen Sie es später erneut.</div>';
+        $valid = false;
        }
      }
+# Wenn alles geklappt hat -> Kaufbeleg an Datenbank senden
      if ($valid) {
        $query = "INSERT INTO components (ComponentTypeID, ComponentName, SupplierID, ComponentPurchaseDate, ComponentWarranty, ComponentNotes, ComponentVendorID, ComponentReceipt)
         VALUES ($component_type_id, '$component_name', $component_supplier_id, '$component_purchase', '$component_warranty', '$component_notes', $component_vendor_id, '$component_receipt')";
@@ -51,11 +58,11 @@
               mysqli_query($dbLink, $save_query);
           }
 
-          // TODO: Nachricht bei Erfolg mit Link zur Komponente
+          echo "<div class='alert alert-success'>Komponente erfolgreich angelegt. <a href='index.php?page=component&detail=edit&id=$component_id'>Zur Detailansicht</a></div>";
 
           unset($_POST['component_type']);
         } else {
-          echo mysqli_error($dbLink);
+          echo '<div class="alert alert-danger">Leider tratt bei der Verarbeitung ein Fehler auf, bitte versuchen Sie es später erneut.</div>';
         }
      }
    }
@@ -126,9 +133,9 @@
         </div>
       </div>
       <div class="form-group row">
-        <label class="control-label col-sm-2 text-sm-right">Gewährleistungs<wbr />dauer </label>
+        <label class="control-label col-sm-2 text-sm-right">Gewährleistung bis</label>
         <div class="col-sm-8">
-          <input type="text" id="componet_warranty" name="component_warranty" class="form-control " placeholder="Text input">
+          <input type="date" id="componet_warranty" name="component_warranty" class="form-control " placeholder="Text input">
         </div>
       </div>
       <div class="form-group row">
