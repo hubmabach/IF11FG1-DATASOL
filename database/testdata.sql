@@ -29,12 +29,31 @@ INSERT INTO `address` (`AddressID`, `Street`, `PostalCode`, `City`, `Country`, `
 -- Exportiere Daten aus Tabelle gruppe1db.componentattributes: ~6 rows (ungefähr)
 /*!40000 ALTER TABLE `componentattributes` DISABLE KEYS */;
 INSERT INTO `componentattributes` (`AttributeID`, `AttributeName`) VALUES
-	(1, 'Festplatte '),
+	(1, 'Festplatte'),
 	(2, 'Grafikkarte'),
 	(3, 'Arbeitsspeicher'),
 	(4, 'Monitor'),
 	(5, 'AnschlÃ¼sse'),
-	(6, 'Kabel');
+	(6, 'Kabel'),
+	(7, 'Seriennummer'),
+	(8, 'CPU Bezeichnung'),
+	(9, 'Anzahl Ports'),
+	(10, 'Uplinktyp'),
+	(11, 'IP1, IP2, IP3, IP4'),
+	(12, 'WLAN-Standard'),
+	(13, 'Druckertyp'),
+	(14, 'DruckerArt'),
+	(15, 'Druckformat'),
+	(16, 'Beidseitig'),
+	(20, 'ANSI-Lumen'),
+	(21, 'Eingang'),
+	(22, 'Lautsprecher'),
+	(23, 'Versionsnummer'),
+	(24, 'Lizenztyp'),
+	(25, 'Lizenzanzahl'),
+	(26, 'Lizenzlaufzeit'),
+	(27, 'Lizenzinformationen'),
+	(28, 'Installationshinweise');
 /*!40000 ALTER TABLE `componentattributes` ENABLE KEYS */;
 
 -- Exportiere Daten aus Tabelle gruppe1db.componenthasvalues: ~2 rows (ungefähr)
@@ -44,13 +63,13 @@ INSERT INTO `componenthasvalues` (`ComponentValueID`, `ComponentID`, `AttributeI
 	(2, 1, 5, '3 x PCI 16, 5 x USB 3.0, AudioJack, 1 x HDMI, 2 x VGa');
 /*!40000 ALTER TABLE `componenthasvalues` ENABLE KEYS */;
 
--- Exportiere Daten aus Tabelle gruppe1db.components: ~0 rows (ungefähr)
+-- Exportiere Daten aus Tabelle gruppe1db.components: ~1 rows (ungefähr)
 /*!40000 ALTER TABLE `components` DISABLE KEYS */;
 INSERT INTO `components` (`ComponentID`, `ComponentName`, `SupplierID`, `ComponentPurchaseDate`, `ComponentWarranty`, `ComponentNotes`, `ComponentVendorID`, `ComponentTypeID`, `ComponentReceipt`) VALUES
 	(1, 'Think Center 12020', 1, '0000-00-00', 2, '2 Jahre Garantie', 902, 1, NULL);
 /*!40000 ALTER TABLE `components` ENABLE KEYS */;
 
--- Exportiere Daten aus Tabelle gruppe1db.componentsinroom: ~0 rows (ungefähr)
+-- Exportiere Daten aus Tabelle gruppe1db.componentsinroom: ~1 rows (ungefähr)
 /*!40000 ALTER TABLE `componentsinroom` DISABLE KEYS */;
 INSERT INTO `componentsinroom` (`ComponentRoomID`, `ComponentID`, `RoomID`) VALUES
 	(1, 1, 100);
@@ -60,7 +79,35 @@ INSERT INTO `componentsinroom` (`ComponentRoomID`, `ComponentID`, `RoomID`) VALU
 /*!40000 ALTER TABLE `componenttypehasattributes` DISABLE KEYS */;
 INSERT INTO `componenttypehasattributes` (`ComponentTypeAttributeID`, `ComponentTypeID`, `AttributeID`) VALUES
 	(1, 1, 5),
-	(2, 1, 1);
+	(2, 1, 1),
+	(3, 1, 3),
+	(4, 1, 7),
+	(5, 1, 8),
+	(6, 2, 7),
+	(7, 2, 9),
+	(8, 2, 10),
+	(9, 3, 7),
+	(10, 3, 9),
+	(11, 3, 11),
+	(12, 8, 7),
+	(13, 8, 12),
+	(14, 10, 7),
+	(15, 10, 13),
+	(16, 10, 14),
+	(17, 10, 15),
+	(18, 10, 16),
+	(19, 12, 7),
+	(20, 12, 20),
+	(21, 12, 21),
+	(22, 12, 22),
+	(23, 14, 5),
+	(24, 14, 7),
+	(25, 16, 23),
+	(26, 16, 24),
+	(27, 16, 25),
+	(28, 16, 26),
+	(29, 16, 27),
+	(30, 16, 28);
 /*!40000 ALTER TABLE `componenttypehasattributes` ENABLE KEYS */;
 
 -- Exportiere Daten aus Tabelle gruppe1db.componenttypes: ~8 rows (ungefähr)
