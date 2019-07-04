@@ -90,6 +90,25 @@
         return getResult($sqlStatement);
     }
 
+    function getComponentsByAllFilterValues($roomId, $hardwareId, $softwareId, $searchTerm) {
+        printf("here");
+        $sqlStatement = 
+        "SELECT C.ComponentId AS ComponentId,
+        C.ComponentName,
+        CT.ComponentTypeName AS Kategorie,
+        R.RoomNo AS Raum
+        FROM Components AS C
+        INNER JOIN ComponentTypes AS CT ON C.ComponentTypeId = CT.ComponentTypeId
+        INNER JOIN ComponentsInRoom AS CR ON C.ComponentId = CR.ComponentId
+        INNER JOIN Rooms AS R ON R.RoomId = CR.RoomId 
+        WHERE R.RoomId = " .$roomId. " AND  
+        (CT.ComponentTypeId =" .$hardwareId. " OR 
+        CT.ComponentTypeId =" .$softwareId. ") AND 
+        C.ComponentName LIKE '%" .$searchTerm. "%'
+        ORDER BY R.RoomNo ASC;";
+        return getResult($sqlStatement);
+    }
+
     /**
      * Gibt alle Raeume zurueck
      */
@@ -175,24 +194,30 @@
         
         <?php
             if(isset($_POST["searchbtn"])) {
-            if(isset($_POST["room"]) && !empty($_POST["room"])) {
-                $result = getComponentsForRoom($_POST["room"]);
-            }
-            if(isset($_POST["hardware"]) && !empty($_POST["hardware"])) {
-                $result = getComponentsByTypeId($_POST["hardware"]);
-            } 
-            if(isset($_POST["software"]) && !empty($_POST["software"])) {
-                $result = getComponentsByTypeId($_POST["software"]);
-            }
-            if(isset($_POST["searchfilter"]) && !empty($_POST["searchfilter"])) {
-                $result = getComponentsByName($_POST["searchfilter"]);
-            }
-            if((isset($_POST["room"]) && !empty($_POST["room"])) 
-            || (isset($_POST["hardware"]) && !empty($_POST["hardware"])) 
-            || (isset($_POST["software"]) && !empty($_POST["software"])) 
-            || (isset($_POST["searchfilter"]) && !empty($_POST["searchfilter"]))
-            ) {
-            
+                if(isset($_POST["room"]) && !empty($_POST["room"])
+                && isset($_POST["hardware"]) && !empty($_POST["hardware"])
+                && isset($_POST["software"]) && !empty($_POST["software"])
+                && isset($_POST["searchfilter"]) && !empty($_POST["searchfilter"])) {
+                } else {
+                    if(isset($_POST["room"]) && !empty($_POST["room"])) {
+                        $result = getComponentsForRoom($_POST["room"]);
+                    }
+                    if(isset($_POST["hardware"]) && !empty($_POST["hardware"])) {
+                        $result = getComponentsByTypeId($_POST["hardware"]);
+                    } 
+                    if(isset($_POST["software"]) && !empty($_POST["software"])) {
+                        $result = getComponentsByTypeId($_POST["software"]);
+                    }
+                    if(isset($_POST["searchfilter"]) && !empty($_POST["searchfilter"])) {
+                        $result = getComponentsByName($_POST["searchfilter"]);
+                    }
+                }
+                if((isset($_POST["room"]) && !empty($_POST["room"])) 
+                || (isset($_POST["hardware"]) && !empty($_POST["hardware"])) 
+                || (isset($_POST["software"]) && !empty($_POST["software"])) 
+                || (isset($_POST["searchfilter"]) && !empty($_POST["searchfilter"]))
+                ) {
+                        
                 $tableConfig = array(
                     'columns' => array(
                         'Raum' => 'Raum',
