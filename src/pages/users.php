@@ -2,7 +2,9 @@
 <?php 
     /**
      * Anzeige der Benutzer
-     * @author Rubeins
+     * @author Rubein
+     * Mo: 13:45 - 14:35 Uhr
+     * Di: 07:45 - 08:50 Uhr
      */
     
     $query = "SELECT UserId, UserName, UserFirstName, UserLastName, IF(IsAdmin, 'Ja', 'Nein') AS IsAdmin FROM Users";

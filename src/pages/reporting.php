@@ -2,6 +2,9 @@
     /**
      * Anzeige der verschiedenen Komponenten, abhängig von der Filterauswahl
      * @author Rubein
+     * Di 10:00 - 13:00
+     * Mi 08:45 - 13:30
+     * Do 07:45 - 10:15
      */
 
 
