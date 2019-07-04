@@ -28,10 +28,10 @@
        $filename = basename( substr(hash("md5", time(), FALSE), 0, 5) ."_". $component_receipt['name']);
 
        if (move_uploaded_file($component_receipt['tmp_name'], $upload_dir . $filename)) {
-         $component_receipt = $filename;
+        $component_receipt = $filename;
        } else {
-         // FIXME: Fehler
-         $valid = false;
+        echo '<div class="alert alert-danger">Leider tratt bei der Verarbeitung ein Fehler auf, bitte versuchen Sie es später erneut.</div>';
+        $valid = false;
        }
      }
      if ($valid) {
@@ -51,11 +51,11 @@
               mysqli_query($dbLink, $save_query);
           }
 
-          // TODO: Nachricht bei Erfolg mit Link zur Komponente
+          echo "<div class='alert alert-success'>Komponente erfolgreich angelegt. <a href='index.php?page=component&detail=edit&id=$component_id'>Zur Detailansicht</a></div>";
 
           unset($_POST['component_type']);
         } else {
-          echo mysqli_error($dbLink);
+          echo '<div class="alert alert-danger">Leider tratt bei der Verarbeitung ein Fehler auf, bitte versuchen Sie es später erneut.</div>';
         }
      }
    }
