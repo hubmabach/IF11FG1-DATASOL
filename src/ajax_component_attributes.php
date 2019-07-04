@@ -3,6 +3,8 @@
      * Erstellt ein neues Komponentenattribut basierend auf einer Bezeichnung durch eine asynchrone JavaScript-Anfrage.
      * 
      * @author Nikolas Bayerschmidt
+     * Anfang: 03.07.2019 11:45
+     * Ende: 03.07.2019 13:26
      */
 
     require('./includes/global.php');

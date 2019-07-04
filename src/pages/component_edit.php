@@ -10,6 +10,8 @@
    * Die Kompente kann nur gelöscht werden, wenn sie ausgemustert wurde.
    * 
    * @author Nikolas Bayerschmidt
+   * Beginn: 04.07.2019 8:15
+   * Ende: 04.07.2019 10:00
    */
 
   // Ist keine ID gesetzt, dann leite auf die Übersichtsseite weiter

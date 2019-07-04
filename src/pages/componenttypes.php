@@ -3,6 +3,8 @@
      * Liste aller Komponentenarten
      * 
      * @author Nikolas Bayerschmidt
+     * Beginn: 03.07.2019 11:45
+     * Ende: 03.07.2019 13:26
      */
 
     $query = "SELECT ComponentTypeID, ComponentTypeName, (SELECT COUNT(AttributeID) FROM componenttypehasattributes WHERE ComponentTypeID = ct.ComponentTypeID) AS ComponentTypeAttrCount FROM componenttypes ct";

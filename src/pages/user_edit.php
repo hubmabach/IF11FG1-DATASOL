@@ -5,6 +5,8 @@
      * Holt sich die Daten des Nutzers ausgehend von dem Paramter `id` in der URL.
      * 
      * @author Nikolas Bayerschmidt
+     * Beginn: 01.07.2019 13:45
+     * Ende: 02.07.2019 10:30 
      */
 
     $userId = (isset($_GET['id']) and !empty($_GET['id'])) ? intval($_GET['id']) : false;

@@ -3,6 +3,8 @@
      * Formular zum Hinzufügen eines neuen Nutzers.
      * 
      * @author Nikolas Bayerschmidt
+     * Beginn: 01.07.2019 13:45
+     * Ende: 02.07.2019 10:30
      */
 
     $userData = array(

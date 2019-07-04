@@ -5,6 +5,8 @@
      * Ist der Nutzer eingeloggt wird auch gleich der Nutzer in einer Variable abgespeichert, damit jeder
      * auf die Daten des Nutzes zugreifen kann. Ebenso wird auch gleich eine Verbindung mit der Datenbank hergestellt.
      * 
+     * Weiterhin werden hier funktionen und Variablen definiert, welche für alle Dateien verfügbar sind.
+     * 
      * @author Reindl/Schmiedkunz
      * 
      * Benedikt: 11:00 - 12:00

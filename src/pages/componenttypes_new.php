@@ -6,6 +6,8 @@
  * Das Besondere an diesem Formular ist die Zuweisung von Komponentenattributen.
  * 
  * @author Nikolas Bayerschmidt
+ * Beginn: 03.07.2019 11:45
+ * Ende: 03.07.2019 13:26
  */
 
 if ($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['componenttype_save'])) {
