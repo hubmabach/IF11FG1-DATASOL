@@ -3,32 +3,9 @@
      * Bearbeiten eines bereits bestehenden Nutzers.
      * 
      * Holt sich die Daten des Nutzers ausgehend von dem Paramter `id` in der URL.
-     */
-
-
-    /**
-     * Funktion um ein assoziatives Array in eine MySQL-UPDATE-Wertefolge zu formatieren.
      * 
-     * @param array $valueArray Assoziatives Array mit Werten
-     * @return string $updateStr Zeichenfolge die der Wertevergabe bei einer UPDATE-Datenbankabfrage gleicht. (`COLUMN = VALUE`)
+     * @author Nikolas Bayerschmidt
      */
-    function sqlUpdateString($valueArray) {
-        $updateStr = "";
-        $arrayKeys = array_keys($valueArray);
-        $lastArrayKey = array_pop($arrayKeys);
-        foreach ($valueArray as $key => $value) {
-
-            // Wenn der Wert ein String ist, müssen extra Anführungszeichen hinzugefügt werden.
-            if (is_string($value)) $value = "\"$value\"";
-
-            $updateStr .= $key." = ".$value;
-
-            // Sollte der Iterator nicht bei dem letzten Wert sein, dann füge ein Komma zur Zeichenfolge hinzu.
-            if ($key !== $lastArrayKey) $updateStr .= ", ";
-        }
-
-        return $updateStr;
-    }
 
     $userId = (isset($_GET['id']) and !empty($_GET['id'])) ? intval($_GET['id']) : false;
 
@@ -72,7 +49,7 @@
 
             $result = mysqli_query($dbLink, $query);
 
-            if ($result && mysqli_num_rows($result) > 0) {
+            if ($result) {
                 header("Location: ./index.php?page=users");
                 die();
             }

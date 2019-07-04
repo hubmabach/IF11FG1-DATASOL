@@ -21,6 +21,7 @@ $supplierData = array(
     "Mobile" => "",
     "Fax" => ""
 );
+$valid = true;
 
 if ($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit-new-supplier'])) {
     $supplierData = array(
@@ -64,7 +65,16 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit-new-supplier']
         }
     }
 
-    if ($resultAddressID) {
+    $queryCheck = "SELECT * FROM supplier WHERE SupplierCompanyName = '".$supplierData["SupplierName"]."';";
+    $resultCheck = mysqli_query($dbLink, $queryCheck);
+
+    if(mysqli_num_rows($resultCheck) !== 0) {
+        $id = mysqli_fetch_assoc($resultCheck)["SupplierID"];
+        echo "<div class='alert alert-danger'>Lieferant existiert bereits. <a href='index.php?page=supplier&detail=edit&id=$id'>Zur Detailansicht</a></div>";
+        $valid = false;
+    }
+
+    if ($resultAddressID && $valid) {
         $addressId = mysqli_fetch_assoc($resultAddressID)["AddressID"];
 
         $queryInsertSupplier = "INSERT INTO supplier (SupplierCompanyName, AddressID) VALUES ('".

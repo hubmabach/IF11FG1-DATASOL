@@ -66,13 +66,13 @@ INSERT INTO `componenthasvalues` (`ComponentValueID`, `ComponentID`, `AttributeI
 -- Exportiere Daten aus Tabelle gruppe1db.components: ~1 rows (ungefähr)
 /*!40000 ALTER TABLE `components` DISABLE KEYS */;
 INSERT INTO `components` (`ComponentID`, `ComponentName`, `SupplierID`, `ComponentPurchaseDate`, `ComponentWarranty`, `ComponentNotes`, `ComponentVendorID`, `ComponentTypeID`, `ComponentReceipt`) VALUES
-	(1, 'Think Center 12020', 1, '0000-00-00', 2, '2 Jahre Garantie', 902, 1, NULL);
+	(1, 'Think Center 12020', 1, '2012-12-20', 2, '2014-12-20', 1, 1, NULL);
 /*!40000 ALTER TABLE `components` ENABLE KEYS */;
 
 -- Exportiere Daten aus Tabelle gruppe1db.componentsinroom: ~1 rows (ungefähr)
 /*!40000 ALTER TABLE `componentsinroom` DISABLE KEYS */;
 INSERT INTO `componentsinroom` (`ComponentRoomID`, `ComponentID`, `RoomID`) VALUES
-	(1, 1, 100);
+	(1, 1, 1);
 /*!40000 ALTER TABLE `componentsinroom` ENABLE KEYS */;
 
 -- Exportiere Daten aus Tabelle gruppe1db.componenttypehasattributes: ~2 rows (ungefähr)
@@ -126,14 +126,14 @@ INSERT INTO `componenttypes` (`ComponentTypeID`, `ComponentTypeName`, `IsSoftwar
 -- Exportiere Daten aus Tabelle gruppe1db.rooms: ~8 rows (ungefähr)
 /*!40000 ALTER TABLE `rooms` DISABLE KEYS */;
 INSERT INTO `rooms` (`RoomID`, `RoomNo`, `RoomName`, `RoomNodes`) VALUES
-	(100, '101', 'SekretÃ¤riat', ''),
-	(102, '102', 'Kopierer Raum', 'Raum zum kopieren'),
-	(105, '103', 'Besenkammer', 'Raum fÃ¼r Besen und Heulsusen '),
-	(107, '104', 'Lehrer Zimmer', NULL),
-	(111, '105', 'Lager', 'Lagerraum'),
-	(113, '106', 'Besprechungzimmer', NULL),
-	(115, '107', 'BÃ¼ro 001', ''),
-	(117, '108', 'BÃ¼ro  002', '');
+	(1, '101', 'SekretÃ¤riat', ''),
+	(2, '102', 'Kopierer Raum', 'Raum zum kopieren'),
+	(3, '103', 'Besenkammer', 'Raum fÃ¼r Besen und Heulsusen '),
+	(4, '104', 'Lehrer Zimmer', NULL),
+	(5, '105', 'Lager', 'Lagerraum'),
+	(6, '106', 'Besprechungzimmer', NULL),
+	(7, '107', 'BÃ¼ro 001', ''),
+	(8, '108', 'BÃ¼ro  002', '');
 /*!40000 ALTER TABLE `rooms` ENABLE KEYS */;
 
 -- Exportiere Daten aus Tabelle gruppe1db.supplier: ~2 rows (ungefähr)
@@ -153,8 +153,8 @@ INSERT INTO `users` (`UserID`, `UserEmail`, `UserName`, `UserFirstName`, `UserLa
 -- Exportiere Daten aus Tabelle gruppe1db.vendor: ~2 rows (ungefähr)
 /*!40000 ALTER TABLE `vendor` DISABLE KEYS */;
 INSERT INTO `vendor` (`VendorID`, `VendorName`) VALUES
-	(901, 'Microsoft'),
-	(902, 'Lenovo');
+	(1, 'Microsoft'),
+	(2, 'Lenovo');
 /*!40000 ALTER TABLE `vendor` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
