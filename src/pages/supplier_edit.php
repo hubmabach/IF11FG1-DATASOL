@@ -13,6 +13,7 @@ $supplierId = (isset($_GET['id']) and !empty($_GET['id'])) ? intval($_GET['id'])
 $query = "SELECT * FROM Supplier INNER JOIN Address ON Supplier.AddressID = Address.AddressID WHERE SupplierID = $supplierId;";
 $result = mysqli_query($dbLink, $query);
 $supplier = mysqli_fetch_assoc($result);
+$valid = true;
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     if (isset($_POST['submit-edit-supplier'])) {
@@ -30,23 +31,34 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
         $addressId = $supplier["AddressID"];
 
-        $queryUpdateAddress = "UPDATE address SET Street = '$street', PostalCode = '$postcode', City = '$city', " .
-            "Country = '$country', TelNo = '$telephone', MobilNo = '$mobile', FaxNo = '$fax', " .
-            " MailAddress = '$email' WHERE AddressID = $addressId;";
-        $queryUpdateCompany = "UPDATE supplier SET SupplierCompanyName = '$supplierCompanyName' WHERE SupplierID = $supplierId";
+        $queryCheck = "SELECT * FROM supplier WHERE SupplierCompanyName = '" . $supplierCompanyName . "';";
+        $resultCheck = mysqli_query($dbLink, $queryCheck);
 
-        mysqli_query($dbLink, "BEGIN");
-        $resultAddress = mysqli_query($dbLink, $queryUpdateAddress);
-        $resultCompany = mysqli_query($dbLink, $queryUpdateCompany);
+        if (mysqli_num_rows($resultCheck) !== 0) {
+            $id = mysqli_fetch_assoc($resultCheck)["SupplierID"];
+            echo "<div class='alert alert-danger'>Lieferant existiert bereits. <a href='index.php?page=supplier&detail=edit&id=$id'>Zur Detailansicht</a></div>";
+            $valid = false;
+        }
 
-        if ($resultAddress === false || $resultCompany === false) {
-            mysqli_query($dbLink, "ROLLBACK");
-            echo '<div class="alert alert-danger">Upps, da ist was schief gelaufen, versuchen Sie es bitte erneut.</div>';
-        } else {
-            mysqli_query($dbLink, "COMMIT");
-            echo "<div class='alert alert-success'>Änderungen erfolgreich gespeichert.</div>";
-            $result = mysqli_query($dbLink, $query);
-            $supplier = mysqli_fetch_assoc($result);
+        if ($valid) {
+            $queryUpdateAddress = "UPDATE address SET Street = '$street', PostalCode = '$postcode', City = '$city', " .
+                "Country = '$country', TelNo = '$telephone', MobilNo = '$mobile', FaxNo = '$fax', " .
+                " MailAddress = '$email' WHERE AddressID = $addressId;";
+            $queryUpdateCompany = "UPDATE supplier SET SupplierCompanyName = '$supplierCompanyName' WHERE SupplierID = $supplierId";
+
+            mysqli_query($dbLink, "BEGIN");
+            $resultAddress = mysqli_query($dbLink, $queryUpdateAddress);
+            $resultCompany = mysqli_query($dbLink, $queryUpdateCompany);
+
+            if ($resultAddress === false || $resultCompany === false) {
+                mysqli_query($dbLink, "ROLLBACK");
+                echo '<div class="alert alert-danger">Upps, da ist was schief gelaufen, versuchen Sie es bitte erneut.</div>';
+            } else {
+                mysqli_query($dbLink, "COMMIT");
+                echo "<div class='alert alert-success'>Änderungen erfolgreich gespeichert.</div>";
+                $result = mysqli_query($dbLink, $query);
+                $supplier = mysqli_fetch_assoc($result);
+            }
         }
     } else if (isset($_POST['submit-delete-supplier'])) {
         $queryDelete = "DELETE FROM supplier WHERE SupplierID = $supplierId";
