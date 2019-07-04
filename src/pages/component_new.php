@@ -97,6 +97,7 @@
         </div>
       </div>
       <input type="submit" class="btn btn-success" name="component_type_choose" value="Auswählen" />
+      <a class="btn btn-secondary" href="index.php?page=component">Abbrechen</a>
       <?php else: ?>
 
 <!-- Sollte der Komponententyp jedoch feststehen gebe alle Inputfelder aus -->
