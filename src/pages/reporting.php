@@ -159,7 +159,7 @@
                             echo "<option value='", $option["RoomId"],"' ".((isset($_POST['room']) and $_POST['room'] == $option['RoomId']) ? "selected" : ""). "> ", $option["RoomNo"], " (", $option["RoomName"], ") </option>";
                         }        
                     ?>
-                    <option value="IsInMaintenance">Ausgemustert</option>
+                    <option value="IsInMaintenance" <?php if(isset($_POST['room']) && $_POST['room']=="IsInMaintenance" ){echo "selected";} ?> >Ausgemustert</option>
                 </select>
             </div>        
         <div class="d-flex flex-column ">
