@@ -88,7 +88,6 @@
 // Hole alle Einträge aus der Tabelle Componenttypes
                 $query = "SELECT ComponentTypeName, ComponentTypeID FROM componenttypes";
                 $result = mysqli_query($dbLink, $query);
-
                 while ($row = mysqli_fetch_assoc($result)):
               ?>
 <!-- Gebe das Ergebnis in einem DropDown-Options-Menü aus -->
@@ -171,7 +170,7 @@
         <div class="col-sm-8">
           <select class="form-control" id="component_room" name="component_room">
               <option value="" disabled="" selected="">Auswahl</option>
-              <?
+              <?php
 // Suche alle verfügbaren Räume und gebe sie in einem Optionsfeld aus
               $query = "SELECT RoomID, RoomName FROM rooms";
               $result = mysqli_query($dbLink,$query);
@@ -195,6 +194,7 @@
           </div>
         </div>
       </div>
+<!-- Layout für Notizen die es eventuell zu hinterlegen gilt -->
       <div class="form-group row">
         <label class="control-label col-sm-2 text-sm-right">Notiz</label>
         <div class="col-sm-8">
@@ -203,6 +203,7 @@
       </div>
       <hr />
       <?php
+// Ausgabe der Attribute und Eigenschaften
         $query = "SELECT a.AttributeID, a.AttributeName FROM componentattributes a LEFT JOIN componenttypehasattributes cta ON cta.AttributeID = a.AttributeID WHERE cta.ComponentTypeID = ".$_POST['component_type'];
         $result = mysqli_query($dbLink, $query);
 
@@ -216,6 +217,7 @@
         </div>
       </div>
       <?php endwhile; ?>
+<!-- Daten speichern und per Post an den Server übergeben -->
       <input type="submit" class="btn btn-success" name="component_save" value="Speichern" />
       <?php endif; ?>
     </form>
