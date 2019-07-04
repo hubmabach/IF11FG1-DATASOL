@@ -34,15 +34,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $valid = false;
         }
 
-        $queryCheck = "SELECT * FROM rooms WHERE RoomNo = 'R$roomnumber'";
-        $resultCheck = mysqli_query($dbLink, $queryCheck);
-
-        if (mysqli_num_rows($resultCheck) !== 0) {
-            $id = mysqli_fetch_assoc($resultCheck)["RoomID"];
-            echo "<div class='alert alert-danger'>Raumnummer existiert bereits. <a href='index.php?page=room&detail=edit&id=$id'>Zur Detailansicht</a></div>";
-            $valid = false;
-        }
-
         if ($valid) {
             $roomId = $room['RoomID'];
             $queryUpdate = "UPDATE rooms SET RoomNo = '$roomNumber', RoomName = '$roomName', RoomNodes='$roomNodes' WHERE RoomID = $roomId";

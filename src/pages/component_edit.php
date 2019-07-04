@@ -12,6 +12,7 @@
    * @author Nikolas Bayerschmidt
    */
 
+  // Ist keine ID gesetzt, dann leite auf die Übersichtsseite weiter
   if (!isset($_GET['id']) or empty($_GET['id'])) {
     header('Location: ./index.php?page=component');
     die();
@@ -21,49 +22,48 @@
 
   if ($_SERVER['REQUEST_METHOD'] == "POST") {
     if (isset($_POST['component_save'])) {
+      // Hole alle Werte die aus dem Formular gesendet wurden.
       $component_type_id = $_POST['component_type'];
-      $component_name = $_POST['component_name'];
-      $component_supplier_id = $_POST['component_supplier'];
-      $component_purchase = $_POST['component_purchase'];
-      $component_warranty = $_POST['component_warranty'];
-      $component_vendor_id = $_POST['component_vendor'];
       $component_room_id = $_POST['component_room'];
-      $component_receipt = $_POST['component_receipt_current'];
-      $component_notes = $_POST['component_notes'];
       $component_attributes = $_POST['component_attributes'];
 
+      $saveData = array(
+        'ComponentName' => $_POST['component_name'],
+        'SupplierID' => $_POST['component_supplier'],
+        'ComponentPurchaseDate' => $_POST['component_purchase'],
+        'ComponentWarranty' => $_POST['component_warranty'],
+        'ComponentNotes' => $_POST['component_notes'],
+        'ComponentVendorID' => $_POST['component_vendor'],
+        'ComponentReceipt' => $_POST['component_receipt_current']
+      );
+
+      // Überprüfe ob eine Datei hochgeladen wurde.
       if (!empty($_FILES) && isset($_FILES['component_receipt']) && file_exists($_FILES['component_receipt']['tmp_name']) && is_uploaded_file($_FILES['component_receipt']['tmp_name'])) {
-        $upload_dir = __dir__ . "/../uploads/";
+        $upload_dir = __dir__ . "/../uploads/"; // Ordner zum Speichern der Dateien.
+
+        // Erstelle einen 5 Zeichen langen Hash und füge an diesen den Namen der Datei an.
         $filename = basename( substr(hash("md5", time(), FALSE), 0, 5) ."_". $_FILES['component_receipt']['name']);
 
         if (move_uploaded_file($_FILES['component_receipt']['tmp_name'], $upload_dir . $filename)) {
-          if ($component_receipt !== "") unlink($upload_dir . $component_receipt);
-          $component_receipt = $filename;
+          // Wenn eine neue Datei hochgeladen wurde und eine Alte vorhanden ist, dann lösche die alte Datei
+          if ($saveData['ComponentReceipt'] !== "") unlink($upload_dir . $saveData['ComponentReceipt']);
+          $saveData['ComponentReceipt'] = $filename;
         } else {
           echo '<div class="alert alert-danger">Leider tratt bei der Verarbeitung ein Fehler auf, bitte versuchen Sie es später erneut.</div>';
           $valid = false;
         }
       }
       if ($valid) {
-        $saveData = array(
-          'ComponentName' => $component_name,
-          'SupplierID' => $component_supplier_id,
-          'ComponentPurchaseDate' => $component_purchase,
-          'ComponentWarranty' => $component_warranty,
-          'ComponentNotes' => $component_notes,
-          'ComponentVendorID' => $component_vendor_id,
-          'ComponentReceipt' => $component_receipt
-        );
-
         $query = "UPDATE components SET ".sqlUpdateString($saveData)." WHERE ComponentID = ".$_GET['id'];
         $result = mysqli_query($dbLink, $query);
 
         if ($result) {
+          // Erstelle eine neue Zeile in der Datenbank sollte diese nicht existieren, ansonsten aktualisiere die bereits vorhandene Zeile.
           $room_query = "INSERT INTO componentsinroom (ComponentID, RoomID) VALUES (".$_GET['id'].", $component_room_id) ON DUPLICATE KEY UPDATE RoomID = $component_room_id;";
           mysqli_query($dbLink, $room_query);
 
           foreach($component_attributes as $attribute) {
-            if (empty($attribute['value'])) continue;
+            // Erstelle eine neue Zeile in der Datenbank sollte diese nicht existieren, ansonsten aktualisiere die bereits vorhandene Zeile.
             $save_query = "INSERT INTO componenthasvalues (ComponentID, AttributeID, AttributeValue) VALUES (".$_GET['id'].", ".$attribute['id'].", '".$attribute['value']."') ON DUPLICATE KEY UPDATE AttributeValue = '".$attribute['value']."';";
             mysqli_query($dbLink, $save_query);
           }
@@ -89,6 +89,7 @@
         }
       }
     } else if (isset($_POST['component_delete'])) {
+      // Überprüfe ob die Komponente gelöscht werden kann.
       $check_query = "SELECT IsInMaintenance FROM components WHERE IsInMaintenance = 1 AND ComponentID = ".$_GET['id'];
       $result = mysqli_query($dbLink, $check_query);
 
@@ -96,20 +97,25 @@
         $delete_query = "DELETE FROM components WHERE ComponentID = ".$_GET['id'];
         $delete_attributes_query = "DELETE FROM componenthasvalues WHERE ComponentID = ".$_GET['id'];
         $delete_room_query = "DELETE FROM componentsinroom WHERE ComponentID = ".$_GET['id'];
-        mysqli_begin_transaction($dbLink, MYSQLI_TRANS_START_READ_WRITE);
+
+        // Benutze eine MySQL Transaction um bei einem Fehler beim Löschen die Datenbank wieder zurück zu setzen
+        mysqli_begin_transaction($dbLink, MYSQLI_TRANS_START_READ_WRITE, "component_delete");
         mysqli_query($dbLink, $delete_attributes_query);
         mysqli_query($dbLink, $delete_room_query);
         mysqli_query($dbLink, $delete_query);
-        $result = mysqli_commit($dbLink);
+        $result = mysqli_commit($dbLink, 0, "component_delete");
 
         if ($result) {
+          // Leite auf die die Übersichtseite weiter wenn die Komponente erfolgreich gelöscht wurde.
           header("Location: ./index.php?page=component");
           die();
         } else {
+          mysqli_rollback($dbLink, 0, "component_delete");
           echo "<div class='alert alert-danger'>Komponente konnte nicht gelöscht werden.</div>";
         }
       }
     } else if (isset($_POST['component_de_store'])) {
+      // Überprüfe ob die Komponente wieder eingeführt werden kann.
       $check_query = "SELECT IsInMaintenance FROM components WHERE IsInMaintenance = 1 AND ComponentID = ".$_GET['id'];
       $result = mysqli_query($dbLink, $check_query);
 
@@ -127,7 +133,6 @@
   }
 
   $data_query = "SELECT c.*, cir.RoomID FROM components c LEFT JOIN componentsinroom cir ON c.ComponentID = cir.ComponentID WHERE c.ComponentID = ".$_GET['id'];
-
   $data_result = mysqli_query($dbLink, $data_query);
 
   if (mysqli_num_rows($data_result) > 0):
@@ -235,6 +240,7 @@
       </div>
       <hr />
       <?php
+        // Hole alle zugewiesenen Attribute der Komponentenart und vorhanden Werte der Komponente
         $query = "SELECT a.AttributeID, a.AttributeName, (SELECT chv.AttributeValue FROM componenthasvalues chv WHERE chv.AttributeID = a.AttributeID AND chv.ComponentID = ".$_GET['id'].") AS AttributeValue
         FROM componentattributes a
         LEFT JOIN componenttypehasattributes cta ON cta.AttributeID = a.AttributeID
@@ -258,7 +264,7 @@
     </form>
   </div>
 </div>
-<?php else: ?>
+<?php else: // Sollte die gesuchte Komponente nicht existieren ?>
 <h3 class="text-danger">Die angeforderte Komponente wurde leider nicht gefunden.</h3>
 <p>Vielleicht wurde sie durch einen anderen Nutzer gelöscht.</p>
 <a class="btn btn-secondary" href="index.php?page=component">Zur Übersicht</a>
