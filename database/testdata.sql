@@ -66,7 +66,7 @@ INSERT INTO `componenthasvalues` (`ComponentValueID`, `ComponentID`, `AttributeI
 -- Exportiere Daten aus Tabelle gruppe1db.components: ~1 rows (ungefähr)
 /*!40000 ALTER TABLE `components` DISABLE KEYS */;
 INSERT INTO `components` (`ComponentID`, `ComponentName`, `SupplierID`, `ComponentPurchaseDate`, `ComponentWarranty`, `ComponentNotes`, `ComponentVendorID`, `ComponentTypeID`, `ComponentReceipt`) VALUES
-	(1, 'Think Center 12020', 1, '0000-00-00', 2, '2 Jahre Garantie', 902, 1, NULL);
+	(1, 'Think Center 12020', 1, '2012-12-20', 2, '2014-12-20', 902, 1, NULL);
 /*!40000 ALTER TABLE `components` ENABLE KEYS */;
 
 -- Exportiere Daten aus Tabelle gruppe1db.componentsinroom: ~1 rows (ungefähr)

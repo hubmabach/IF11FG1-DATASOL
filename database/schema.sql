@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS `components` (
   `ComponentName` varchar(100) COLLATE utf8_general_ci DEFAULT NULL,
   `SupplierID` int(11) DEFAULT NULL,
   `ComponentPurchaseDate` date DEFAULT NULL,
-  `ComponentWarranty` int(11) DEFAULT NULL,
+  `ComponentWarranty` date DEFAULT NULL,
   `ComponentNotes` longtext COLLATE utf8_general_ci DEFAULT NULL,
   `ComponentVendorID` int(11) DEFAULT NULL,
   `ComponentTypeID` int(11) DEFAULT NULL,
