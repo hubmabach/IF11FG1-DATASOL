@@ -126,9 +126,9 @@
         </div>
       </div>
       <div class="form-group row">
-        <label class="control-label col-sm-2 text-sm-right">Gewährleistungs<wbr />dauer </label>
+        <label class="control-label col-sm-2 text-sm-right">Gewährleistung bis</label>
         <div class="col-sm-8">
-          <input type="text" id="componet_warranty" name="component_warranty" class="form-control " placeholder="Text input">
+          <input type="date" id="componet_warranty" name="component_warranty" class="form-control " placeholder="Text input">
         </div>
       </div>
       <div class="form-group row">
