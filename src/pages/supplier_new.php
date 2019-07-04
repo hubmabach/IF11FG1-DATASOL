@@ -1,11 +1,11 @@
 <?php
 
 /**
- * Auf dieser Seite kann der Nutzer ein neuen Lieferanten anlegen. Bei der Eingabe der Adresse wird geprüft, 
+ * Auf dieser Seite kann der Nutzer ein neuen Lieferanten anlegen. Bei der Eingabe der Adresse wird geprüft,
  * ob die Addresse bereits vorhanden ist und falls ja wird keine neue Adresse angelegt, sondern die bereits vorhandene
  * Addresse verwendet. Falls keine Adresse vorhanden ist, wird eine angelegt und im Lieferanten gespeichert.
  * @author Reindl/Schmiedkunz
- * 
+ *
  * Benedikt 13:00-15:00
  * Matthias 13:00-15:00
  */
@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit-new-supplier']
                          "PostalCode LIKE '".$supplierData["Postcode"]."' AND ".
                          "City LIKE '".$supplierData["City"]."' AND ".
                          "MailAddress LIKE '".$supplierData["Email"]."'";
-                         
+
     $resultAddressID = mysqli_query($dbLink, $queryAddressID);
 
     if (mysqli_num_rows($resultAddressID) === 0) {
@@ -102,38 +102,38 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit-new-supplier']
             <div class="form-group row">
                 <label for="input-supplier-name" class="col-sm-2 col-form-label">Lieferantennamen</label>
                 <div class="col-sm-7">
-                    <input  type="text" class="form-control" id="input-supplier-name" 
-                            placeholder="Datasol GmbH" name="input-supplier-name" maxlength="45" 
+                    <input  type="text" class="form-control" id="input-supplier-name"
+                            placeholder="Datasol GmbH" name="input-supplier-name" maxlength="45"
                             required value="<?php $supplierData["SupplierName"] ?>">
                 </div>
             </div>
             <div class="form-group row">
                 <label for="input-street" class="col-sm-2 col-form-label">Straße</label>
                 <div class="col-sm-7">
-                    <input  type="text" class="form-control" id="input-street" 
-                            placeholder="Häußsterweg 4" name="input-street" maxlength="255" 
+                    <input  type="text" class="form-control" id="input-street"
+                            placeholder="Häußsterweg 4" name="input-street" maxlength="255"
                             required value="<?php $supplierData["Street"] ?>">
                 </div>
             </div>
             <div class="form-group row">
                 <label for="input-postcode" class="col-sm-2 col-form-label">Postleitzahl</label>
                 <div class="col-sm-2">
-                    <input  type="text" class="form-control" id="input-postcode" 
-                            rows="3" placeholder="12345" name="input-postcode" maxlength="5" 
+                    <input  type="text" class="form-control" id="input-postcode"
+                            rows="3" placeholder="12345" name="input-postcode" maxlength="5"
                             required value="<?php $supplierData["Postcode"] ?>"/>
                 </div>
                 <label for="input-city" class="col-sm-1 col-form-label">Stadt</label>
                 <div class="col-sm-4">
-                    <input  type="text" class="form-control" id="input-city" 
-                            rows="3" placeholder="Berlin" name="input-city" maxlength="45" 
+                    <input  type="text" class="form-control" id="input-city"
+                            rows="3" placeholder="Berlin" name="input-city" maxlength="45"
                             required value="<?php $supplierData["City"] ?>"/>
                 </div>
             </div>
             <div class="form-group row">
                 <label for="input-country" class="col-sm-2 col-form-label">Land</label>
                 <div class="col-sm-7">
-                    <input  type="text" class="form-control" id="input-country" 
-                            rows="3" placeholder="Deutschland" name="input-country" maxlength="45" 
+                    <input  type="text" class="form-control" id="input-country"
+                            rows="3" placeholder="Deutschland" name="input-country" maxlength="45"
                             required value="<?php $supplierData["Country"] ?>"/>
                 </div>
             </div>
@@ -141,41 +141,38 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit-new-supplier']
             <div class="form-group row">
                 <label for="input-email" class="col-sm-2 col-form-label">E-Mail</label>
                 <div class="col-sm-7">
-                    <input  type="email" class="form-control" id="input-email" 
-                            rows="3" placeholder="test@lieferant.de" name="input-email" maxlength="45" 
+                    <input  type="email" class="form-control" id="input-email"
+                            rows="3" placeholder="test@lieferant.de" name="input-email" maxlength="45"
                             required value="<?php $supplierData["Email"] ?>"/>
                 </div>
             </div>
             <div class="form-group row">
                 <label for="input-telephone" class="col-sm-2 col-form-label">Telefonnummer</label>
                 <div class="col-sm-7">
-                    <input  type="text" class="form-control" id="input-telephone" 
-                            rows="3" placeholder="0123/456789" name="input-telephone" maxlength="20" 
+                    <input  type="text" class="form-control" id="input-telephone"
+                            rows="3" placeholder="0123/456789" name="input-telephone" maxlength="20"
                             value="<?php $supplierData["Telephone"] ?>"/>
                 </div>
             </div>
             <div class="form-group row">
                 <label for="input-mobile" class="col-sm-2 col-form-label">Handynummer</label>
                 <div class="col-sm-7">
-                    <input  type="text" class="form-control" id="input-mobile" 
-                            rows="3" placeholder="0123/456789" name="input-mobile" maxlength="20" 
+                    <input  type="text" class="form-control" id="input-mobile"
+                            rows="3" placeholder="0123/456789" name="input-mobile" maxlength="20"
                             value="<?php $supplierData["Mobile"] ?>"/>
                 </div>
             </div>
             <div class="form-group row">
                 <label for="input-fax" class="col-sm-2 col-form-label">Faxnummer</label>
                 <div class="col-sm-7">
-                    <input  type="text" class="form-control" id="input-fax" 
-                            rows="3" placeholder="0123/456789" name="input-fax" maxlength="20" 
+                    <input  type="text" class="form-control" id="input-fax"
+                            rows="3" placeholder="0123/456789" name="input-fax" maxlength="20"
                             value="<?php $supplierData["Fax"] ?>"/>
                 </div>
             </div>
-            <div class="form-group row">
-                <div class="col-sm-1">
-                    <button type="submit" class="btn btn-success" name="submit-new-supplier">Speichern</button>
-                    <a class="btn btn-secondary" href="index.php?page=supplier">Abbrechen</a>
-                </div>
-            </div>
+            <button type="submit" class="btn btn-success" name="submit-new-supplier">Speichern</button>
+            <a class="btn btn-secondary" href="index.php?page=supplier">Abbrechen</a>
+
         </form>
     </div>
 </div>
