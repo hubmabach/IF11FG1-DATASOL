@@ -156,37 +156,22 @@
                     <option value="" selected>-----</option>
                     <?php 
                         foreach($rooms as $option) {
-                            echo "<option value='", $option["RoomId"],"' > ", $option["RoomNo"], " (", $option["RoomName"], ") </option>";
+                            echo "<option value='", $option["RoomId"],"' ".((isset($_POST['room']) and $_POST['room'] == $option['RoomId']) ? "selected" : ""). "> ", $option["RoomNo"], " (", $option["RoomName"], ") </option>";
                         }        
                     ?>
                     <option value="IsInMaintenance">Ausgemustert</option>
                 </select>
-            </div>
-            <script type="text/javascript">
-                document.getElementById('room').value = "
-                <?php if(isset($_POST['room'])) {
-                    echo $_POST['room'];
-                } 
-                ?>";
-            </script>
-        
+            </div>        
         <div class="d-flex flex-column ">
         <label>Hardware</label>
             <select id="hardware" name="hardware" placeholer="Hardware" class="custom-select custom-select-lg" >
                 <option value="" selected>-----</option>
                 <?php 
                     foreach($hardware as $option) {
-                        echo "<option value='", $option["ComponentTypeID"],"' > ", $option["ComponentTypeName"], " </option>";
+                        echo "<option value='", $option["ComponentTypeID"],"' ".((isset($_POST['hardware']) and $_POST['hardware'] == $option['ComponentTypeID']) ? "selected" : "")."> ", $option["ComponentTypeName"], " </option>";
                     }      
                 ?>
             </select>
-            <script type="text/javascript">
-                document.getElementById('hardware').value = "
-                <?php if(isset($_POST['hardware'])) {
-                    echo $_POST['hardware'];
-                }                
-                ?>";
-            </script>
         </div>
 
         <div class="d-flex flex-column ">
@@ -195,26 +180,12 @@
                 <option value="" selected>-----</option>
                 <?php 
                     foreach($software as $option) {
-                        echo "<option value='", $option["ComponentTypeID"],"' > ", $option["ComponentTypeName"], " </option>";
+                        echo "<option value='", $option["ComponentTypeID"],"' ".((isset($_POST['software']) and $_POST['software'] == $option['ComponentTypeID']) ? "selected" : "")." > ", $option["ComponentTypeName"], " </option>";
                     }        
                 ?>
             </select>
-            <script type="text/javascript">
-                document.getElementById('software').value = "
-                <?php if(isset($_POST['software'])) {
-                    echo $_POST['software'];
-                }
-                ?>";
-            </script>
         </div>
-        <input id="searchfilter" type="text" name="searchfilter" class="form-control" style="width:20% !important; display:inline; margin-top:25px" placeholder="Gerätename"/>
-        <script type="text/javascript">
-            document.getElementById('searchfilter').value = "
-            <?php if(isset($_POST['searchfilter'])) {
-                echo $_POST['searchfilter'];
-            }
-            ?>";
-        </script>
+        <input id="searchfilter" type="text" name="searchfilter" <?php echo "value='", (isset($_POST['searchfilter']) ? $_POST['searchfilter'] : ""), "'" ?>  class="form-control" style="width:20% !important; display:inline; margin-top:25px" placeholder="Gerätename"/>
         <button name="searchbtn" type="submit" class="btn btn-primary" style="margin-top:25px">Suchen</button>
         <button name="reset" type="submit" class="btn btn-secondary" style="margin-top:25px"> Zurücksetzen </button>
         <?php if(isset($_POST["reset"])): ?>
