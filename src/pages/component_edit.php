@@ -137,6 +137,9 @@
 <h1>Stammdaten - Komponente - <?php echo $data['ComponentName']; ?></h1>
 <div class="card">
   <div class="card-body">
+    <?php if (boolval($data['IsInMaintenance'])): ?>
+    <div class="alert alert-warning">Diese Komponente wurde ausgemustert.</div>
+    <?php endif;?>
     <form method="post" enctype="multipart/form-data">
       <div class="form-group row">
         <label class="control-label col-sm-2 text-sm-right">Komponentenart</label>
