@@ -29,6 +29,7 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="index.php?page=supplier">Lieferanten</a>
+                <a class="dropdown-item" href="index.php?page=vendor">Hersteller</a>
                 <a class="dropdown-item" href="index.php?page=room">Räume</a>
                 <a class="dropdown-item" href="index.php?page=users">Benutzer</a>
                 <a class="dropdown-item" href="index.php?page=component">Komponenten</a>
